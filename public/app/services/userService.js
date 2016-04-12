@@ -1,36 +1,76 @@
-angular.module('userService', [])
+angular.module('mainApp')
 
-.factory('User', function($http) {
+    .factory('User',['$http', 'Auth', function ($http, Auth) {
 
- // create a new object
- var userFactory = {};
+        // create a new object
+        var userFactory = {};
 
- // get a single user
- userFactory.get = function(id) {
- 	return $http.get('/api/users/' + id);
- };
+        userFactory.currentUser = {};
 
- // get all users
- userFactory.all = function() {
- 	return $http.get('/api/users/');
- };
+        // get a single user
+        userFactory.get = function (id) {
+            return $http.get('/api/user/' + id);
+        };
 
- // create a user
- userFactory.create = function(userData) {
- 	return $http.post('/api/users/', userData);
- };
+        // get all users
+        userFactory.all = function () {
+            return $http.get('/api/user/');
+        };
 
- // update a user
- userFactory.update = function(id, userData) {
- 	return $http.put('/api/users/' + id, userData);
- };
+        // create a user
+        userFactory.create = function (userData) {
+            return $http.post('/api/user/', userData);
+        };
 
- // delete a user
- userFactory.delete = function(id) {
- 	return $http.delete('/api/users/' + id);
- };
+        // update a user
+        userFactory.update = function (id, userData) {
+            return $http.put('/api/user/' + id, userData);
+        };
 
- // return our entire userFactory object
- return userFactory;
+        // delete a user
+        userFactory.delete = function (id) {
+            return $http.delete('/api/user/' + id);
+        };
 
-});
+        //get current user
+        userFactory.current = function () {
+            return $http.get('/api/me/');
+        };
+
+        userFactory.getCurrentUser = function () {
+
+            var vm = this;
+
+            vm.user = {};
+
+            if (Auth.isLoggedIn()) {
+                userFactory.all().success(function (res) {
+                    //bind the users that come back to vm.users
+                    vm.users = res;
+
+                    userFactory.current().success(function (data) {
+                        //bind the users that come back to vm.users
+                        vm.user.username = data.username;
+
+                        for (var i = 0; i < vm.users.length; ++i) {
+                            if (vm.users[i].username == vm.user.username) {
+                                vm.user.firstName = vm.users[i].firstName;
+                                vm.user.secondName = vm.users[i].secondName;
+                            }
+                        }
+
+                        console.log(vm.user);
+                    });
+                });
+
+            }
+
+            vm.currentUser = vm.user;
+
+            return vm.user;
+        };
+
+        // return our entire userFactory object
+        return userFactory;
+
+    }]);

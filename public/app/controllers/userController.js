@@ -1,113 +1,116 @@
-angular.module('userController', ['userService'])
+angular.module('mainApp')
 
-//user controller for the main page
-//inject the User factory
-.controller('userController', function(User)
-{
-	var vm = this;
+    //user controller for the main page
+    //inject the User factory
+    .controller('userController', ['$rootScope', 'User', function ($rootScope, User) {
+        var vm = this;
 
-		//set a processing variable to show loading things
-		vm.processing = true;
+        //set a processing variable to show loading things
+        vm.processing = true;
 
-		//grab all users at page load
-		User.all()
-		.success(function(data)
-		{
-				//when all the users come back, remove the processing variable
-				vm.processing = false;
+        //grab all users at page load
+        User.all()
+            .success(function (data) {
+                //when all the users come back, remove the processing variable
+                vm.processing = false;
 
-				//bind the users that come back to vm.users
-				vm.users = data;
-			});
+                //bind the users that come back to vm.users
+                vm.users = data;
+            });
 
-		//function to delete a user
-		vm.deleteUser = function(id)
-		{
-			vm.processing = true;
+        //function to delete a user
+        vm.deleteUser = function (id) {
+            vm.processing = true;
 
-			//accepts the user id as a parameter
-			User.delete(id)
-			.success(function(data)
-			{
-					// get all users to update the table
+            //accepts the user id as a parameter
+            User.delete(id)
+                .success(function (data) {
+                    // get all users to update the table
                     // you can also set up your api
-					// to return the list of users with the delete call
-					User.all()
-					.success(function(data)
-					{
-						vm.processing = false;
-						vm.users = data;
-					});
-				});
-		}
-	})
+                    // to return the list of users with the delete call
+                    User.all()
+                        .success(function (data) {
+                            vm.processing = false;
+                            vm.users = data;
+                        });
+                });
+        }
+    }])
 
-//controller applied to user creation page
-.controller('userCreateController', function(User)
-{
-	var vm = this;
+    //controller applied to user creation page
+    .controller('userCreateController', ['HeightDetect', 'User', function (HeightDetect, User) {
 
-	//variable to hide/show elements of the view
-	//differentiates between create or edit pages
-	vm.type = 'create';
+        var vm = this;
 
-	//function to create a user
-	vm.saveUser = function()
-	{
-		vm.processing = true;
+        //variable to hide/show elements of the view
+        //differentiates between create or edit pages
+        vm.type = 'create';
 
-		//clear the message
-		vm.message = '';
+        /**
+         * resize header
+         */
+        HeightDetect.heightDetect();
 
-		//use the create function in the userService
-		User.create(vm.userData)
-		.success(function(data)
-		{
-			vm.processing = false;
+        $(window).resize(function () {
+            HeightDetect.heightDetect();
+        });
 
-				//clear the form
-				vm.userData = {};
-				vm.message = data.message;
-			})
-	}
-})
+        //function to create a user
+        vm.saveUser = function () {
+            vm.processing = true;
 
-//controller applied to user edit page
-.controller('userEditController', function($routeParams, User)
-{
-	var vm = this;
+            //clear the message
+            vm.message = '';
 
-	// variable to hide/show elements of the view
-	// differentiates between create or edit pages
-	vm.type = 'edit';
+            //use the create function in the userService
+            User.create(vm.userData)
+                .success(function (data) {
+                    vm.processing = false;
 
- 	// get the user data for the user you want to edit
-    // $routeParams is the way we grab data from the URL
-    User.get($routeParams.user_id)
-    .success(function(data)
-    {
-    	vm.userData = data;
-    });
+                    //clear the form
+                    vm.userData = {};
+                    vm.message = data.message;
 
-    //function to save the user
-    vm.saveUser = function()
-    {
-    	vm.processing = true;
+                    $rootScope.$emit('changeUser');
+                })
+        }
+    }])
 
-    	vm.message = '';
+    //controller applied to user edit page
+    .controller('userEditController', ['$routeParams', 'User', function ($routeParams, User) {
+        var vm = this;
 
-    	//call the userService function to update
-    	User.update($routeParams.user_id, vm.userData)
-    	.success(function(data)
-    	{
-    		vm.processing = false;
+        // variable to hide/show elements of the view
+        // differentiates between create or edit pages
+        vm.type = 'edit';
 
-    		//clear the form
-    		vm.userData = {};
+        // get the user data for the user you want to edit
+        // $routeParams is the way we grab data from the URL
+        User.get($routeParams.user_id)
+            .success(function (data) {
+                vm.userData = data;
+            });
 
-    		//bind the message from our API to vm.message
-    		vm.message = data.message;
+        //function to save the user
+        vm.saveUser = function () {
+            vm.processing = true;
 
-    	});
-    };
-});
+            vm.message = '';
+
+            //call the userService function to update
+            User.update($routeParams.user_id, vm.userData)
+                .success(function (data) {
+                    vm.processing = false;
+
+                    //clear the form
+                    vm.userData = {};
+
+                    //bind the message from our API to vm.message
+                    vm.message = data.message;
+
+                })
+                .error(function (data) {
+                    console.log(data);
+                });
+        };
+    }]);

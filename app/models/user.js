@@ -4,15 +4,18 @@ var Schema = mongoose.Schema;
 var bncrypt = require('bcrypt-nodejs');
 
 //user schema
-var AdminUser = new Schema(
+var User = new Schema(
     {
-        name: String,
+        firstName: String,
+        secondName: String,
+        email: String,
+        role: String,
         username: {type: String, required: true, index: {unique:true}},
         password: {type: String, required: true, select: false}
     });
 
 //hash password before user is saved
-AdminUser.pre('save', function(next)
+User.pre('save', function(next)
 {
     var user = this;
 
@@ -20,7 +23,7 @@ AdminUser.pre('save', function(next)
     if(!user.isModified('password')) return next();
 
     //generate the hash
-    bcrypt.hash(user.password, null, null, function(err, hash)
+    bncrypt.hash(user.password, null, null, function(err, hash)
     {
         //change the password to the hashed version
         user.password = hash;
@@ -30,7 +33,7 @@ AdminUser.pre('save', function(next)
 });
 
 //methid to compare a given password with the database hash
-AdminUser.methods.comparePassword = function(password)
+User.methods.comparePassword = function(password)
 {
     var user = this;
 
@@ -38,4 +41,4 @@ AdminUser.methods.comparePassword = function(password)
 };
 
 //return the model
-module.exports = mongoose.model('User', AdminUser);
+module.exports = mongoose.model('User', User);

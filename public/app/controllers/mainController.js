@@ -1,53 +1,68 @@
-angular.module('mainController', [])
+angular.module('mainApp')
 
-.controller('mainController', function($rootScope, $location, Auth) {
+    .controller('mainController', ['$rootScope',
+        '$location',
+        'Auth',
+        'HeightDetect',
+        'User',
+        '$routeParams',
+        function ($rootScope, $location, Auth, HeightDetect, User, ngParallax, $routeParams) {
 
-	var vm = this;
+            var vm = this;
 
- // get info if a person is logged in
- vm.loggedIn = Auth.isLoggedIn();
+            vm.user = {};
 
- // check to see if a user is logged in on every request
- $rootScope.$on('$routeChangeStart', function() {
- 	vm.loggedIn = Auth.isLoggedIn();
+            HeightDetect.heightDetect();
 
- // get user information on route change
- Auth.getUser()
- .then(function(data) {
- 	vm.user = data;
- });
-});
+            // get info if a person is logged in
+            vm.loggedIn = Auth.isLoggedIn();
 
- // function to handle login form
- vm.doLogin = function() {
+            // check to see if a user is logged in on every request
+            $rootScope.$on('$routeChangeStart', function () {
+                vm.loggedIn = Auth.isLoggedIn();
 
- console.log(vm.loginData.username);
+                // get user information on route change
+                Auth.getUser()
+                    .then(function (data) {
+                        vm.user = data;
+                    });
+            });
 
- vm.processing = true;
+            // function to handle login form
+            vm.doLogin = function () {
 
- //clear the error
- vm.error = '';
+                console.log(vm.loginData.username);
 
- // call the Auth.login() function
- Auth.login(vm.loginData.username, vm.loginData.password)
- .success(function(data) {
+                vm.processing = true;
 
-vm.processing = false;
+                //clear the error
+                vm.error = '';
 
- // if a user successfully logs in, redirect to users page
- if(data.success)
- 	$location.path('/users');
- else
- 	vm.error = data.message;
-});
-};
+                // call the Auth.login() function
+                Auth.login(vm.loginData.username, vm.loginData.password)
+                    .success(function (data) {
 
- // function to handle logging out
- vm.doLogout = function() {
- 	Auth.logout();
- // reset all user info
- vm.user = {};
- $location.path('/login');
-};
+                        vm.processing = false;
 
-});
+                        // if a user successfully logs in, redirect to users page
+                        if (data.success) {
+                            $rootScope.$emit('changeUser');
+                            $location.path('/users');
+                        }
+                        else
+                            vm.error = data.message;
+                    });
+            };
+
+            vm.doRegistration = function () {
+
+            };
+
+            // function to handle logging out
+            vm.doLogout = function () {
+                Auth.logout();
+                // reset all user info
+                vm.user = {};
+                $location.path('/login');
+            };
+        }]);

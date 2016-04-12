@@ -1,0 +1,101 @@
+@import "bourbon/bourbon"
+
+$header-color: #ffffff
+
+html.js .loader
+	background: none repeat scroll 0 0 #ffffff
+	bottom: 0
+	height: 100%
+	left: 0
+	position: fixed
+	right: 0
+	top: 0
+	width: 100%
+	z-index: 9999
+	.loader_inner
+		background-size: 100px
+		background: #fff url("../../assets/img/preloader.gif") no-repeat center center
+		height: 128px
+		width: 128px
+		margin-top: -64px
+		margin-left: -64px
+		left: 50%
+		top: 50%
+		position: absolute
+
+body
+	font-family: "RobotoRegular", sans-serif
+	font-weight: normal
+	font-size: 14px
+	min-width: 320px
+	position: relative
+	line-height: 1.6
+	-webkit-font-smoothing: antialiased
+	overflow-x: hidden
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: red
+body input:required:valid,
+body textarea:required:valid
+	color: green
+
+.hidden
+	display: none
+
+.jumbotron
+	margin-top: 100px
+
+header .parallax-content
+	opacity: 0.8
+	background-size: cover !important
+
+header .header-content
+	text-align: center
+	position: relative
+	top: 50%
+	width: 50%
+	font-size: 30px
+	margin: auto
+	color: #fff
+	border: solid 8px $header-color
+	.header-title
+		color: $header-color
+		margin-top: 10px
+		margin-bottom: 10px
+
+.navbar
+	margin-bottom: 0px
+	.nav-logo
+		margin-right: 10px
+
+.admin-panel
+	margin-top: 50px
+
+#login, #signup
+	background-color: #222
+	.jumbotron
+		padding-left: 20px
+		padding-right: 20px
+		position: relative
+		.col-md-6:nth-of-type(1)
+			padding-left: 0px
+		.col-md-6:nth-of-type(2)
+			padding-right: 0px
+		h1
+			text-align: center
+			margin-bottom: 30px
+		button
+			display: block
+			margin: auto
+			width: 50%
+		.to-signup
+			position: absolute
+			margin-top: 20px
+			bottom: 5px
+
+section#all-users .page-header
+	margin-top: 80px
+
+section#single-page .page-header
+	margin-top: 80px
