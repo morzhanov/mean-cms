@@ -358,6 +358,7 @@ module.exports = function (app, express) {
                 if (req.body.firstName) user.firstName = req.body.firstName;
                 if (req.body.secondName) user.secondName = req.body.secondName;
                 if (req.body.email) user.email = req.body.email;
+                if (req.body.role) user.role = req.body.role;
                 if (req.body.username) user.username = req.body.username;
                 if (req.body.password) user.password = req.body.password;
 

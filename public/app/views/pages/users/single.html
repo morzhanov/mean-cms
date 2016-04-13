@@ -11,14 +11,16 @@
                        class="form-control"
                        ng-model="user.userData.firstName">
             </div>
-        </div><div class="form-group">
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">Second Name</label>
             <div class="col-sm-6">
                 <input type="text"
                        class="form-control"
                        ng-model="user.userData.secondName">
             </div>
-        </div><div class="form-group">
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">Email</label>
             <div class="col-sm-6">
                 <input type="text"
@@ -32,6 +34,16 @@
                 <input type="text"
                        class="form-control"
                        ng-model="user.userData.username">
+            </div>
+        </div>
+        <div class="admin-edit" ng-controller="adminController as admin">
+            <div class="form-group" ng-if="admin.isAdmin">
+                <label class="col-sm-2 control-label">Role</label>
+                <div class="col-sm-6">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="user.userData.role">
+                </div>
             </div>
         </div>
         <div class="form-group">

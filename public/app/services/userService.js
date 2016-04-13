@@ -1,6 +1,6 @@
 angular.module('mainApp')
 
-    .factory('User',['$http', 'Auth', function ($http, Auth) {
+    .factory('User', ['$http', 'Auth', '$location', function ($http, Auth, $location) {
 
         // create a new object
         var userFactory = {};
@@ -9,6 +9,7 @@ angular.module('mainApp')
 
         // get a single user
         userFactory.get = function (id) {
+
             return $http.get('/api/user/' + id);
         };
 

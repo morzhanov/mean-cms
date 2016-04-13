@@ -1,44 +1,65 @@
 angular.module('mainApp')
 
-    //user controller for the main page
-    //inject the User factory
-    .controller('userController', ['$rootScope', 'User', function ($rootScope, User) {
-        var vm = this;
-
-        //set a processing variable to show loading things
-        vm.processing = true;
-
-        //grab all users at page load
-        User.all()
-            .success(function (data) {
-                //when all the users come back, remove the processing variable
-                vm.processing = false;
-
-                //bind the users that come back to vm.users
-                vm.users = data;
-            });
-
-        //function to delete a user
-        vm.deleteUser = function (id) {
-            vm.processing = true;
-
-            //accepts the user id as a parameter
-            User.delete(id)
-                .success(function (data) {
-                    // get all users to update the table
-                    // you can also set up your api
-                    // to return the list of users with the delete call
-                    User.all()
-                        .success(function (data) {
-                            vm.processing = false;
-                            vm.users = data;
+    .factory('adminControlService', ['$rootScope', 'User', 'Auth', '$location', '$http',
+        function ($rootScope, User, Auth, $location, $http) {
+        return {
+            control: function () {
+                if (Auth.isLoggedIn()) {
+                    $http.get('/api/admin')
+                        .error(function () {
+                            $location.path('/login');
                         });
-                });
+                }
+                else
+                    $location.path('/login');
+            }
         }
     }])
 
+    //user controller for the main page
+    //inject the User factory
+    .controller('userController', ['$rootScope', 'User', 'adminControlService',
+        function ($rootScope, User, adminControlService) {
+
+            adminControlService.control();
+
+            var vm = this;
+
+            //set a processing variable to show loading things
+            vm.processing = true;
+
+            //grab all users at page load
+            User.all()
+                .success(function (data) {
+                    //when all the users come back, remove the processing variable
+                    vm.processing = false;
+
+                    //bind the users that come back to vm.users
+                    vm.users = data;
+                });
+
+            //function to delete a user
+            vm.deleteUser = function (id) {
+                vm.processing = true;
+
+                //accepts the user id as a parameter
+                User.delete(id)
+                    .success(function (data) {
+                        // get all users to update the table
+                        // you can also set up your api
+                        // to return the list of users with the delete call
+                        User.all()
+                            .success(function (data) {
+                                vm.processing = false;
+                                vm.users = data;
+                            });
+                    });
+            }
+        }])
+
     //controller applied to user creation page
-    .controller('userCreateController', ['HeightDetect', 'User', function (HeightDetect, User) {
+    .controller('userCreateController', ['$rootScope','HeightDetect', 'User', '$location',
+        function ($rootScope, HeightDetect, User, $location) {
 
         var vm = this;
 
@@ -73,12 +94,15 @@ angular.module('mainApp')
 
                     $rootScope.$emit('changeUser');
                     $rootScope.$emit('invalidateAdminPanel');
+
+                    $location.path('/login');
                 })
         }
     }])
 
     //controller applied to user edit page
     .controller('userEditController', ['$routeParams', 'User', function ($routeParams, User) {
+
         var vm = this;
 
         // variable to hide/show elements of the view
@@ -109,9 +133,13 @@ angular.module('mainApp')
                     //bind the message from our API to vm.message
                     vm.message = data.message;
 
+                    $rootScope.$emit('changeUser');
+                    $rootScope.$emit('invalidateAdminPanel');
                 })
                 .error(function (data) {
                     console.log(data);
+                    $rootScope.$emit('changeUser');
+                    $rootScope.$emit('invalidateAdminPanel');
                 });
         };
     }]);

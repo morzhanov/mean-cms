@@ -95,6 +95,10 @@ header .header-content {
 
 section#all-users .page-header {
   margin-top: 120px; }
+section#all-users .col-sm-3 {
+  text-align: center; }
+  section#all-users .col-sm-3 a {
+    margin-right: 10px; }
 
 section#single-page .page-header {
   margin-top: 120px; }

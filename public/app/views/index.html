@@ -53,7 +53,9 @@
             <a href="/" class="navbar-brand"><span class="fa nav-logo fa-code text-danger"></span>MEAN CMS</a>
         </div>
         <ul class="nav navbar-nav" ng-if="main.loggedIn">
-            <li><a href="/users"><span class="glyphicon glyphicon-user"></span>Users</a></li>
+            <li ng-controller="adminController as admin">
+                <a ng-if="admin.isAdmin" href="/users"><span class="glyphicon glyphicon-user"></span>Users</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
@@ -65,16 +67,16 @@
 </nav>
 
 <div id="admin-panel-container" ng-controller="adminController as admin">
-        <nav class="navbar navbar-fixed-top navbar-inverse admin-panel" ng-if="admin.isAdmin">
-            <div class="container">
-                <div class="navbar-header">
-                </div>
-                <ul class="nav navbar-nav">
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                </ul>
+    <nav class="navbar navbar-fixed-top navbar-inverse admin-panel" ng-if="admin.isAdmin">
+        <div class="container">
+            <div class="navbar-header">
             </div>
-        </nav>
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <!-- NAVBAR -->

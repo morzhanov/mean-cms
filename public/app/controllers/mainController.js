@@ -48,7 +48,7 @@ angular.module('mainApp')
                         if (data.success) {
                             $rootScope.$emit('changeUser');
                             $rootScope.$emit('invalidateAdminPanel');
-                            $location.path('/users');
+                            $location.path('/');
                         }
                         else
                             vm.error = data.message;
