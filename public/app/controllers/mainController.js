@@ -47,6 +47,7 @@ angular.module('mainApp')
                         // if a user successfully logs in, redirect to users page
                         if (data.success) {
                             $rootScope.$emit('changeUser');
+                            $rootScope.$emit('invalidateAdminPanel');
                             $location.path('/users');
                         }
                         else
@@ -54,8 +55,19 @@ angular.module('mainApp')
                     });
             };
 
-            vm.doRegistration = function () {
+            vm.facebookLogin = function () {
+                vm.processing = true;
 
+                //clear the error
+                vm.error = '';
+
+                Auth.facebookLogin()
+                    .success(function () {
+                        console.log('logged in via Facebook');
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
             };
 
             // function to handle logging out
@@ -64,5 +76,7 @@ angular.module('mainApp')
                 // reset all user info
                 vm.user = {};
                 $location.path('/login');
+
+                $rootScope.$emit('invalidateAdminPanel');
             };
         }]);

@@ -27,6 +27,10 @@ angular.module('mainApp')
                 });
         };
 
+        authFactory.facebookLogin = function () {
+            return $http.get('/api/login/facebook');
+        };
+
         //log a user out by clearing the token
         authFactory.logout = function () {
             //clear the token

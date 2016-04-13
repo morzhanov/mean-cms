@@ -1,6 +1,6 @@
 angular.module('mainApp')
 
-    .controller('adminController', ['$http', 'Auth', function ($http, Auth) {
+    .controller('adminController', ['$rootScope', '$http', 'Auth', function ($rootScope, $http, Auth) {
         var vm = this;
 
         vm.isAdmin = false;
@@ -19,7 +19,13 @@ angular.module('mainApp')
                         vm.isAdmin = false;
                     });
             }
+            else
+                vm.isAdmin = false;
         };
 
         vm.invalidatePanelUsername();
+        
+        $rootScope.$on('invalidateAdminPanel', function () {
+            vm.invalidatePanelUsername();
+        })
     }]);

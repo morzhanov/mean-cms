@@ -58,11 +58,11 @@ angular.module('app.routes', ['ngRoute'])
              * Routes for admin users
              */
             //admin panel route
-            .when('/admin-panel',
+            .when('/admin/panel',
                 {
-                    templateUrl: 'app/views/admin-panel.html',
-                    controller: 'mainController',
-                    controllerAs: 'panel',
+                    templateUrl: 'app/views/admin/panel.html',
+                    controller: 'adminController',
+                    controllerAs: 'admin-panel',
                     resolve: {
                         validate: function ($q, $location) {
                             // Either you could maintain an array of hashes on client side

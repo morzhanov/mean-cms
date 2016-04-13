@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Page = require('../models/page.js');
 var User = require('../models/user.js');
 var jwt = require('jsonwebtoken');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('../../config');
 
 var secret = config.secret;
@@ -130,6 +132,55 @@ module.exports = function (app, express) {
             return response.send(page);
         });
     });
+    // Configure the Facebook strategy for use by Passport.
+    //
+    // OAuth 2.0-based strategies require a `verify` function which receives the
+    // credential (`accessToken`) for accessing the Facebook API on the user's
+    // behalf, along with the user's profile.  The function must invoke `cb`
+    // with a user object, which will be set at `req.user` in route handlers after
+    // authentication.
+    passport.use(new FacebookStrategy({
+            clientID: config.FACEBOOK_APP_ID,
+            clientSecret: config.FACEBOOK_SECRET,
+            callbackURL: 'http://localhost:8080/login/facebook/return'
+        },
+        function (accessToken, refreshToken, profile, cb) {
+            // In this example, the user's Facebook profile is supplied as the user
+            // record.  In a production-quality application, the Facebook profile should
+            // be associated with a user record in the application's database, which
+            // allows for account linking and authentication with other identity
+            // providers.
+            return cb(null, profile);
+        }));
+
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  However, due to the fact that this
+// example does not have a database, the complete Twitter profile is serialized
+// and deserialized.
+    passport.serializeUser(function (user, cb) {
+        cb(null, user);
+    });
+
+    passport.deserializeUser(function (obj, cb) {
+        cb(null, obj);
+    });
+
+    apiRouter.use(passport.initialize());
+
+    apiRouter.get('/login/facebook',
+        // authenticate with facebook
+        passport.authenticate('facebook'));
+
+    apiRouter.get('/login/facebook/return',
+        passport.authenticate('facebook', {failureRedirect: '/login'}),
+        function (req, res) {
+            res.redirect('/');
+        });
 
     /**
      * Route for authenticating users
@@ -218,8 +269,7 @@ module.exports = function (app, express) {
         }
         else {
 
-           if(req.path == '/user/' && req.method == 'POST')
-            {
+            if (req.path == '/user/' && req.method == 'POST' || req.path.indexOf('/login/facebook') > -1) {
                 console.log('This\'s sing up request');
 
                 next();
@@ -227,11 +277,11 @@ module.exports = function (app, express) {
             else
             //if there is no token
             // return an HTTP response of 403 (access forbidden) and an error message
-            return res.status(403).send(
-                {
-                    success: false,
-                    message: 'No token provided.'
-                });
+                return res.status(403).send(
+                    {
+                        success: false,
+                        message: 'No token provided.'
+                    });
         }
     });
 
@@ -337,13 +387,43 @@ module.exports = function (app, express) {
                 })
         });
 
-
     /**
      * API endpoint to get user information
      */
     apiRouter.get('/me', function (req, res) {
         res.send(req.decoded);
     });
+
+    apiRouter.use(function (req, res, next) {
+
+        var currentRole;
+
+        /**
+         * admin middleware
+         */
+        User.findOne({'username': req.decoded.username}, function (err, user) {
+            if (err) {
+                return console.log(err);
+            }
+
+            currentRole = user.role;
+
+            if(req.path.indexOf('/admin') > -1 && currentRole != 'admin')
+                return res.status(423).send(
+                    {
+                        success: false,
+                        message: 'You\'re not admin.'
+                    });
+
+            next();
+
+        });
+    });
+
+    apiRouter.route('/admin')
+        .get(function (req, res) {
+            res.send(200);
+        });
 
     /**
      * Return apiRouter to app

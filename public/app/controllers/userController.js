@@ -72,6 +72,7 @@ angular.module('mainApp')
                     vm.message = data.message;
 
                     $rootScope.$emit('changeUser');
+                    $rootScope.$emit('invalidateAdminPanel');
                 })
         }
     }])
