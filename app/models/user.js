@@ -9,6 +9,7 @@ var User = new Schema(
         firstName: String,
         secondName: String,
         email: String,
+        site: String,
         role: String,
         username: {type: String, required: true, index: {unique:true}},
         password: {type: String, required: true, select: false}

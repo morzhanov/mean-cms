@@ -1,6 +1,6 @@
 angular.module('mainApp')
 
-    .factory('User', ['$http', 'Auth', '$location', function ($http, Auth, $location) {
+    .factory('User', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
 
         // create a new object
         var userFactory = {};
@@ -42,33 +42,17 @@ angular.module('mainApp')
 
             var vm = this;
 
-            vm.user = {};
+            var deferred = $q.defer();
 
             if (Auth.isLoggedIn()) {
+
                 userFactory.all().success(function (res) {
-                    //bind the users that come back to vm.users
-                    vm.users = res;
 
-                    userFactory.current().success(function (data) {
-                        //bind the users that come back to vm.users
-                        vm.user.username = data.username;
-
-                        for (var i = 0; i < vm.users.length; ++i) {
-                            if (vm.users[i].username == vm.user.username) {
-                                vm.user.firstName = vm.users[i].firstName;
-                                vm.user.secondName = vm.users[i].secondName;
-                            }
-                        }
-
-                        console.log(vm.user);
+                    deferred.resolve(res);
                     });
-                });
 
+                return deferred.promise;
             }
-
-            vm.currentUser = vm.user;
-
-            return vm.user;
         };
 
         // return our entire userFactory object

@@ -40,9 +40,6 @@ body textarea:required:valid {
 .hidden {
   display: none; }
 
-.jumbotron {
-  margin-top: 100px; }
-
 header .parallax-content {
   opacity: 0.8;
   background-size: cover !important; }
@@ -50,7 +47,7 @@ header .parallax-content {
 header .header-content {
   text-align: center;
   position: relative;
-  top: 50%;
+  top: 30%;
   width: 50%;
   font-size: 30px;
   margin: auto;
@@ -62,12 +59,32 @@ header .header-content {
     margin-bottom: 10px; }
 
 .navbar {
+  border-radius: 0px;
   margin-bottom: 0px; }
   .navbar .nav-logo {
     margin-right: 10px; }
+  .navbar .navbar-user-photo-reference {
+    border-radius: 50%; }
+    .navbar .navbar-user-photo-reference .navbar-user-photo {
+      border-radius: 50%;
+      width: 20px;
+      height: 20px; }
+
+#admin-panel-container {
+  max-height: 40px; }
 
 .admin-panel {
-  margin-top: 50px; }
+  padding-top: 6px;
+  font-size: 16px;
+  height: 40px;
+  background-color: #aaa;
+  border: none; }
+  .admin-panel .admin-panel-logo {
+    padding-right: 10px;
+    font-size: 24px; }
+
+#login .jumbotron {
+  margin-top: 120px; }
 
 #login, #signup {
   background-color: #222; }
@@ -94,13 +111,40 @@ header .header-content {
       font-size: 20px; }
 
 section#all-users .page-header {
-  margin-top: 120px; }
-section#all-users .col-sm-3 {
+  margin-top: 120px;
+  margin-bottom: 0px; }
+section#all-users h1 {
+  margin-left: 10px; }
+section#all-users a {
+  cursor: pointer; }
+section#all-users .col-sm-2 {
   text-align: center; }
-  section#all-users .col-sm-3 a {
+  section#all-users .col-sm-2 a {
     margin-right: 10px; }
 
 section#single-page .page-header {
-  margin-top: 120px; }
+  margin-top: 50px; }
+  section#single-page .page-header h1 {
+    margin-left: 30px; }
+section#single-page .thumbnail {
+  width: 220px;
+  margin: auto; }
+section#single-page img {
+  width: 200px;
+  min-height: 200px;
+  height: auto; }
+section#single-page .btn-photo {
+  margin: auto;
+  width: 200px;
+  margin-top: 10px; }
+
+section#donation {
+  background-color: #222;
+  padding-top: 20%; }
+  section#donation .donation-form {
+    width: 450px;
+    margin: auto; }
+    section#donation .donation-form iframe {
+      position: relative; }
 
 /*# sourceMappingURL=main.css.map */

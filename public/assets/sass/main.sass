@@ -1,6 +1,7 @@
 @import "bourbon/bourbon"
 
 $header-color: #ffffff
+$admin-panel-height: 40px
 
 html.js .loader
 	background: none repeat scroll 0 0 #ffffff
@@ -43,9 +44,6 @@ body textarea:required:valid
 .hidden
 	display: none
 
-.jumbotron
-	margin-top: 100px
-
 header .parallax-content
 	opacity: 0.8
 	background-size: cover !important
@@ -53,7 +51,7 @@ header .parallax-content
 header .header-content
 	text-align: center
 	position: relative
-	top: 50%
+	top: 30%
 	width: 50%
 	font-size: 30px
 	margin: auto
@@ -65,12 +63,33 @@ header .header-content
 		margin-bottom: 10px
 
 .navbar
+	border-radius: 0px
 	margin-bottom: 0px
 	.nav-logo
 		margin-right: 10px
+	.navbar-user-photo-reference
+		border-radius: 50%
+		.navbar-user-photo
+			border-radius: 50%
+			width: 20px
+			height: 20px
+
+#admin-panel-container
+	max-height: $admin-panel-height
 
 .admin-panel
-	margin-top: 50px
+	padding-top: 6px
+	font-size: 16px
+	height: $admin-panel-height
+	background-color: #aaa
+	border: none
+	.admin-panel-logo
+		padding-right: 10px
+		font-size: 24px
+
+#login
+	.jumbotron
+		margin-top: 120px
 
 #login, #signup
 	background-color: #222
@@ -99,10 +118,38 @@ header .header-content
 section#all-users
 	.page-header
 		margin-top: 120px
-	.col-sm-3
+		margin-bottom: 0px
+	h1
+		margin-left: 10px
+	a
+		cursor: pointer
+	.col-sm-2
 		text-align: center
 		a
 			margin-right: 10px
 
-section#single-page .page-header
-	margin-top: 120px
+section#single-page
+	.page-header
+		margin-top: 50px
+		h1
+			margin-left: 30px
+	.thumbnail
+		width: 220px
+		margin: auto
+	img
+		width: 200px
+		min-height: 200px
+		height: auto
+	.btn-photo
+		margin: auto
+		width: 200px
+		margin-top: 10px
+
+section#donation
+	background-color: #222
+	padding-top: 20%
+	.donation-form
+		width: 450px
+		margin: auto
+		iframe
+			position: relative

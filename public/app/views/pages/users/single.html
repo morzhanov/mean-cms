@@ -4,65 +4,84 @@
         <h1 ng-if="user.type == 'edit'">Edit User</h1>
     </div>
     <form class="form-horizontal" ng-submit="user.saveUser()">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">First Name</label>
-            <div class="col-sm-6">
-                <input type="text"
-                       class="form-control"
-                       ng-model="user.userData.firstName">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Second Name</label>
-            <div class="col-sm-6">
-                <input type="text"
-                       class="form-control"
-                       ng-model="user.userData.secondName">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-6">
-                <input type="text"
-                       class="form-control"
-                       ng-model="user.userData.email">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Username</label>
-            <div class="col-sm-6">
-                <input type="text"
-                       class="form-control"
-                       ng-model="user.userData.username">
-            </div>
-        </div>
-        <div class="admin-edit" ng-controller="adminController as admin">
-            <div class="form-group" ng-if="admin.isAdmin">
-                <label class="col-sm-2 control-label">Role</label>
-                <div class="col-sm-6">
+        <div class="left-form-content col-sm-8">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">First Name</label>
+                <div class="col-sm-10">
                     <input type="text"
                            class="form-control"
-                           ng-model="user.userData.role">
+                           ng-model="user.userData.firstName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Second Name</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="user.userData.secondName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="user.userData.email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="user.userData.username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Site</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           ng-model="user.userData.site">
+                </div>
+            </div>
+            <div class="admin-edit" ng-controller="adminController as admin">
+                <div class="form-group" ng-if="admin.isAdmin">
+                    <label class="col-sm-2 control-label">Role</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.role">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password"
+                           class="form-control"
+                           ng-model="user.userData.password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit"
+                            class="btn btn-success btn-lg btn-block"
+                            ng-if="user.type == 'create'">Create User
+                    </button>
+                    <button type="submit"
+                            class="btn btn-success btn-lg btn-block"
+                            ng-if="user.type == 'edit'">Update User
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-6">
-                <input type="password"
-                       class="form-control"
-                       ng-model="user.userData.password">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-6">
-                <button type="submit"
-                        class="btn btn-success btn-lg btn-block"
-                        ng-if="user.type == 'create'">Create User
-                </button>
-                <button type="submit"
-                        class="btn btn-success btn-lg btn-block"
-                        ng-if="user.type == 'edit'">Update User
+        <div class="right-form-content col-sm-4">
+            <div class="form-group">
+                <div>
+                    <div class="thumbnail"><img ng-src="{{user.getUserPhoto()}}" alt="user photo"></div>
+                </div>
+                <button class="btn btn-photo btn-primary btn-lg btn-block">Change photo
                 </button>
             </div>
         </div>

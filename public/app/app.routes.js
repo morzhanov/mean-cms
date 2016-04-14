@@ -22,6 +22,13 @@ angular.module('app.routes', ['ngRoute'])
                     controllerAs: 'home'
                 })
 
+            .when('/donation',
+                {
+                    templateUrl: 'app/views/pages/donation.html',
+                    controller: 'mainController',
+                    controllerAs: 'donate'
+                })
+
             //login page
             .when('/login',
                 {

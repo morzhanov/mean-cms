@@ -12,7 +12,7 @@ angular.module('mainApp',
 
         // get a single user
         this.heightDetect = function () {
-            $(".height-detect").css("height", $(window).height());
+            $(".height-detect").css("height", $(window).height() - 52);
         };
 
         $(document).ready(function () {
