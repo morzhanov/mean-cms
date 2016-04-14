@@ -50,9 +50,9 @@ angular.module('mainApp')
 
                     deferred.resolve(res);
                     });
-
-                return deferred.promise;
             }
+
+            return deferred.promise;
         };
 
         // return our entire userFactory object
