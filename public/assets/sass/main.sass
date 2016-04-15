@@ -64,20 +64,26 @@ header .header-content
 
 .navbar
 	border-radius: 0px
+	height: 70px
 	margin-bottom: 0px
+	.container
+		padding-top: 10px
 	.nav-logo
 		margin-right: 10px
 	.navbar-user-photo-reference
 		border-radius: 50%
+		margin-top: -17px
 		.navbar-user-photo
 			border-radius: 50%
-			width: 20px
-			height: 20px
+			width: 50px
+			height: 50px
 
 #admin-panel-container
 	max-height: $admin-panel-height
 
 .admin-panel
+	.container
+		padding-top: 0px
 	padding-top: 6px
 	font-size: 16px
 	height: $admin-panel-height
@@ -116,8 +122,34 @@ header .header-content
 			font-size: 20px
 
 section#all-users
+	background: url("../../assets/img/section-bg.jpg") no-repeat center center
+	color: #fff !important
+
+	.btn-new-user
+		margin-left: 20px
+		background-color: transparent
+		color: #fff
+		border-color: #fff
+		border-radius: 0px
+	.btn-new-user:hover,
+	.btn-new-user:active
+		background-color: #161616
+		border-color: #161616
+
+	.glyphicon-plus
+		font-size: 14px
+		font-weight: 100
+	a
+		color: #a9fffd
+	table, td, th, thead, tr
+		border: none
+	tr
+		background-color: transparent
 	.page-header
-		margin-top: 120px
+		border: none
+		padding-top: 50px
+		margin-top: 0px
+		margin-bottom: 0px
 		margin-bottom: 0px
 	h1
 		margin-left: 10px
@@ -129,8 +161,13 @@ section#all-users
 			margin-right: 10px
 
 section#single-page
+	color: #fff !important
+	background: url("../../assets/img/section-bg.jpg") no-repeat center center
 	.page-header
-		margin-top: 50px
+		border: none
+		padding-top: 50px
+		margin-top: 0px
+		margin-bottom: 0px
 		h1
 			margin-left: 30px
 	.thumbnail
@@ -153,3 +190,9 @@ section#donation
 		margin: auto
 		iframe
 			position: relative
+
+section#image-section
+	background: url("../../assets/img/section-bg.jpg") no-repeat center center
+	img
+		width: 100%
+		height: auto

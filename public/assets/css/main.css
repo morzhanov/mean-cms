@@ -60,15 +60,19 @@ header .header-content {
 
 .navbar {
   border-radius: 0px;
+  height: 70px;
   margin-bottom: 0px; }
+  .navbar .container {
+    padding-top: 10px; }
   .navbar .nav-logo {
     margin-right: 10px; }
   .navbar .navbar-user-photo-reference {
-    border-radius: 50%; }
+    border-radius: 50%;
+    margin-top: -17px; }
     .navbar .navbar-user-photo-reference .navbar-user-photo {
       border-radius: 50%;
-      width: 20px;
-      height: 20px; }
+      width: 50px;
+      height: 50px; }
 
 #admin-panel-container {
   max-height: 40px; }
@@ -79,6 +83,8 @@ header .header-content {
   height: 40px;
   background-color: #aaa;
   border: none; }
+  .admin-panel .container {
+    padding-top: 0px; }
   .admin-panel .admin-panel-logo {
     padding-right: 10px;
     font-size: 24px; }
@@ -110,33 +116,64 @@ header .header-content {
     #login .jumbotron .login-facebook, #signup .jumbotron .login-facebook {
       font-size: 20px; }
 
-section#all-users .page-header {
-  margin-top: 120px;
-  margin-bottom: 0px; }
-section#all-users h1 {
-  margin-left: 10px; }
-section#all-users a {
-  cursor: pointer; }
-section#all-users .col-sm-2 {
-  text-align: center; }
-  section#all-users .col-sm-2 a {
-    margin-right: 10px; }
+section#all-users {
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center;
+  color: #fff !important; }
+  section#all-users .btn-new-user {
+    margin-left: 20px;
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+    border-radius: 0px; }
+  section#all-users .btn-new-user:hover,
+  section#all-users .btn-new-user:active {
+    background-color: #161616;
+    border-color: #161616; }
+  section#all-users .glyphicon-plus {
+    font-size: 14px;
+    font-weight: 100; }
+  section#all-users a {
+    color: #a9fffd; }
+  section#all-users table, section#all-users td, section#all-users th, section#all-users thead, section#all-users tr {
+    border: none; }
+  section#all-users tr {
+    background-color: transparent; }
+  section#all-users .page-header {
+    border: none;
+    padding-top: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-bottom: 0px; }
+  section#all-users h1 {
+    margin-left: 10px; }
+  section#all-users a {
+    cursor: pointer; }
+  section#all-users .col-sm-2 {
+    text-align: center; }
+    section#all-users .col-sm-2 a {
+      margin-right: 10px; }
 
-section#single-page .page-header {
-  margin-top: 50px; }
-  section#single-page .page-header h1 {
-    margin-left: 30px; }
-section#single-page .thumbnail {
-  width: 220px;
-  margin: auto; }
-section#single-page img {
-  width: 200px;
-  min-height: 200px;
-  height: auto; }
-section#single-page .btn-photo {
-  margin: auto;
-  width: 200px;
-  margin-top: 10px; }
+section#single-page {
+  color: #fff !important;
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center; }
+  section#single-page .page-header {
+    border: none;
+    padding-top: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px; }
+    section#single-page .page-header h1 {
+      margin-left: 30px; }
+  section#single-page .thumbnail {
+    width: 220px;
+    margin: auto; }
+  section#single-page img {
+    width: 200px;
+    min-height: 200px;
+    height: auto; }
+  section#single-page .btn-photo {
+    margin: auto;
+    width: 200px;
+    margin-top: 10px; }
 
 section#donation {
   background-color: #222;
@@ -146,5 +183,11 @@ section#donation {
     margin: auto; }
     section#donation .donation-form iframe {
       position: relative; }
+
+section#image-section {
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center; }
+  section#image-section img {
+    width: 100%;
+    height: auto; }
 
 /*# sourceMappingURL=main.css.map */

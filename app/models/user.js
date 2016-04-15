@@ -11,6 +11,7 @@ var User = new Schema(
         email: String,
         site: String,
         role: String,
+        photo: String,
         username: {type: String, required: true, index: {unique:true}},
         password: {type: String, required: true, select: false}
     });

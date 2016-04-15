@@ -73,11 +73,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
-            <li ng-if="!main.loggedIn"><a href="/users/create">SignUp</a></li>
+            <li ng-if="!main.loggedIn"><a href="/signup">SignUp</a></li>
             <li ng-if="main.loggedIn" class="navbar-text">Hello {{navbar.user.firstName}} !</li>
             <li ng-if="main.loggedIn">
                     <a ng-controller="userController as user" ng-href="/account" class="navbar-user-photo-reference">
-                        <img class="navbar-user-photo" ng-src="{{user.getUserPhoto()}}" alt="User Photo">
+                        <img class="navbar-user-photo" ng-src="{{user.photo}}" alt="User Photo">
                     </a>
             </li>
             <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
@@ -108,9 +108,9 @@
         crossorigin="anonymous"></script>
 
 <!-- load angular angular-animate and angular-route via CDN -->
-<script src="assets/libs/angular/angular.min.js"></script>
-<script src="assets/libs/angular-route/angular-route.min.js"></script>
-<script src="assets/libs/angular-animate/angular-animate.min.js"></script>
+<script src="assets/libs/angular/angular.js"></script>
+<script src="assets/libs/angular-route/angular-route.js"></script>
+<script src="assets/libs/angular-animate/angular-animate.js"></script>
 
 <script src="assets/libs/ng-simple-parallax/js/ngParallax.min.js"></script>
 
@@ -122,15 +122,17 @@
 <script src="app/app.routes.js"></script>
 <script src="app/app.js"></script>
 
+<!-- services -->
+<script src="app/services/authService.js"></script>
+<script src="app/services/userService.js"></script>
+<script src="app/services/imageService.js"></script>
+
 <!-- controllers -->
 <script src="app/controllers/mainController.js"></script>
 <script src="app/controllers/userController.js"></script>
 <script src="app/controllers/navbarController.js"></script>
 <script src="app/controllers/adminController.js"></script>
-
-<!-- services -->
-<script src="app/services/authService.js"></script>
-<script src="app/services/userService.js"></script>
+<script src="app/controllers/imageController.js"></script>
 
 <script src="assets/js/common.js"></script>
 

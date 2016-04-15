@@ -3,14 +3,20 @@ angular.module('mainApp')
     .controller('mainController', ['$rootScope',
         '$location',
         'Auth',
+        'Image',
         'HeightDetect',
         'User',
         '$routeParams',
-        function ($rootScope, $location, Auth, HeightDetect, User, ngParallax, $routeParams) {
+        function ($rootScope, $location, Auth, Image, HeightDetect, User, $routeParams, ngParallax) {
 
             var vm = this;
 
             vm.user = {};
+
+            if (Auth.isLoggedIn())
+                if ($location.$$path == '/login' || $location.$$path == '/signup') {
+                    $location.path('/');
+                }
 
             HeightDetect.heightDetect();
 

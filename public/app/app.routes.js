@@ -29,12 +29,27 @@ angular.module('app.routes', ['ngRoute'])
                     controllerAs: 'donate'
                 })
 
+            .when('/image',
+                {
+                    templateUrl: 'app/views/pages/image.html',
+                    controller: 'imageController',
+                    controllerAs: 'image'
+                })
+
             //login page
             .when('/login',
                 {
                     templateUrl: 'app/views/pages/users/login.html',
                     controller: 'mainController',
                     controllerAs: 'login'
+                })
+
+            //login page
+            .when('/signup',
+                {
+                    templateUrl: 'app/views/pages/users/signup.html',
+                    controller: 'userCreateController',
+                    controllerAs: 'user'
                 })
 
             //show all users

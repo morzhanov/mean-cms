@@ -5,7 +5,11 @@ var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('../../config');
-
+var Image = require('../models/image.js');
+var fs = require('fs');
+var request = require('request');
+var formidable = require('formidable');
+var im = require('imagemagick');
 var secret = config.secret;
 
 module.exports = function (app, express) {
@@ -20,6 +24,65 @@ module.exports = function (app, express) {
      */
     apiRouter.get('/', function (req, res) {
         res.send('Welcome to the API zone');
+    });
+
+    apiRouter.route('/image/:id')
+        .post(function (req, res) {
+
+            var form = new formidable.IncomingForm();
+
+            var currentUser;
+
+            User.findById(req.params.id, function (err, user) {
+                currentUser = user;
+
+                form.parse(req, function (err, fields, files) {
+                    fs.readFile(files.image.path, function (err, data) {
+                        var imageName = files.image.name;
+                        var imageType = files.image.type.substring(files.image.type.indexOf("/") + 1);
+                        /// If there's an error
+                        if (!imageName) {
+                            console.log("There was an error");
+                            res.redirect("/");
+                            res.end();
+                        } else {
+                            fs.writeFile("./public/assets/img/users-photos/"
+                                + currentUser.username
+                                + "." + imageType, data, function (err) {
+                                if (err)
+                                    console.log(err);
+                            });
+
+                            /**
+                             * delete users-photos with old extension
+                             */
+                        }
+                    });
+                });
+            });
+        })
+        .get(function (req, res) {
+
+        });
+
+
+    apiRouter.get('/image', function (req, res) {
+        var image = new Image();
+
+        //image.img.data = fs.readFileSync(imgPath);
+
+        image.img.url = "assets/img/users-photos/mary.jpg";
+
+        image.save(function (err, a) {
+            if (err) throw err;
+
+            var imgRes = Image.findById(a, function (err, doc) {
+                if (err) return next(err);
+
+                //send image to frontend
+                res.send(doc.img.url);
+            });
+        });
     });
 
     /**
@@ -182,10 +245,18 @@ module.exports = function (app, express) {
             res.redirect('/');
         });
 
+    apiRouter.get('/login', function (req, res) {
+        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+
+        if (token)
+            res.redirect("/");
+    });
+
     /**
      * Route for authenticating users
      */
     apiRouter.post('/authenticate', function (req, res) {
+
         //find the user
         User.findOne(
             {
@@ -302,6 +373,7 @@ module.exports = function (app, express) {
             user.email = req.body.email;
             user.site = req.body.site;
             user.role = "user";
+            user.image = req.body.image;
             user.username = req.body.username;
             user.password = req.body.password;
 
@@ -361,6 +433,7 @@ module.exports = function (app, express) {
                 if (req.body.email) user.email = req.body.email;
                 if (req.body.site) user.site = req.body.site;
                 if (req.body.role) user.role = req.body.role;
+                if (req.body.photo) user.photo = req.body.photo;
                 if (req.body.username) user.username = req.body.username;
                 if (req.body.password) user.password = req.body.password;
 
@@ -409,9 +482,12 @@ module.exports = function (app, express) {
                 return console.log(err);
             }
 
+            if(user === undefined)
+                res.status(403).send();
+
             currentRole = user.role;
 
-            if(req.path.indexOf('/admin') > -1 && currentRole != 'admin')
+            if (req.path.indexOf('/admin') > -1 && currentRole != 'admin')
                 return res.status(423).send(
                     {
                         success: false,
