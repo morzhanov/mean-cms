@@ -87,10 +87,24 @@
             <div class="right-form-content col-sm-4">
                 <div class="form-group">
                     <div>
-                        <div class="thumbnail"><img ng-src="{{user.userData.photo}}" alt="user photo"></div>
+                        <div class="thumbnail" id="user-photo"><img
+                                ng-src="{{user.userData.photo}}"
+                                alt="user photo"></div>
                     </div>
-                    <button class="btn btn-photo btn-primary btn-lg btn-block" ng-click="user.loadImage()">Change photo
-                    </button>
+                    <input class="filestyle fd-photo"
+                           filestyle
+                           name='image'
+                           ng-model="photo"
+                           ng-model-instant
+                           onchange="angular.element(this).scope().LoadFilePath(this)"
+                           type="file"
+                           data-input="false"
+                           data-classIcon="icon-plus"
+                           data-buttonText="Change photo"
+                           style="margin: auto;
+                           width: 200px;
+                           margin-top: 10px;">
+                    </input>
                 </div>
             </div>
         </form>

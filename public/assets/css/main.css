@@ -164,16 +164,20 @@ section#single-page {
     section#single-page .page-header h1 {
       margin-left: 30px; }
   section#single-page .thumbnail {
-    width: 220px;
+    width: 212px;
     margin: auto; }
   section#single-page img {
     width: 200px;
     min-height: 200px;
     height: auto; }
-  section#single-page .btn-photo {
+  section#single-page .input-group {
     margin: auto;
-    width: 200px;
-    margin-top: 10px; }
+    margin-top: 10px;
+    width: 200px; }
+    section#single-page .input-group label {
+      width: 200px; }
+    section#single-page .input-group span {
+      margin-right: 10px; }
 
 section#donation {
   background-color: #222;

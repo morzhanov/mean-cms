@@ -3,7 +3,8 @@ angular.module('mainApp',
     [
         'ngAnimate',          //animating
         'app.routes',         //routing
-        'ngParallax'          //parallax effect
+        'ngParallax',          //parallax effect
+        'ngFileUpload'
     ])
 
     .service('HeightDetect', function () {

@@ -153,11 +153,35 @@ angular.module('mainApp')
             }
         }])
 
+    .directive('filestyle', function () {
+        return {
+            restrict: 'AC',
+            scope: true,
+            link: function (scope, element, attrs) {
+                var options = {
+                    'input': attrs.input === 'false' ? false : true,
+                    'icon': attrs.icon === 'false' ? false : true,
+                    'buttonBefore': attrs.buttonbefore === 'true' ? true : false,
+                    'disabled': attrs.disabled === 'true' ? true : false,
+                    'size': attrs.size,
+                    'buttonText': attrs.buttontext,
+                    'buttonName': attrs.buttonname,
+                    'iconName': attrs.iconname,
+                    'badge': attrs.badge === 'false' ? false : true,
+                    'placeholder': attrs.placeholder
+                };
+                $(element).filestyle(options);
+            }
+        };
+    })
+
     //controller applied to user edit page
-    .controller('userEditController', ['$routeParams', 'User', 'Image', 'HeightDetect',
-        function ($routeParams, User, Image, HeightDetect) {
+    .controller('userEditController', ['$rootScope', '$routeParams', 'User', 'Image', 'HeightDetect', '$window', 'Upload',
+        function ($rootScope, $routeParams, User, Image, HeightDetect, $window, Upload) {
 
             var vm = this;
+
+            vm.uploadPhoto = false;
 
             HeightDetect.heightDetect();
 
@@ -167,10 +191,29 @@ angular.module('mainApp')
             // differentiates between create or edit pages
             vm.type = 'edit';
 
-            vm.getUserPhoto = function () {
-                if (vm.userData.photo === undefined) {
-                    vm.userData.photo = vm.defaultUserPhoto;
-                }
+            $rootScope.LoadFilePath = function (element) {
+
+                $rootScope.$apply(function (scope) {
+
+                    var file = element.files[0];
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        console.log(e);
+                        vm.photoData = e.target.result;
+
+                        vm.userData.photo = e.target.result;
+
+                        angular.element('#user-photo')
+                            .html(
+                                '<img ng-src="{{user.userData.photo}}" src="' + vm.userData.photo + '" alt="user photo">'
+                            );
+
+                        vm.uploadPhoto = true;
+                    };
+                    reader.readAsDataURL(file);
+                });
             };
 
             // get the user data for the user you want to edit
@@ -179,54 +222,85 @@ angular.module('mainApp')
                 .success(function (data) {
                     vm.userData = data;
 
+                    angular.element('#photo-form')
+                        .attr('action', '/api/upload/image/user?id='
+                            + $routeParams.user_id
+                            + '&token=' + $window.localStorage.getItem('token')
+                            + '&username=' + vm.userData.username);
+
                     vm.getUserPhoto();
                 });
 
-            vm.loadingImage = false;
 
-            vm.loadImage = function () {
-
-                vm.loadingImage = true;
-
-                //...load image from file dialog....
-                //then...
-                Image.get().success(function (res) {
-                    vm.userPhoto = res;
-                    vm.userData.photo = res;
-
-                    vm.loadingImage = false;
-                });
+            vm.getUserPhoto = function () {
+                if (vm.userData.photo === undefined) {
+                    vm.userData.photo = vm.defaultUserPhoto;
+                }
             };
 
             //function to save the user
             vm.saveUser = function () {
-
-                if (vm.loadingImage)
-                    return;
-
+                
                 vm.processing = true;
 
                 vm.message = '';
 
-                //call the userService function to update
-                User.update($routeParams.user_id, vm.userData)
-                    .success(function (data) {
-                        vm.processing = false;
+                var uploadPhotoFunc = function()
+                {
+                    "use strict";
 
-                        //clear the form
-                        vm.userData = {};
+                    /**
+                     * load image on server
+                     */
+                    Upload.upload({
+                        url: '/api/upload/image/user',
+                        data: {
+                            photo: {
+                                userId: $routeParams.user_id,
+                                data: vm.photoData,
+                                type: "." + vm.photoData.substring(
+                                    vm.photoData.indexOf('/') + 1,
+                                    vm.photoData.indexOf(';'))
+                            }
+                        }
+                    }).then(function (response) {
+                        "use strict";
+                        console.log(response);
 
-                        //bind the message from our API to vm.message
-                        vm.message = data.message;
-
-                        $rootScope.$emit('changeUser');
-                        $rootScope.$emit('invalidateAdminPanel');
-                    })
-                    .error(function (data) {
-                        console.log(data);
-                        $rootScope.$emit('changeUser');
-                        $rootScope.$emit('invalidateAdminPanel');
+                        updateUser();
                     });
+                };
+
+                var updateUser = function () {
+
+                    //call the userService function to update
+                    User.update($routeParams.user_id, vm.userData)
+                        .success(function (data) {
+                            vm.processing = false;
+
+                            //bind the message from our API to vm.message
+                            vm.message = data.message;
+
+                            $rootScope.$emit('changeUser');
+                            $rootScope.$emit('invalidateAdminPanel');
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                            $rootScope.$emit('changeUser');
+                            $rootScope.$emit('invalidateAdminPanel');
+                        });
+                };
+
+                if(vm.uploadPhoto)
+                {
+                    vm.uploadPhoto = false;
+
+                    uploadPhotoFunc();
+                }
+                else
+                {
+                    updateUser();
+                }
             };
         }
     ]);

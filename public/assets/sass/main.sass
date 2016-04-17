@@ -4,195 +4,199 @@ $header-color: #ffffff
 $admin-panel-height: 40px
 
 html.js .loader
-	background: none repeat scroll 0 0 #ffffff
-	bottom: 0
-	height: 100%
-	left: 0
-	position: fixed
-	right: 0
-	top: 0
-	width: 100%
-	z-index: 9999
-	.loader_inner
-		background-size: 100px
-		background: #fff url("../../assets/img/preloader.gif") no-repeat center center
-		height: 128px
-		width: 128px
-		margin-top: -64px
-		margin-left: -64px
-		left: 50%
-		top: 50%
-		position: absolute
+  background: none repeat scroll 0 0 #ffffff
+  bottom: 0
+  height: 100%
+  left: 0
+  position: fixed
+  right: 0
+  top: 0
+  width: 100%
+  z-index: 9999
+  .loader_inner
+    background-size: 100px
+    background: #fff url("../../assets/img/preloader.gif") no-repeat center center
+    height: 128px
+    width: 128px
+    margin-top: -64px
+    margin-left: -64px
+    left: 50%
+    top: 50%
+    position: absolute
 
 body
-	font-family: "RobotoRegular", sans-serif
-	font-weight: normal
-	font-size: 14px
-	min-width: 320px
-	position: relative
-	line-height: 1.6
-	-webkit-font-smoothing: antialiased
-	overflow-x: hidden
+  font-family: "RobotoRegular", sans-serif
+  font-weight: normal
+  font-size: 14px
+  min-width: 320px
+  position: relative
+  line-height: 1.6
+  -webkit-font-smoothing: antialiased
+  overflow-x: hidden
 
 body input:focus:required:invalid,
 body textarea:focus:required:invalid
-	color: red
+  color: red
 body input:required:valid,
 body textarea:required:valid
-	color: green
+  color: green
 
 .hidden
-	display: none
+  display: none
 
 header .parallax-content
-	opacity: 0.8
-	background-size: cover !important
+  opacity: 0.8
+  background-size: cover !important
 
 header .header-content
-	text-align: center
-	position: relative
-	top: 30%
-	width: 50%
-	font-size: 30px
-	margin: auto
-	color: #fff
-	border: solid 8px $header-color
-	.header-title
-		color: $header-color
-		margin-top: 10px
-		margin-bottom: 10px
+  text-align: center
+  position: relative
+  top: 30%
+  width: 50%
+  font-size: 30px
+  margin: auto
+  color: #fff
+  border: solid 8px $header-color
+  .header-title
+    color: $header-color
+    margin-top: 10px
+    margin-bottom: 10px
 
 .navbar
-	border-radius: 0px
-	height: 70px
-	margin-bottom: 0px
-	.container
-		padding-top: 10px
-	.nav-logo
-		margin-right: 10px
-	.navbar-user-photo-reference
-		border-radius: 50%
-		margin-top: -17px
-		.navbar-user-photo
-			border-radius: 50%
-			width: 50px
-			height: 50px
+  border-radius: 0px
+  height: 70px
+  margin-bottom: 0px
+  .container
+    padding-top: 10px
+  .nav-logo
+    margin-right: 10px
+  .navbar-user-photo-reference
+    border-radius: 50%
+    margin-top: -17px
+    .navbar-user-photo
+      border-radius: 50%
+      width: 50px
+      height: 50px
 
 #admin-panel-container
-	max-height: $admin-panel-height
+  max-height: $admin-panel-height
 
 .admin-panel
-	.container
-		padding-top: 0px
-	padding-top: 6px
-	font-size: 16px
-	height: $admin-panel-height
-	background-color: #aaa
-	border: none
-	.admin-panel-logo
-		padding-right: 10px
-		font-size: 24px
+  .container
+    padding-top: 0px
+  padding-top: 6px
+  font-size: 16px
+  height: $admin-panel-height
+  background-color: #aaa
+  border: none
+  .admin-panel-logo
+    padding-right: 10px
+    font-size: 24px
 
 #login
-	.jumbotron
-		margin-top: 120px
+  .jumbotron
+    margin-top: 120px
 
 #login, #signup
-	background-color: #222
-	.jumbotron
-		padding-left: 20px
-		padding-right: 20px
-		position: relative
-		.col-md-6:nth-of-type(1)
-			padding-left: 0px
-		.col-md-6:nth-of-type(2)
-			padding-right: 0px
-		h1
-			text-align: center
-			margin-bottom: 30px
-		button
-			display: block
-			margin: auto
-			width: 50%
-		.to-signup
-			position: absolute
-			margin-top: 20px
-			bottom: 5px
-		.login-facebook
-			font-size: 20px
+  background-color: #222
+  .jumbotron
+    padding-left: 20px
+    padding-right: 20px
+    position: relative
+    .col-md-6:nth-of-type(1)
+      padding-left: 0px
+    .col-md-6:nth-of-type(2)
+      padding-right: 0px
+    h1
+      text-align: center
+      margin-bottom: 30px
+    button
+      display: block
+      margin: auto
+      width: 50%
+    .to-signup
+      position: absolute
+      margin-top: 20px
+      bottom: 5px
+    .login-facebook
+      font-size: 20px
 
 section#all-users
-	background: url("../../assets/img/section-bg.jpg") no-repeat center center
-	color: #fff !important
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  color: #fff !important
 
-	.btn-new-user
-		margin-left: 20px
-		background-color: transparent
-		color: #fff
-		border-color: #fff
-		border-radius: 0px
-	.btn-new-user:hover,
-	.btn-new-user:active
-		background-color: #161616
-		border-color: #161616
+  .btn-new-user
+    margin-left: 20px
+    background-color: transparent
+    color: #fff
+    border-color: #fff
+    border-radius: 0px
+  .btn-new-user:hover,
+  .btn-new-user:active
+    background-color: #161616
+    border-color: #161616
 
-	.glyphicon-plus
-		font-size: 14px
-		font-weight: 100
-	a
-		color: #a9fffd
-	table, td, th, thead, tr
-		border: none
-	tr
-		background-color: transparent
-	.page-header
-		border: none
-		padding-top: 50px
-		margin-top: 0px
-		margin-bottom: 0px
-		margin-bottom: 0px
-	h1
-		margin-left: 10px
-	a
-		cursor: pointer
-	.col-sm-2
-		text-align: center
-		a
-			margin-right: 10px
+  .glyphicon-plus
+    font-size: 14px
+    font-weight: 100
+  a
+    color: #a9fffd
+  table, td, th, thead, tr
+    border: none
+  tr
+    background-color: transparent
+  .page-header
+    border: none
+    padding-top: 50px
+    margin-top: 0px
+    margin-bottom: 0px
+    margin-bottom: 0px
+  h1
+    margin-left: 10px
+  a
+    cursor: pointer
+  .col-sm-2
+    text-align: center
+    a
+      margin-right: 10px
 
 section#single-page
-	color: #fff !important
-	background: url("../../assets/img/section-bg.jpg") no-repeat center center
-	.page-header
-		border: none
-		padding-top: 50px
-		margin-top: 0px
-		margin-bottom: 0px
-		h1
-			margin-left: 30px
-	.thumbnail
-		width: 220px
-		margin: auto
-	img
-		width: 200px
-		min-height: 200px
-		height: auto
-	.btn-photo
-		margin: auto
-		width: 200px
-		margin-top: 10px
+  color: #fff !important
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  .page-header
+    border: none
+    padding-top: 50px
+    margin-top: 0px
+    margin-bottom: 0px
+    h1
+      margin-left: 30px
+  .thumbnail
+    width: 212px
+    margin: auto
+  img
+    width: 200px
+    min-height: 200px
+    height: auto
+  .input-group
+    margin: auto
+    margin-top: 10px
+    width: 200px
+    label
+      width: 200px
+    span
+      margin-right: 10px
 
 section#donation
-	background-color: #222
-	padding-top: 20%
-	.donation-form
-		width: 450px
-		margin: auto
-		iframe
-			position: relative
+  background-color: #222
+  padding-top: 20%
+  .donation-form
+    width: 450px
+    margin: auto
+    iframe
+      position: relative
 
 section#image-section
-	background: url("../../assets/img/section-bg.jpg") no-repeat center center
-	img
-		width: 100%
-		height: auto
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  img
+    width: 100%
+    height: auto

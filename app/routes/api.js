@@ -26,46 +26,6 @@ module.exports = function (app, express) {
         res.send('Welcome to the API zone');
     });
 
-    apiRouter.route('/image/:id')
-        .post(function (req, res) {
-
-            var form = new formidable.IncomingForm();
-
-            var currentUser;
-
-            User.findById(req.params.id, function (err, user) {
-                currentUser = user;
-
-                form.parse(req, function (err, fields, files) {
-                    fs.readFile(files.image.path, function (err, data) {
-                        var imageName = files.image.name;
-                        var imageType = files.image.type.substring(files.image.type.indexOf("/") + 1);
-                        /// If there's an error
-                        if (!imageName) {
-                            console.log("There was an error");
-                            res.redirect("/");
-                            res.end();
-                        } else {
-                            fs.writeFile("./public/assets/img/users-photos/"
-                                + currentUser.username
-                                + "." + imageType, data, function (err) {
-                                if (err)
-                                    console.log(err);
-                            });
-
-                            /**
-                             * delete users-photos with old extension
-                             */
-                        }
-                    });
-                });
-            });
-        })
-        .get(function (req, res) {
-
-        });
-
-
     apiRouter.get('/image', function (req, res) {
         var image = new Image();
 
@@ -313,7 +273,7 @@ module.exports = function (app, express) {
      */
     apiRouter.use(function (req, res, next) {
         //check header or url params or post params for token
-        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+        var token = req.body.token || req.query.token || req.param('token') || req.headers['x-access-token'];
 
         //decode token
         if (token) {
@@ -400,6 +360,60 @@ module.exports = function (app, express) {
             })
         });
 
+    apiRouter.route('/upload/image/user')
+        .post(function (req, res) {
+            var form = new formidable.IncomingForm();
+
+            var currentUser;
+
+            form.parse(req, function (err, fields, files) {
+                var photoData = fields['photo[data]'];
+                var imageType = fields['photo[type]'];
+
+                User.findById(fields['photo[userId]'], function (err, user) {
+                    currentUser = user;
+                    /// If there's an error
+
+                    var photoPath = "./public/assets/img/users-photos/"
+                        + currentUser.username
+                        + imageType;
+
+                    //photoData = photoData.replace(/^data:image\/png|jpeg|jpg|gif;base64,/, "");
+
+                    var base64Data = photoData.substring(
+                        photoData.indexOf(',') + 1
+                    );
+
+                    fs.writeFile(photoPath, base64Data, 'base64', function (err) {
+                        if (err)
+                            console.log(err);
+                        else {
+
+                            photoPath = "assets/img/users-photos/"
+                                + currentUser.username
+                                + imageType;
+
+                            if (currentUser.photo != photoPath && currentUser.photo != undefined) {
+                                /**
+                                 * delete user photo with old extension
+                                 */
+                                fs.unlink(user.photo);
+                            }
+
+                            currentUser.photo = photoPath;
+
+                            currentUser.save(function (err) {
+                                if (err) {
+                                    res.send(err);
+                                }
+                                res.send(202);
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
     /**
      * On routes that end in /user/:id
      */
@@ -421,11 +435,10 @@ module.exports = function (app, express) {
         //accessed at PUT http://localhost:8080/api//user/:id
         .put(function (req, res) {
 
-            //use our model to find the user we want
+            var currentUser;
+
             User.findById(req.params.id, function (err, user) {
-                if (err) {
-                    res.send(err);
-                }
+                currentUser = user;
 
                 //update the users info only if its new
                 if (req.body.firstName) user.firstName = req.body.firstName;
@@ -433,7 +446,6 @@ module.exports = function (app, express) {
                 if (req.body.email) user.email = req.body.email;
                 if (req.body.site) user.site = req.body.site;
                 if (req.body.role) user.role = req.body.role;
-                if (req.body.photo) user.photo = req.body.photo;
                 if (req.body.username) user.username = req.body.username;
                 if (req.body.password) user.password = req.body.password;
 
@@ -444,7 +456,7 @@ module.exports = function (app, express) {
                     }
 
                     res.json({message: 'User updated!'});
-                })
+                });
             })
         })
 
@@ -482,7 +494,7 @@ module.exports = function (app, express) {
                 return console.log(err);
             }
 
-            if(user === undefined)
+            if (user === undefined)
                 res.status(403).send();
 
             currentRole = user.role;
@@ -509,4 +521,4 @@ module.exports = function (app, express) {
      */
     return apiRouter;
 
-};
+}
