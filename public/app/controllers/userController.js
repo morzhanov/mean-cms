@@ -240,7 +240,7 @@ angular.module('mainApp')
 
             //function to save the user
             vm.saveUser = function () {
-                
+
                 vm.processing = true;
 
                 vm.message = '';

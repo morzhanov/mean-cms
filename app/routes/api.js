@@ -122,26 +122,6 @@ module.exports = function (app, express) {
     });
 
     /**
-     * displaying a single record
-     */
-    apiRouter.get('/pages/admin-details/:id', function (request, response) {
-
-        var id = request.params.id;
-
-        Page.findOne({
-                _id: id
-            },
-
-            function (err, page) {
-                if (err) {
-                    return console.log(err);
-                }
-                return response.send(page);
-
-            });
-    });
-
-    /**
      * Get single page details
      */
     apiRouter.get('pages/details/:url', function (req, res) {
@@ -155,6 +135,130 @@ module.exports = function (app, express) {
             return response.send(page);
         });
     });
+
+    /**
+     * Get all posts
+     */
+    apiRouter.get('/posts', function (request, response) {
+
+        return Page.find(function (err, pages) {
+            if (!err) {
+                return response.send(pages);
+            } else {
+                return response.send(500, err);
+            }
+        });
+    });
+
+    /**
+     * Get all posts of curtain page
+     */
+    apiRouter.get('/posts/:id', function (request, response) {
+
+        return Page.find(function (err, pages) {
+            if (!err) {
+                return response.send(pages);
+            } else {
+                return response.send(500, err);
+            }
+        });
+    });
+
+    /**
+     * Get single post
+     */
+    apiRouter.get('/post/:id', function (request, response) {
+
+        return Page.find(function (err, pages) {
+            if (!err) {
+                return response.send(pages);
+            } else {
+                return response.send(500, err);
+            }
+        });
+    });
+
+    /**
+     * Create new post in DB
+     * id - ID of page
+     */
+    apiRouter.post('/post/add/:id', function (request, response) {
+
+        var page = new Page({
+            title: request.body.title,
+            url: request.body.url,
+            content: request.body.content,
+            menuIndex: request.body.menuIndex,
+            date: new Date(Date.now())
+        });
+
+        page.save(function (err) {
+            if (!err) {
+                return response.send(200, page);
+            }
+            else {
+                return response.send(500, err);
+            }
+        });
+    });
+
+    /**
+     * update a post
+     * id - ID of post
+     */
+    apiRouter.post('/post/update/:id', function (request, response) {
+        var id = request.body._id;
+
+        Page.update(
+            {
+                _id: id
+            },
+            {
+                $set: {
+                    title: request.body.title,
+                    url: request.body.url,
+                    content: request.body.content,
+                    menuIndex: request.body.menuIndex,
+                    date: new Date(Date.now())
+                }
+            }).exec();
+        response.send("Page updated");
+    });
+
+    /**
+     * delete all posts of page
+     * id - ID of page
+     */
+    apiRouter.get('/posts/delete/:id', function (request, response) {
+
+        var id = request.params.id;
+
+        Page.remove({
+                _id: id
+            },
+            function (err) {
+                return console.log(err);
+            });
+        return response.send('Page id- ' + id + 'has been deleted');
+    });
+
+    /**
+     * delete a single post
+     * id - ID of post
+     */
+    apiRouter.get('/post/delete/:id', function (request, response) {
+
+        var id = request.params.id;
+
+        Page.remove({
+                _id: id
+            },
+            function (err) {
+                return console.log(err);
+            });
+        return response.send('Page id- ' + id + 'has been deleted');
+    });
+    
     // Configure the Facebook strategy for use by Passport.
     //
     // OAuth 2.0-based strategies require a `verify` function which receives the
