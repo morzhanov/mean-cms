@@ -3,11 +3,10 @@ angular.module('mainApp')
     .controller('mainController', ['$rootScope',
         '$location',
         'Auth',
-        'Image',
         'HeightDetect',
         'User',
         '$routeParams',
-        function ($rootScope, $location, Auth, Image, HeightDetect, User, $routeParams, ngParallax) {
+        function ($rootScope, $location, Auth, HeightDetect, User, $routeParams, ngParallax) {
 
             var vm = this;
 

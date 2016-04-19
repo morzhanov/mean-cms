@@ -9,8 +9,6 @@ var Schema = mongoose.Schema;
 var Post = new Schema({
     //title of the post
     title: String,
-    //The id of parent page
-    page: Number,
     //content of the post
     content: String,
     //The date when this document was last updated.

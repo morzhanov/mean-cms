@@ -11,8 +11,8 @@ var Page = new Schema({
     title: String,
     //The SEO-friendly alias that will be used to identify the page.
     url: {type: String, index:{unique:true}},
-    //content of the page
-    content: String,
+    //content of the page (array of posts ids)
+    content: [Number],
     //defines the menu sequence of the pages in the navigation bar.
     menuIndex: Number,
     //The date when this document was last updated.

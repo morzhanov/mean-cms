@@ -119,7 +119,7 @@ angular.module('mainApp')
 
             vm.processing = false;
 
-            if ($location.$$path == '/user/create')
+            if ($location.$$path == '/users/create')
                 $http.get('/api/admin')
                     .error(function (err) {
                         $location.path('/');
@@ -176,8 +176,8 @@ angular.module('mainApp')
     })
 
     //controller applied to user edit page
-    .controller('userEditController', ['$rootScope', '$routeParams', 'User', 'Image', 'HeightDetect', '$window', 'Upload',
-        function ($rootScope, $routeParams, User, Image, HeightDetect, $window, Upload) {
+    .controller('userEditController', ['$rootScope', '$routeParams', 'User', 'HeightDetect', '$window', 'Upload',
+        function ($rootScope, $routeParams, User, HeightDetect, $window, Upload) {
 
             var vm = this;
 
