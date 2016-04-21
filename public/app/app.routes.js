@@ -22,6 +22,13 @@ angular.module('app.routes', ['ngRoute'])
                     controllerAs: 'home'
                 })
 
+            .when('/admin-dashboard',
+                {
+                    templateUrl: 'app/views/pages/dashboard.html',
+                    controller: 'dashboardController',
+                    controllerAs: 'dashboard'
+                })
+
             .when('/donation',
                 {
                     templateUrl: 'app/views/pages/donation.html',

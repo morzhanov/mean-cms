@@ -37,12 +37,66 @@ body
 body input:focus:required:invalid,
 body textarea:focus:required:invalid
   color: red
+
 body input:required:valid,
 body textarea:required:valid
   color: green
 
 .hidden
   display: none
+
+/**
+  *Dashboard
+  */
+
+.accordion-toggle:focus,
+.accordion-toggle:active
+  outline: none
+  color: #ff904e
+
+#dashboard-container
+  .row
+    height: 100%
+  a
+    color: #fff
+    text-decoration: none
+    cursor: pointer
+  a:active, a:hover, a:visited, a:focus,
+  span:hover,
+  span:active,
+  span:focus
+    color: #ff904e
+
+.dshb-menu
+  border-right: 2px solid #aaa
+  padding-right: 0px
+  background-color: #4e285e
+  height: 100%
+  span
+    color: #fff
+
+.panel-group
+.panel-heading + .panel-collapse >
+.list-group,
+.panel-group
+.panel-heading + .panel-collapse >
+.panel-body
+  border-top: 0px !important
+
+.panel-group .panel + .panel
+  border: none
+
+.panel-default,
+.panel-default > .panel-heading
+  background-color: transparent
+  border-color: transparent
+  border-radius: 0px !important
+
+.dshb-menu-item, .dshd-menu-child-item
+  text-align: justify
+
+.dshd-menu-child-item
+  margin-bottom: 10px
 
 header .parallax-content
   opacity: 0.8
@@ -63,13 +117,17 @@ header .header-content
     margin-bottom: 10px
 
 .navbar
+  background-color: #4e285e
   border-radius: 0px
   height: 70px
+  border-bottom: 2px solid #aaa
   margin-bottom: 0px
   .container
     padding-top: 10px
   .nav-logo
     margin-right: 10px
+    color: #ff904e
+    font-size: 20px
   .navbar-user-photo-reference
     border-radius: 50%
     margin-top: -17px
@@ -77,6 +135,16 @@ header .header-content
       border-radius: 50%
       width: 50px
       height: 50px
+  a.navbar-brand
+    color: #fff
+  a.navbar-brand:hover,a.navbar-brand:focus, a.navbar-brand:active
+    color: #ff904e
+  .navbar-right
+    a
+      color: #fff
+    a:hover, a:active, a:focus
+      color: #ff904e
+      background-color: transparent
 
 #admin-panel-container
   max-height: $admin-panel-height

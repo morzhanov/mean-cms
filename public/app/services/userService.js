@@ -1,3 +1,7 @@
+/**
+ * Service for managing user's routes
+ */
+
 angular.module('mainApp')
 
     .factory('User', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {

@@ -1,0 +1,37 @@
+<section id="dashboard-container" class="height-detect">
+        <div class="row">
+            <div class="col-md-2 dshb-menu">
+                <uib-accordion close-others="false">
+
+                    <uib-accordion-group class="dshb-menu-item" heading="Home" is-disabled="true">
+                        Dashboard home
+                    </uib-accordion-group>
+                    <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Posts"
+                                         is-open="isPostsOpen">
+                        <div class="dshd-menu-child-item"><a ng-click="">All</a></div>
+                        <div class="dshd-menu-child-item"><a ng-click="">Create New</a></div>
+                    </uib-accordion-group>
+
+                    <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Pages"
+                                         is-open="isPagesOpen">
+                        <div class="dshd-menu-child-item"><a ng-click="">All</a></div>
+                        <div class="dshd-menu-child-item"><a ng-click="">Create New</a></div>
+                    </uib-accordion-group>
+
+                    <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Appearance"
+                                         is-open="isAppearanceOpen">
+                        <div class="dshd-menu-child-item"><a ng-click="">Theme</a></div>
+                        <div class="dshd-menu-child-item"><a ng-click="">Colors</a></div>
+                    </uib-accordion-group>
+
+                    <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Settings"
+                                         is-open="isOpen">
+                        <div class="dshd-menu-child-item"><a  ng-click="">Users</a></div>
+                        <div class="dshd-menu-child-item"><a  ng-click="">Site preferences</a></div>
+                    </uib-accordion-group>
+                </uib-accordion>
+            </div>
+            <div class="col-md-9 dashboard-content">
+            </div>
+        </div>
+</section>

@@ -3,6 +3,7 @@ angular.module('mainApp',
     [
         'ngAnimate',          //animating
         'app.routes',         //routing
+        'ui.bootstrap',
         'ngParallax',          //parallax effect
         'ngFileUpload'
     ])

@@ -1,3 +1,7 @@
+/**
+ * PAGES ROUTES
+ */
+
 var mongoose = require('mongoose');
 var Page = require('../models/page.js');
 var User = require('../models/user.js');
@@ -11,10 +15,6 @@ module.exports = function (app, express) {
      * get an instance of the express router
      */
     var pageRouter = express.Router();
-
-    /**
-     * PAGE ROUTES
-     */
 
     /**
      * Page routes for /pages/ reference
@@ -119,7 +119,7 @@ module.exports = function (app, express) {
         });
 
     /**
-     * Return apiRouter to app
+     * Return pagesRouter to app
      */
     return pageRouter;
 

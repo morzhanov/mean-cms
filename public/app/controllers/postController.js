@@ -1,3 +1,13 @@
-/**
- * Created by vlads on 4/18/2016.
- */
+angular.module('mainApp')
+
+    .controller('postController', [function () {
+
+    }])
+
+    .controller('postEditController', [function () {
+
+    }])
+
+    .controller('postCreateController', [function () {
+
+    }]);

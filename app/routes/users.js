@@ -1,8 +1,12 @@
+/**
+ * USERS ROUTES
+ * @type {*|exports|module.exports}
+ */
+
 var mongoose = require('mongoose');
 var Page = require('../models/page.js');
 var User = require('../models/user.js');
 var config = require('../../config');
-var Image = require('../models/image.js');
 var fs = require('fs');
 var request = require('request');
 var formidable = require('formidable');
@@ -121,7 +125,7 @@ module.exports = function (app, express) {
         });
 
     /**
-     * Return apiRouter to app
+     * Return userRouter to app
      */
     return userRouter;
 

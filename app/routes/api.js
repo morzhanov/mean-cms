@@ -1,3 +1,7 @@
+/**
+ * API ROUTES
+ */
+
 var mongoose = require('mongoose');
 var User = require('../models/user.js');
 var passport = require('passport');
