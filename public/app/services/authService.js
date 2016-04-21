@@ -7,9 +7,6 @@ angular.module('mainApp')
     // inject AuthToken to manage tokens
     // ===================================================
     .factory('Auth', ['$http', '$q','AuthToken', function ($http, $q, AuthToken) {
-
-        console.log(AuthToken);
-
         //create auth factory object
         var authFactory = {};
 

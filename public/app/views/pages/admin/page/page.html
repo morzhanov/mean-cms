@@ -1,0 +1,34 @@
+<section id="single-page" ng-controller="pageEditController as page">
+    <h2 ng-if="page.type == 'edit';">Edit page</h2>
+    <h2 ng-if="page.type == 'create';">Create page</h2>
+
+    <div class="row">
+        <div class="page-title col-md-8">
+            <span>Page Title: </span>
+            <input type="text"
+                   ng-model="page.title">
+        </div>
+
+        <div class="col-md-8 page-content">
+            <h3>Page Content</h3>
+        <textarea name="page-content"
+                  id="#page-content"
+                  cols="30"
+                  rows="10"
+                  style="width: 100%; height: 100%;"
+                  ng-model="page.content"
+        ></textarea>
+        </div>
+        <div class="page-posts-title">
+            <span>Page's posts</span>
+            <a ng-click="page.newPost()" class="btn btn-success">+</a>
+        </div>
+
+        <div class="col-md-4 page-posts" ng-repeat="post in page.posts">
+            <div class="page-post">
+                <span>{{post.title}}</span>
+                <button class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+</section>

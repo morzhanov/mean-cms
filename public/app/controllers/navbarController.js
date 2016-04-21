@@ -1,10 +1,18 @@
 angular.module('mainApp')
 
-    .controller('navbarController', ['$rootScope', 'User', 'Auth', '$q', function ($rootScope, User, Auth, $q) {
+    .controller('navbarController', ['$rootScope', 'User', 'Auth', '$q', '$location',
+        function ($rootScope, User, Auth, $q, $location) {
 
         var vm = this;
 
         vm.user = {};
+
+        vm.logoClick = function () {
+            if($location.$$path === '/admin-dashboard')
+                $location.path('/');
+            else
+                $location.path('/admin-dashboard');
+        };
 
         var deferred = $q.defer();
 

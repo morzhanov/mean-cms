@@ -24,7 +24,7 @@ angular.module('app.routes', ['ngRoute'])
 
             .when('/admin-dashboard',
                 {
-                    templateUrl: 'app/views/pages/dashboard.html',
+                    templateUrl: 'app/views/pages/admin/dashboard.html',
                     controller: 'dashboardController',
                     controllerAs: 'dashboard'
                 })

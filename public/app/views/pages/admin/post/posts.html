@@ -1,0 +1,28 @@
+<section id="posts" ng-controller="postController as postCtrl">
+    <h2 class="all-pages-title">All Posts</h2>
+    <table class="table table-bordered table-striped" ng-show="postCtrl.posts">
+        <thead>
+        <tr>
+            <th class="col-sm-1">_id</th>
+            <th>Title</th>
+            <th>Short description</th>
+            <th class="col-sm-2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- LOOP OVER THE PAGES -->
+        <tr ng-repeat="post in postCtrl.posts">
+            <td class="col-sm-3">{{ post._id }}</td>
+            <td class="col-sm-3">{{ post.title }}</td>
+            <td class="col-sm-3">{{ post.desc }}</td>
+            <td class="col-sm-3">
+                <a  ng-click="postCtrl.editPost(post._id)" class="btn btn-primary">Edit</a>
+                <a  href="#" ng-click="postCtrl.deletePost(post._id)" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="new-page-fab col-md-offset-11 col-md-1">
+        +
+    </div>
+</section>

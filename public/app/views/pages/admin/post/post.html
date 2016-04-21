@@ -1,0 +1,23 @@
+<section id="single-post" ng-controller="postEditController as post">
+    <h2 ng-if="post.type == 'edit';">Edit post</h2>
+    <h2 ng-if="post.type == 'create';">Create post</h2>
+
+    <div class="row">
+        <div class="post-title col-md-8">
+            <span>Post Title: </span>
+            <input type="text"
+                   ng-model="post.title">
+        </div>
+
+        <div class="col-md-8 post-content">
+            <h3>Post Content</h3>
+        <textarea name="post-content"
+                  id="#post-content"
+                  cols="30"
+                  rows="10"
+                  style="width: 100%; height: 100%;"
+                  ng-model="post.content"
+        ></textarea>
+        </div>
+    </div>
+</section>
