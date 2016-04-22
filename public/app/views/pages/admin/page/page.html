@@ -1,12 +1,19 @@
 <section id="single-page" ng-controller="pageEditController as page">
-    <h2 ng-if="page.type == 'edit';">Edit page</h2>
+    <h2 ng-if="page.type == 'edit';">Edit page
+        <span class="page-id">id: {{page.id}}</span>
+    </h2>
     <h2 ng-if="page.type == 'create';">Create page</h2>
 
     <div class="row">
         <div class="page-title col-md-8">
             <span>Page Title: </span>
             <input type="text"
-                   ng-model="page.title">
+                   ng-model="page.pageData.title">
+        </div>
+        <div class="page-url col-md-8">
+            <span>Page Url: </span>
+            <input type="text"
+                   ng-model="page.pageData.url">
         </div>
 
         <div class="col-md-8 page-content">
@@ -16,19 +23,28 @@
                   cols="30"
                   rows="10"
                   style="width: 100%; height: 100%;"
-                  ng-model="page.content"
-        ></textarea>
-        </div>
-        <div class="page-posts-title">
-            <span>Page's posts</span>
-            <a ng-click="page.newPost()" class="btn btn-success">+</a>
-        </div>
-
-        <div class="col-md-4 page-posts" ng-repeat="post in page.posts">
-            <div class="page-post">
-                <span>{{post.title}}</span>
-                <button class="btn btn-danger">X</button>
+                  ng-model="page.pageData.content"></textarea>
+            <button ng-click="page.savePage()"
+                    class="btn btn-success">Save
+            </button>
+            <div class="row show-hide-message" ng-show="page.message">
+                <div>
+                    <div class="alert alert-info">
+                        {{ page.message }}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-4">
+            <div class="page-posts-title">
+                <span>Page's posts</span>
+                <a ng-click="page.newPost()" class="btn btn-success">+</a>
+            </div>
+            <div class="page-posts" ng-repeat="post in page.posts">
+                <div class="page-post">
+                    <span>{{post.title}}</span>
+                    <button class="btn btn-danger">X</button>
+                </div>
+            </div>
+        </div>
 </section>

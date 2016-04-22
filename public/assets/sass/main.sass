@@ -1,4 +1,5 @@
 @import "bourbon/bourbon"
+@include font-face(Frutiger, "../../assets/fonts/bast/bast")
 
 $header-color: #ffffff
 $admin-panel-height: 40px
@@ -23,6 +24,10 @@ html.js .loader
     left: 50%
     top: 50%
     position: absolute
+
+*
+  font-family: Frutiger
+  font-weight: 400 !important
 
 body
   font-family: "RobotoRegular", sans-serif
@@ -319,7 +324,15 @@ section#dashboard-home
 section#single-page
   .row
     margin-top: 40px
-  .page-title
+  h2
+    position: relative
+    .page-id
+      color: #fc99a1
+      font-size: 16px
+      position: absolute
+      right: 0px
+  .page-title,
+  .page-url
     position: relative
     margin-right: 0px
     margin-left: 0px
@@ -332,6 +345,7 @@ section#single-page
       &active
         color: #000 !important
     input
+      padding-left: 10px
       position: absolute
       right: 0px
       width: 70%

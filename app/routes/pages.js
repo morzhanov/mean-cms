@@ -2,11 +2,8 @@
  * PAGES ROUTES
  */
 
-var mongoose = require('mongoose');
 var Page = require('../models/page.js');
-var User = require('../models/user.js');
 var config = require('../../config');
-var fs = require('fs');
 var formidable = require('formidable');
 
 module.exports = function (app, express) {
@@ -24,13 +21,13 @@ module.exports = function (app, express) {
         /**
          * Get all pages
          */
-        .get(function (request, response) {
+        .get(function (req, res) {
 
             return Page.find(function (err, pages) {
                 if (!err) {
-                    return response.send(pages);
+                    return res.send(pages);
                 } else {
-                    return response.send(500, err);
+                    return res.send(500, err);
                 }
             });
         })
@@ -39,23 +36,24 @@ module.exports = function (app, express) {
         /**
          * Create new page in DB
          */
-        .post(function (request, response) {
+        .post(function (req, res) {
 
             var page = new Page({
-                title: request.body.title,
-                url: request.body.url,
-                content: request.body.content,
-                menuIndex: request.body.menuIndex,
+                title: req.body.title,
+                url: req.body.url,
+                content: req.body.content,
+                posts: req.body.posts,
+                menuIndex: req.body.menuIndex,
                 date: new Date(Date.now())
             });
 
 
             page.save(function (err) {
                 if (!err) {
-                    return response.send(200, page);
+                    return res.send(200, page);
                 }
                 else {
-                    return response.send(500, err);
+                    return res.send(500, err);
                 }
             });
         });
@@ -68,13 +66,13 @@ module.exports = function (app, express) {
         /**
          * Get a specific page
          */
-        .get(function (request, response) {
+        .get(function (req, res) {
 
             return Page.findById(req.params.id, function (err, page) {
                 if (!err) {
-                    return response.send(page);
+                    return res.send(page);
                 } else {
-                    return response.send(500, err);
+                    return res.send(500, err);
                 }
             });
         })
@@ -83,31 +81,36 @@ module.exports = function (app, express) {
          * update a page
          * id - ID of page
          */
-        .put(function (request, response) {
-            var id = request.body._id;
+        .put(function (req, res) {
+            var id = req.params.id;
 
-            Page.update(
-                {
-                    _id: id
-                },
-                {
-                    $set: {
-                        title: request.body.title,
-                        url: request.body.url,
-                        content: request.body.content,
-                        menuIndex: request.body.menuIndex,
-                        date: new Date(Date.now())
+            Page.findById(id, function (err, page) {
+
+                //update the pages info only if its new
+                if (req.body.title) page.title = req.body.title;
+                if (req.body.url) page.url = req.body.url;
+                if (req.body.content) page.content = req.body.content;
+                if (req.body.posts) page.posts = req.body.posts;
+                if (req.body.menuIndex) page.menuIndex = req.body.menuIndex;
+                page.date = new Date(Date.now());
+
+                //save the page
+                page.save(function (err) {
+                    if (err) {
+                        res.send(err);
                     }
-                }).exec();
-            response.send("Page updated");
+
+                    res.send("Page updated");
+                });
+            });
         })
 
         /**
          * delete a single page
          */
-        .delete(function (request, response) {
+        .delete(function (req, res) {
 
-            var id = request.params.id;
+            var id = req.params.id;
 
             Page.remove({
                     _id: id
@@ -115,7 +118,7 @@ module.exports = function (app, express) {
                 function (err) {
                     return console.log(err);
                 });
-            return response.send('Page id- ' + id + 'has been deleted');
+            return res.send('Page id- ' + id + 'has been deleted');
         });
 
     /**

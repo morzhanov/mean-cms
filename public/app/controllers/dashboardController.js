@@ -62,7 +62,7 @@ angular.module('mainApp')
                 if ($event != undefined)
                     $event.stopPropagation();
 
-                $rootScope.$emit('toggleEditView');
+                $rootScope.$emit('toggleEditPostView');
 
                 vm.toggleActiveClass('.btn-create-post');
 
@@ -78,6 +78,8 @@ angular.module('mainApp')
                 //to stop bubbles effect
                 if ($event != undefined)
                     $event.stopPropagation();
+
+                $rootScope.$emit('toggleEditPageView');
 
                 vm.toggleActiveClass('.btn-create-page');
 

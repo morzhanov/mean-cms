@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Frutiger;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../../assets/fonts/bast/bast.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/bast/bast.woff") format("woff"), url("../../assets/fonts/bast/bast.ttf") format("truetype"), url("../../assets/fonts/bast/bast.svg#Frutiger") format("svg"); }
 html.js .loader {
   background: none repeat scroll 0 0 #ffffff;
   bottom: 0;
@@ -18,6 +23,10 @@ html.js .loader {
     left: 50%;
     top: 50%;
     position: absolute; }
+
+* {
+  font-family: Frutiger;
+  font-weight: 400 !important; }
 
 body {
   font-family: "RobotoRegular", sans-serif;
@@ -299,17 +308,29 @@ section#dashboard-home {
 
 section#single-page .row {
   margin-top: 40px; }
-section#single-page .page-title {
+section#single-page h2 {
+  position: relative; }
+  section#single-page h2 .page-id {
+    color: #fc99a1;
+    font-size: 16px;
+    position: absolute;
+    right: 0px; }
+section#single-page .page-title,
+section#single-page .page-url {
   position: relative;
   margin-right: 0px;
   margin-left: 0px;
   font-size: 20px;
   margin-bottom: 30px; }
-  section#single-page .page-title span {
+  section#single-page .page-title span,
+  section#single-page .page-url span {
     color: #000 !important; }
-    section#single-page .page-title spanactive {
+    section#single-page .page-title spanactive,
+    section#single-page .page-url spanactive {
       color: #000 !important; }
-  section#single-page .page-title input {
+  section#single-page .page-title input,
+  section#single-page .page-url input {
+    padding-left: 10px;
     position: absolute;
     right: 0px;
     width: 70%;

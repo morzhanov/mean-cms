@@ -59,7 +59,7 @@ angular.module('mainApp')
 
             vm.postData = {};
 
-            $rootScope.$on('toggleEditView', function () {
+            $rootScope.$on('toggleEditPostView', function () {
                 vm.postData = {};
                 vm.type = 'create';
             });
