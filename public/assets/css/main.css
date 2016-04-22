@@ -2,7 +2,7 @@
   font-family: Frutiger;
   font-style: normal;
   font-weight: normal;
-  src: url("../../assets/fonts/bast/bast.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/bast/bast.woff") format("woff"), url("../../assets/fonts/bast/bast.ttf") format("truetype"), url("../../assets/fonts/bast/bast.svg#Frutiger") format("svg"); }
+  src: url("../../assets/fonts/bast/bast.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/bast/bast.woff2") format("woff2"), url("../../assets/fonts/bast/bast.woff") format("woff"), url("../../assets/fonts/bast/bast.ttf") format("truetype"), url("../../assets/fonts/bast/bast.svg#Frutiger") format("svg"); }
 html.js .loader {
   background: none repeat scroll 0 0 #ffffff;
   bottom: 0;
@@ -300,6 +300,10 @@ section#pages .new-page-fab {
   border-radius: 50%; }
   section#pages .new-page-fab:hover {
     background-color: #6a317b; }
+section#pages .manage-pages {
+  text-align: center; }
+  section#pages .manage-pages a {
+    margin-left: 20px; }
 
 section#dashboard-home {
   text-align: center; }
@@ -338,17 +342,30 @@ section#single-page .page-url {
 section#single-page .page-content {
   padding-right: 0px; }
 section#single-page .page-posts-title {
+  padding-left: 30px;
+  margin-bottom: 20px;
+  color: #4e285e;
+  text-align: justify;
   font-size: 24px;
   margin-top: 0px;
-  text-align: center;
   position: relative; }
   section#single-page .page-posts-title span {
     cursor: default; }
     section#single-page .page-posts-title span:hover {
       color: #000; }
-  section#single-page .page-posts-title a:hover {
+  section#single-page .page-posts-title button {
+    position: absolute;
+    right: 20px; }
+section#single-page .page-post-item {
+  color: #4e285e;
+  font-size: 16px; }
+  section#single-page .page-post-item span {
+    cursor: default; }
+    section#single-page .page-post-item span:hover {
+      color: #000; }
+  section#single-page .page-post-item a:hover {
     color: #fff; }
-  section#single-page .page-posts-title .btn {
+  section#single-page .page-post-item .btn {
     position: absolute;
     right: 20px; }
 section#single-page .page-posts {
@@ -361,6 +378,16 @@ section#single-page .page-posts {
   section#single-page .page-posts .btn {
     position: absolute;
     right: 20px; }
+section#single-page .add-post-menu {
+  text-align: right; }
+section#single-page a.add-existing-post,
+section#single-page a.create-new-post {
+  font-size: 16px;
+  font-weight: 500;
+  color: #9838ac; }
+  section#single-page a.add-existing-post:hover,
+  section#single-page a.create-new-post:hover {
+    color: #4e285e; }
 
 section#all-posts div.new-post-fab {
   cursor: pointer;
@@ -402,5 +429,9 @@ section#single-post .post-title {
     margin-left: 30px; }
 section#single-post .post-content {
   padding-right: 0px; }
+section#single-post .all-posts-modal .page-posts {
+  margin: auto;
+  width: 60%;
+  line-height: 10; }
 
 /*# sourceMappingURL=main.css.map */

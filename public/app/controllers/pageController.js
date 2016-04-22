@@ -46,8 +46,8 @@ angular.module('mainApp')
 
         }])
 
-    .controller('pageEditController', ['$rootScope', '$window', 'Page',
-        function ($rootScope, $window, Page) {
+    .controller('pageEditController', ['$rootScope', '$window', 'Page', 'Post',
+        function ($rootScope, $window, Page, Post) {
             //also for page creating
             var vm = this;
 
@@ -58,6 +58,8 @@ angular.module('mainApp')
             vm.message = "";
 
             vm.pageData = {};
+
+            vm.allPostsTemplate = 'app/views/pages/admin/page/all_posts.html';
 
             $rootScope.$on('toggleEditPageView', function () {
                 vm.pageData = {};
@@ -73,6 +75,7 @@ angular.module('mainApp')
                         vm.pageData.content = data.content;
                         vm.pageData.url = data.url;
                         vm.pageData.date = data.date;
+                        vm.pageData.posts = data.posts;
                     });
             }
 
@@ -89,5 +92,36 @@ angular.module('mainApp')
                             vm.message = "Page successfully created!";
                         });
 
+            };
+
+            vm.toggleAddPostMenu = false;
+
+            vm.addPost = function () {
+
+                if (!vm.toggleAddPostMenu) {
+                    angular.element('.btn-add-page-post')
+                        .html('-');
+
+                    Post.all().success(function (data) {
+
+                        vm.allPosts = data;
+
+                        angular.element('.btn-add-page-post')
+                    });
+                }
+                else {
+                    angular.element('.btn-add-page-post')
+                        .html('+');
+                }
+
+                vm.toggleAddPostMenu = !vm.toggleAddPostMenu;
+            };
+
+            vm.addThisPost = function (id) {
+
+                if (vm.pageData.posts == undefined)
+                    vm.pageData.posts = [];
+
+                vm.pageData.posts.push(id);
             };
         }]);

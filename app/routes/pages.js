@@ -96,11 +96,10 @@ module.exports = function (app, express) {
 
                 //save the page
                 page.save(function (err) {
-                    if (err) {
+                    if (err)
                         res.send(err);
-                    }
-
-                    res.send("Page updated");
+                    else
+                        res.send("Page updated");
                 });
             });
         })

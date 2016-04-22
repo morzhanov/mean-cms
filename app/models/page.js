@@ -13,7 +13,7 @@ var Page = new Schema({
     url: {type: String, index:{unique:true}},
     //content of the page (array of posts ids)
     content: String,
-    posts: [Number],
+    posts: [String],
     //defines the menu sequence of the pages in the navigation bar.
     menuIndex: Number,
     //The date when this document was last updated.

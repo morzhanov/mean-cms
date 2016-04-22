@@ -38,13 +38,26 @@
         <div class="col-md-4">
             <div class="page-posts-title">
                 <span>Page's posts</span>
-                <a ng-click="page.newPost()" class="btn btn-success">+</a>
+                <button ng-click="page.addPost()"
+                   class="btn btn-success btn-add-page-post">+</button>
+                <div class="add-post-menu" ng-if="page.toggleAddPostMenu">
+                    <a data-toggle="modal"
+                       data-target="#postsModal"
+                       class="add-existing-post">
+                        Add existing post</a>
+                    <br>
+                    <a ng-click="dashboard.createPost()"
+                       class="btn btn-success create-new-post">
+                        Create new post</a>
+                </div>
             </div>
-            <div class="page-posts" ng-repeat="post in page.posts">
+            <div class="page-posts" ng-repeat="post in page.pageData.posts">
                 <div class="page-post">
-                    <span>{{post.title}}</span>
+                    <a class="page-post-item">{{post}}</a>
                     <button class="btn btn-danger">X</button>
                 </div>
             </div>
         </div>
+        <ng-include src="page.allPostsTemplate">
+        </ng-include>
 </section>
