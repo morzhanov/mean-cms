@@ -84,9 +84,12 @@ body textarea:required:valid {
 .panel-group .panel + .panel {
   border: none; }
 
+.panel-group .panel {
+  background-color: #3F2550; }
+
 .panel-default,
 .panel-default > .panel-heading {
-  background-color: transparent;
+  background-color: #352245;
   border-color: transparent;
   border-radius: 0px !important; }
 
@@ -337,6 +340,24 @@ section#single-page .page-posts {
   section#single-page .page-posts .btn {
     position: absolute;
     right: 20px; }
+
+section#all-posts div.new-post-fab {
+  cursor: pointer;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  background-color: #4e285e;
+  font-size: 30px;
+  color: #fff;
+  border-radius: 50%; }
+  section#all-posts div.new-post-fab:hover {
+    background-color: #6a317b; }
+section#all-posts .manage-posts {
+  text-align: center; }
+  section#all-posts .manage-posts a {
+    margin-left: 20px; }
 
 #page-content {
   width: 60%; }

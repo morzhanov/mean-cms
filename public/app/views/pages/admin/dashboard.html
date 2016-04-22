@@ -1,28 +1,42 @@
 <section id="dashboard-container" class="height-detect">
     <div class="row">
         <div class="col-md-2 dshb-menu">
-            <uib-accordion close-others="false">
+            <uib-accordion close-others="true">
 
                 <uib-accordion-group ng-click="dashboard.home()"
-                                     class="dshb-menu-item"
-                                     heading="Home"
-                                     is-disabled="true">
-                    Dashboard home
+                                     class="dshb-menu-item accordion-group-home"
+                                     heading="Home">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.home()"
+                           class="btn-home">Home</a>
+                    </div>
                 </uib-accordion-group>
                 <uib-accordion-group class="dshb-menu-item posts-collapse"
                                      ng-click="dashboard.allPosts()"
                                      heading="Posts"
                                      is-open="isPostsOpen">
-                    <div class="dshd-menu-child-item"><a ng-click="">All</a></div>
-                    <div class="dshd-menu-child-item"><a ng-click="">Create New</a></div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.allPosts()"
+                           class="btn-all-posts">All</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.createPost($event)"
+                           class="btn-create-post">Create New</a>
+                    </div>
                 </uib-accordion-group>
 
                 <uib-accordion-group class="dshb-menu-item posts-collapse"
                                      ng-click="dashboard.allPages()"
                                      heading="Pages"
                                      is-open="isPagesOpen">
-                    <div class="dshd-menu-child-item"><a ng-click="">All</a></div>
-                    <div class="dshd-menu-child-item"><a ng-click="">Create New</a></div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.allPages()"
+                           class="btn-all-pages">All</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.createPage($event)"
+                           class="btn-create-page">Create New</a>
+                    </div>
                 </uib-accordion-group>
 
                 <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Appearance"

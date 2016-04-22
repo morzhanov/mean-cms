@@ -7,8 +7,7 @@ angular.module('mainApp')
 
             if ($window.localStorage.getItem('dashboard-content') !== "undefined")
                 vm.contentUrl = $window.localStorage.getItem('dashboard-content');
-            else
-            {
+            else {
                 vm.contentUrl = "app/views/pages/admin/home.html";
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
             }
@@ -19,7 +18,18 @@ angular.module('mainApp')
 
             HeightDetect.heightDetect();
 
+            vm.toggleActiveClass = function (element) {
+
+                angular.element('.dshd-menu-child-item a')
+                    .css('color', '#fff');
+
+                angular.element(element)
+                    .css('color', '#ff904e');
+            };
+
             vm.home = function () {
+
+                vm.toggleActiveClass('.btn-home');
 
                 vm.contentUrl = "app/views/pages/admin/home.html";
 
@@ -29,6 +39,8 @@ angular.module('mainApp')
 
             vm.allPages = function () {
 
+                vm.toggleActiveClass('.btn-all-pages');
+
                 vm.contentUrl = "app/views/pages/admin/page/pages.html";
 
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
@@ -37,7 +49,41 @@ angular.module('mainApp')
 
             vm.allPosts = function () {
 
+                vm.toggleActiveClass('.btn-all-posts');
+
                 vm.contentUrl = "app/views/pages/admin/post/posts.html";
+
+                $window.localStorage.setItem('dashboard-content', vm.contentUrl);
+            };
+
+            vm.createPost = function ($event) {
+
+                //to stop bubbles effect
+                if ($event != undefined)
+                    $event.stopPropagation();
+
+                $rootScope.$emit('toggleEditView');
+
+                vm.toggleActiveClass('.btn-create-post');
+
+                vm.contentUrl = "app/views/pages/admin/post/post.html";
+
+                $window.localStorage.setItem('single-post-edit-type', "create");
+
+                $window.localStorage.setItem('dashboard-content', vm.contentUrl);
+            };
+
+            vm.createPage = function ($event) {
+
+                //to stop bubbles effect
+                if ($event != undefined)
+                    $event.stopPropagation();
+
+                vm.toggleActiveClass('.btn-create-page');
+
+                vm.contentUrl = "app/views/pages/admin/page/page.html";
+
+                $window.localStorage.setItem('single-page-edit-type', "create");
 
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
             };

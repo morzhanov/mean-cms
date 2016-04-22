@@ -2,8 +2,7 @@
  * POSTS ROUTES
  */
 
-var mongoose = require('mongoose');
-var Page = require('../models/page.js');
+var Post = require('../models/post.js');
 var config = require('../../config');
 var fs = require('fs');
 var formidable = require('formidable');
@@ -24,9 +23,9 @@ module.exports = function (app, express) {
          */
         .get(function (request, response) {
 
-            return Page.find(function (err, pages) {
+            return Post.find(function (err, posts) {
                 if (!err) {
-                    return response.send(pages);
+                    return response.send(posts);
                 } else {
                     return response.send(500, err);
                 }
@@ -38,17 +37,15 @@ module.exports = function (app, express) {
          */
         .post(function (request, response) {
 
-            var page = new Page({
+            var post = new Post({
                 title: request.body.title,
-                url: request.body.url,
                 content: request.body.content,
-                menuIndex: request.body.menuIndex,
                 date: new Date(Date.now())
             });
 
-            page.save(function (err) {
+            post.save(function (err) {
                 if (!err) {
-                    return response.send(200, page);
+                    return response.send(200, post);
                 }
                 else {
                     return response.send(500, err);
@@ -66,9 +63,9 @@ module.exports = function (app, express) {
          */
         .get(function (request, response) {
 
-            return Page.find(function (err, pages) {
+            return Post.findById(request.params.id, function (err, post) {
                 if (!err) {
-                    return response.send(pages);
+                    return response.send(post);
                 } else {
                     return response.send(500, err);
                 }
@@ -80,22 +77,20 @@ module.exports = function (app, express) {
          * id - ID of post
          */
         .put(function (request, response) {
-            var id = request.body._id;
+            var id = request.params.id;
 
-            Page.update(
+            Post.update(
                 {
                     _id: id
                 },
                 {
                     $set: {
                         title: request.body.title,
-                        url: request.body.url,
                         content: request.body.content,
-                        menuIndex: request.body.menuIndex,
                         date: new Date(Date.now())
                     }
                 }).exec();
-            response.send("Page updated");
+            response.send("Post updated");
         })
 
         /**
@@ -106,13 +101,13 @@ module.exports = function (app, express) {
 
             var id = request.params.id;
 
-            Page.remove({
+            Post.remove({
                     _id: id
                 },
                 function (err) {
                     return console.log(err);
                 });
-            return response.send('Page id- ' + id + 'has been deleted');
+            return response.send('Post id- ' + id + 'has been deleted');
         });
 
     /**

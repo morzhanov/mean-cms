@@ -15,22 +15,22 @@ angular.module('mainApp')
             return $http.get('/api/posts/' + id);
         };
 
-        // get all page
+        // get all posts
         postFactory.all = function () {
             return $http.get('/api/posts/');
         };
 
-        // create a page
+        // create a post
         postFactory.create = function (userData) {
             return $http.post('/api/posts/', userData);
         };
 
-        // update a page
+        // update a post
         postFactory.update = function (id, userData) {
             return $http.put('/api/posts/' + id, userData);
         };
 
-        // delete a page
+        // delete a post
         postFactory.delete = function (id) {
             return $http.delete('/api/posts/' + id);
         };
