@@ -17,7 +17,7 @@ angular.module('app.routes', ['ngRoute'])
             //home page route
             .when('/',
                 {
-                    templateUrl: 'app/views/pages/home.html',
+                    templateUrl: 'app/views/pages/public/home.html',
                     controller: 'mainController',
                     controllerAs: 'home'
                 })
@@ -34,13 +34,6 @@ angular.module('app.routes', ['ngRoute'])
                     templateUrl: 'app/views/pages/donation.html',
                     controller: 'mainController',
                     controllerAs: 'donate'
-                })
-
-            .when('/image',
-                {
-                    templateUrl: 'app/views/pages/image.html',
-                    controller: 'imageController',
-                    controllerAs: 'image'
                 })
 
             //login page
@@ -62,7 +55,7 @@ angular.module('app.routes', ['ngRoute'])
             //show all users
             .when('/users',
                 {
-                    templateUrl: 'app/views/pages/users/all.html',
+                    templateUrl: 'app/views/pages/admin/users/all.html',
                     controller: 'userController',
                     controllerAs: 'user'
                 })
@@ -71,14 +64,14 @@ angular.module('app.routes', ['ngRoute'])
             //same view as edit page
             .when('/users/create',
                 {
-                    templateUrl: 'app/views/pages/users/signup.html',
+                    templateUrl: 'app/views/pages/admin/users/signup.html',
                     controller: 'userCreateController',
                     controllerAs: 'user'
                 })
 
             // page to edit a user
             .when('/users/:user_id', {
-                templateUrl: 'app/views/pages/users/single.html',
+                templateUrl: 'app/views/pages/admin/users/single.html',
                 controller: 'userEditController',
                 controllerAs: 'user'
             })

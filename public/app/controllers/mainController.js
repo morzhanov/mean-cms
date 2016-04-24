@@ -10,6 +10,11 @@ angular.module('mainApp')
 
             var vm = this;
 
+            vm.siteSettings = {};
+            vm.siteSettings.title = 'CMS';
+
+            console.log(vm.siteSettings.title);
+
             vm.user = {};
 
             if (Auth.isLoggedIn())

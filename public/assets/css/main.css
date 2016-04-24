@@ -133,9 +133,21 @@ header .header-content {
   border-radius: 0px;
   height: 70px;
   border-bottom: 2px solid #aaa;
-  margin-bottom: 0px; }
-  .navbar .container {
-    padding-top: 10px; }
+  margin-bottom: 0px;
+  padding-top: 10px; }
+  .navbar .navbar-to-site {
+    color: #fff;
+    height: 50px;
+    padding-top: 15px;
+    line-height: 20px;
+    text-decoration: none;
+    float: left;
+    font-size: 18px;
+    padding-bottom: 15px; }
+    .navbar .navbar-to-site:hover {
+      color: #ff904e; }
+    .navbar .navbar-to-site .site-title {
+      color: #ff904e; }
   .navbar .nav-logo {
     margin-right: 10px;
     color: #ff904e;
@@ -144,6 +156,7 @@ header .header-content {
     border-radius: 50%;
     margin-top: -17px; }
     .navbar .navbar-user-photo-reference .navbar-user-photo {
+      margin-right: 0px;
       border-radius: 50%;
       width: 50px;
       height: 50px; }
@@ -155,6 +168,8 @@ header .header-content {
     background-color: transparent;
     color: #ff904e; }
   .navbar a.users-button {
+    padding-top: 12px;
+    font-size: 18px;
     color: #fff;
     background-color: transparent; }
   .navbar .navbar-right a {
@@ -164,6 +179,8 @@ header .header-content {
     background-color: transparent; }
   .navbar .user-hello {
     color: #fff; }
+  .navbar .logout-button {
+    margin-right: 20px; }
 
 #admin-panel-container {
   max-height: 40px; }
@@ -210,6 +227,12 @@ header .header-content {
 section#all-users {
   background: url("../../assets/img/section-bg.jpg") no-repeat center center;
   color: #fff !important; }
+  section#all-users .users-load {
+    background-color: #9838AC;
+    opacity: 0.5;
+    height: 60%; }
+    section#all-users .users-load p, section#all-users .users-load span {
+      margin-top: 4%; }
   section#all-users .btn-new-user {
     margin-left: 20px;
     background-color: transparent;
@@ -393,6 +416,14 @@ section#single-page a.create-new-post {
   section#single-page a.add-existing-post:hover,
   section#single-page a.create-new-post:hover {
     color: #4e285e; }
+section#single-page .page-date {
+  padding-top: 20px;
+  padding-left: 0px; }
+  section#single-page .page-date span {
+    color: #000;
+    cursor: default; }
+    section#single-page .page-date span:hover {
+      color: #000; }
 
 section#all-posts div.new-post-fab {
   cursor: pointer;

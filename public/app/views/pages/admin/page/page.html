@@ -15,7 +15,6 @@
             <input type="text"
                    ng-model="page.pageData.url">
         </div>
-
         <div class="col-md-8 page-content">
             <h3>Page Content</h3>
         <textarea name="page-content"
@@ -27,6 +26,12 @@
             <button ng-click="page.savePage()"
                     class="btn btn-success">Save
             </button>
+            <div>
+                <div class="page-date col-md-8">
+                    <span>Page last modification date: </span>
+                    <span>{{page.pageData.date}}</span>
+                </div>
+            </div>
             <div class="row show-hide-message" ng-show="page.message">
                 <div>
                     <div class="alert alert-info">
