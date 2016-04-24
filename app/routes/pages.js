@@ -3,6 +3,7 @@
  */
 
 var Page = require('../models/page.js');
+var Post = require('../models/post.js');
 var config = require('../../config');
 var formidable = require('formidable');
 
@@ -118,6 +119,116 @@ module.exports = function (app, express) {
                     return console.log(err);
                 });
             return res.send('Page id- ' + id + 'has been deleted');
+        });
+
+    /**
+     * For posts routes with reference (/api/pages/:id/posts)
+     */
+    pageRouter.route('/:id/posts/')
+        /**
+         * Get all posts of specific page
+         */
+        .get(function (req, res) {
+
+            var page_id = req.params.id;
+
+            return Page.findById(page_id, function (err, page) {
+                if (err) {
+                    return res.send(err);
+                } else {
+
+                    var allPosts = [];
+
+                    Post.find({_id: {$in: page.posts}}, function (err, posts) {
+
+                        if (err)
+                            res.send(err);
+                        else
+                            res.send(posts);
+
+                    });
+                }
+            });
+        })
+        /**
+         * Create new post in DB and add it to this page's posts array
+         * id - ID of page
+         */
+        .post(function (request, response) {
+
+            var page = new Page({
+                title: request.body.title,
+                url: request.body.url,
+                content: request.body.content,
+                menuIndex: request.body.menuIndex,
+                date: new Date(Date.now())
+            });
+
+            page.save(function (err) {
+                if (!err) {
+                    return response.send(200, page);
+                }
+                else {
+                    return response.send(500, err);
+                }
+            });
+        })
+        /**
+         * delete all posts from page's posts array
+         * id - ID of post
+         */
+        .delete(function (request, response) {
+
+        });
+
+    /**
+     * For posts routes with reference (/api/pages/:id/posts/:id)
+     */
+    pageRouter.route('/:page_id/posts/:post_id')
+
+        /**
+         * Get single post of specific page
+         */
+        .get(function (request, response) {
+
+            return Page.find(function (err, pages) {
+                if (!err) {
+                    return response.send(pages);
+                } else {
+                    return response.send(500, err);
+                }
+            });
+        })
+
+        /**
+         * delete a single post from specific page
+         * id - ID of post
+         */
+        .delete(function (req, res) {
+
+            Page.findById(req.params.page_id, function (err, page) {
+                if (err)
+                    res.send(err);
+                else {
+                    Post.findById(req.params.post_id, function (err, post) {
+                        if (err)
+                            res.send(err);
+                        else {
+                            page.posts.splice(page.posts.indexOf(post._id), 1);
+
+                            page.save(function (err) {
+                                if (!err) {
+                                    return res.send(200);
+                                }
+                                else {
+                                    return res.send(500, err);
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+
         });
 
     /**

@@ -6,11 +6,17 @@
                 <h4 class="modal-title">Choose existing post</h4>
             </div>
             <div class="modal-body">
-                <div class="all-posts-modal" ng-repeat='post in page.allPosts'>
+                <div class="all-posts-modal"
+                     ng-if="page.allPosts"
+                     ng-repeat='post in page.allPosts'>
                     <div class="page-posts">
                         <a class="page-posts-title">{{post.title}}</a>
                         <button class='btn btn-success' ng-click='page.addThisPost(post._id)'>+</button>
                     </div>
+                </div>
+                <div class="all-posts-modal"
+                     ng-if="!page.allPosts">
+                    <h2>No posts available</h2>
                 </div>
             </div>
             <div class=modal-footer>

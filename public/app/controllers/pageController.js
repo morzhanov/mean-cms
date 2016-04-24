@@ -75,9 +75,38 @@ angular.module('mainApp')
                         vm.pageData.content = data.content;
                         vm.pageData.url = data.url;
                         vm.pageData.date = data.date;
-                        vm.pageData.posts = data.posts;
+
+                        Page.allPosts(vm.id)
+                            .success(function (posts) {
+                                vm.pageData.posts = posts;
+                            });
                     });
             }
+
+            vm.deletePostFromPage = function (page_id, post_id) {
+
+                /**
+                 * remove element from angular model
+                 */
+                var idx = vm.pageData.posts.indexOf(post_id);
+
+                if (idx > -1)
+                    vm.pageData.posts.splice(idx, 1);
+
+                /**
+                 * remove element from servers model
+                 */
+                Page.deletePostFromPage(page_id, post_id)
+                    .success(function (data) {
+
+                        Page.allPosts(vm.id)
+                            .success(function (posts) {
+                                vm.pageData.posts = posts;
+                                vm.message = "Post with id = " + post_id
+                                    + " successfully deleted from current page!";
+                            });
+                    });
+            };
 
             vm.savePage = function () {
 
@@ -106,7 +135,21 @@ angular.module('mainApp')
 
                         vm.allPosts = data;
 
-                        angular.element('.btn-add-page-post')
+                        /**
+                         * delete from all posts posts, that already
+                         * present on current page
+                         */
+                        for (var i = 0; i < vm.allPosts.length; ++i) {
+                            for (var j = 0; j < vm.pageData.posts.length; ++j)
+                                if (vm.allPosts[i]._id == vm.pageData.posts[j]._id) {
+                                    vm.allPosts.splice(i, 1);
+                                    --i;
+                                    break;
+                                }
+                        }
+
+                        if(vm.allPosts.length == 0)
+                            vm.allPosts = undefined;
                     });
                 }
                 else {
@@ -122,6 +165,16 @@ angular.module('mainApp')
                 if (vm.pageData.posts == undefined)
                     vm.pageData.posts = [];
 
-                vm.pageData.posts.push(id);
+                Post.get(id)
+                    .success(function(post){
+                        "use strict";
+
+                        vm.pageData.posts.push(post);
+
+                        Page.update(vm.id, vm.pageData)
+                            .success(function () {
+                                vm.message = "Post successfully added to page!";
+                            });
+                    });
             };
         }]);

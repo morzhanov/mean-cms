@@ -27,6 +27,8 @@ html.js .loader {
 * {
   font-family: Frutiger;
   font-weight: 400 !important; }
+  * .btn {
+    border-radius: 0px !important; }
 
 body {
   font-family: "RobotoRegular", sans-serif;
@@ -379,12 +381,15 @@ section#single-page .page-posts {
     position: absolute;
     right: 20px; }
 section#single-page .add-post-menu {
-  text-align: right; }
+  text-align: right;
+  padding-right: 20px;
+  margin-right: 0px; }
 section#single-page a.add-existing-post,
 section#single-page a.create-new-post {
   font-size: 16px;
   font-weight: 500;
-  color: #9838ac; }
+  color: #fff;
+  width: 150px; }
   section#single-page a.add-existing-post:hover,
   section#single-page a.create-new-post:hover {
     color: #4e285e; }

@@ -43,9 +43,8 @@
                 <div class="add-post-menu" ng-if="page.toggleAddPostMenu">
                     <a data-toggle="modal"
                        data-target="#postsModal"
-                       class="add-existing-post">
+                       class="btn btn-success add-existing-post">
                         Add existing post</a>
-                    <br>
                     <a ng-click="dashboard.createPost()"
                        class="btn btn-success create-new-post">
                         Create new post</a>
@@ -53,8 +52,8 @@
             </div>
             <div class="page-posts" ng-repeat="post in page.pageData.posts">
                 <div class="page-post">
-                    <a class="page-post-item">{{post}}</a>
-                    <button class="btn btn-danger">X</button>
+                    <a class="page-post-item">{{post.title}}</a>
+                    <button ng-click="page.deletePostFromPage(page.id, post._id)" class="btn btn-danger">X</button>
                 </div>
             </div>
         </div>
