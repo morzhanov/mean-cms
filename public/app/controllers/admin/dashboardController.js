@@ -1,9 +1,74 @@
 angular.module('mainApp')
 
-    .controller('dashboardController', ['$rootScope', 'HeightDetect', '$window',
-        function ($rootScope, HeightDetect, $window) {
+    .controller('dashboardController', ['$rootScope',
+        'HeightDetect',
+        '$window',
+        '$q',
+        'User',
+        '$location',
+        function ($rootScope, HeightDetect, $window, $q, User,$location) {
 
             var vm = this;
+
+            /**
+             * navbar section
+             */
+            vm.user = {};
+
+            vm.toDashboard = function () {
+
+                $rootScope.$emit('$routeChangeStart');
+
+                $location.path('/admin-dashboard');
+            };
+
+            vm.toSiteHome = function () {
+
+                $location.path('/');
+
+                $rootScope.$emit('$routeChangeStart');
+            };
+
+            var deferred = $q.defer();
+
+            User.current().success(function (res) {
+                "use strict";
+
+                vm.currentUser = res;
+
+                vm.user = User.currentUser;
+            });
+
+            vm.user = User.currentUser;
+
+            $rootScope.$on('changeUser', function () {
+                var deferred = $q.defer();
+
+                vm.currentUser = User.getCurrentUser().then(function (res) {
+                    //bind the users that come back to vm.users
+                    vm.users = res;
+
+                    User.current().success(function (data) {
+                        //bind the users that come back to vm.users
+                        deferred.resolve(data);
+                    });
+
+                    return deferred.promise;
+                }).then(function (res) {
+                    vm.user.username = res.username;
+
+                    for (var i = 0; i < vm.users.length; ++i) {
+                        if (vm.users[i].username == vm.user.username) {
+                            vm.user.firstName = vm.users[i].firstName;
+                            vm.user.secondName = vm.users[i].secondName;
+                        }
+                    }
+
+                    console.log(vm.user);
+                });
+
+                vm.user = User.currentUser;
+            });
 
             if ($window.localStorage.getItem('dashboard-content') !== "undefined")
                 vm.contentUrl = $window.localStorage.getItem('dashboard-content');

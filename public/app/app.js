@@ -2,7 +2,8 @@
 angular.module('mainApp',
     [
         'ngAnimate',          //animating
-        'app.routes',         //routing
+        'app.p.routes',         //public routing
+        'app.admin.routes',         //public routing
         'ui.bootstrap',
         'ngParallax',          //parallax effect
         'ngFileUpload'
@@ -14,7 +15,8 @@ angular.module('mainApp',
 
         // get a single user
         this.heightDetect = function () {
-            $(".height-detect").css("height", $(window).height() - 70);
+            $(".height-detect").css("height", $(window).height());
+            $(".height-detect").attr("height", $(window).height());
         };
 
         $(document).ready(function () {

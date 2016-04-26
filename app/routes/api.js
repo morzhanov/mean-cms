@@ -246,7 +246,15 @@ module.exports = function (app, express) {
      * API endpoint to get user information
      */
     apiRouter.get('/me', function (req, res) {
-        res.send(req.decoded);
+        var currentUsername = req.decoded.username;
+
+        User.find({username: currentUsername},
+            function (err, user) {
+                if(err)
+                    res.send(err);
+                else
+                    res.send(user[0]);
+            })
     });
 
     apiRouter.use(function (req, res, next) {

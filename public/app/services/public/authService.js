@@ -65,16 +65,16 @@ angular.module('mainApp')
         return {
             //get the token out of local storage
             getToken: function () {
-                return $window.localStorage.getItem('token');
+                return $window.localStorage.getItem('access_token');
             },
             //set the token or clear the token
             //if a token is passed, set the token
             //if there is no token, clear it from local storage
             setToken: function (token) {
                 if (token)
-                    $window.localStorage.setItem('token', token);
+                    $window.localStorage.setItem('access_token', token);
                 else
-                    $window.localStorage.removeItem('token');
+                    $window.localStorage.removeItem('access_token');
             }
         }
     }])

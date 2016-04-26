@@ -4,7 +4,7 @@
 
 angular.module('mainApp')
 
-    .factory('User', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+    .factory('adminUser', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
 
         // create a new object
         var userFactory = {};

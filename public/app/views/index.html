@@ -47,43 +47,50 @@
     <div class="loader_inner"></div>
 </div>
 
-<nav class="navbar user-navbar" ng-controller="navbarController as navbar">
+<nav class="navbar user-navbar" ng-controller="dashboardController as dashboard" ng-if="main.isAdmin">
+    <!-- admin dashboard navbar-->
     <div class="navbar-header">
-        <a ng-click="navbar.toDashboard()" class="navbar-brand"><span class="fa nav-logo fa-code text-danger"></span>Dashboard</a>
-        <a ng-click="navbar.toSiteHome()"
+        <a ng-click="dashboard.toDashboard()"
+           class="navbar-brand">
+            <span class="fa nav-logo fa-code text-danger"></span>Dashboard
+        </a>
+        <a ng-click="dashboard.toSiteHome()"
            class="navbar-to-site">Go to
             <span class="site-title">{{main.siteSettings.title}}</span>
         </a>
     </div>
-    <ul class="nav navbar-nav" ng-if="main.loggedIn">
-        <li ng-controller="adminController as admin">
-            <a class="users-button"
-               ng-if="admin.isAdmin"
-               href="/users">
-                    <span
-                            class="glyphicon glyphicon-user">
-                    </span>Users
-            </a>
+    <ul class="nav navbar-nav navbar-right"
+        ng-controller="userController as user">
+        <li ng-if="!main.loggedIn">
+            <a href="/login">Login</a>
         </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
-        <li ng-if="!main.loggedIn"><a href="/signup">SignUp</a></li>
-        <li ng-if="main.loggedIn" class="user-hello navbar-text">Hello {{navbar.user.firstName}} !</li>
+        <li ng-if="!main.loggedIn">
+            <a href="/signup">SignUp</a><
+            /li>
+        <li ng-if="main.loggedIn"
+            class="user-hello navbar-text">Hello {{user.currentUser.firstName}} !
+        </li>
         <li ng-if="main.loggedIn">
-            <a ng-controller="userController as user" ng-href="/account" class="navbar-user-photo-reference">
-                <img class="navbar-user-photo" ng-src="{{user.photo}}" alt="User Photo">
+            <a ng-href="/account"
+               class="navbar-user-photo-reference">
+                <img class="navbar-user-photo"
+                     ng-src="{{user.currentUser.photo}}"
+                     alt="User Photo">
             </a>
         </li>
-        <li ng-if="main.loggedIn"><a class="logout-button" ng-click="main.doLogout()">Logout</a></li>
+        <li ng-if="main.loggedIn">
+            <a class="logout-button"
+               ng-click="main.doLogout()">Logout
+            </a>
+        </li>
     </ul>
 </nav>
 
-<!-- NAVBAR -->
-
-<main>
+<main class="height-detect">
     <!-- ANGULAR VIEWS -->
-    <div ng-view></div>
+    <div ng-view class="ng-view-template">
+
+    </div>
 </main>
 
 <!--[if lt IE 9]>
@@ -117,27 +124,36 @@
 <script src="assets/libs/waypoints/waypoints.min.js"></script>
 
 <!-- main Angular app files -->
-<script src="app/app.routes.js"></script>
+<script src="app/app.p.routes.js"></script>
+<script src="app/app.admin.routes.js"></script>
 <script src="app/app.js"></script>
 
+<!-- app files-->
 <!-- services -->
-<script src="app/services/authService.js"></script>
-<script src="app/services/userService.js"></script>
-<script src="app/services/pageService.js"></script>
-<script src="app/services/postService.js"></script>
+<script src="app/services/public/authService.js"></script>
+<script src="app/services/public/userService.js"></script>
+<script src="app/services/public/pageService.js"></script>
+<script src="app/services/public/postService.js"></script>
+<script src="app/services/public/siteService.js"></script>
 
 <!-- controllers -->
-<script src="app/controllers/mainController.js"></script>
-<script src="app/controllers/dashboardController.js"></script>
-<script src="app/controllers/userController.js"></script>
-<script src="app/controllers/navbarController.js"></script>
-<script src="app/controllers/adminController.js"></script>
-<!-- pages controller-->
-<script src="app/controllers/pageController.js"></script>
-<!-- posts controller-->
-<script src="app/controllers/postController.js"></script>
+<script src="app/controllers/public/mainController.js"></script>
+<script src="app/controllers/public/userController.js"></script>
+<script src="app/controllers/public/pageController.js"></script>
+<script src="app/controllers/public/postController.js"></script>
 
-<script src="assets/js/common.js"></script>
+<!-- services -->
+<script src="app/services/admin/adminUserService.js"></script>
+<script src="app/services/admin/adminPageService.js"></script>
+<script src="app/services/admin/adminPostService.js"></script>
+<script src="app/services/admin/adminSiteService.js"></script>
+
+<!-- controllers -->
+<script src="app/controllers/admin/dashboardController.js"></script>
+<script src="app/controllers/admin/adminUserController.js"></script>
+
+<script src="app/controllers/admin/adminPageController.js"></script>
+<script src="app/controllers/admin/adminPostController.js"></script>
 
 </body>
 </html>

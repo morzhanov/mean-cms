@@ -12,11 +12,11 @@ angular.module('mainApp')
                         vm.pages = data;
 
                         for (var i = 0; i < vm.pages.length; ++i) {
-                            if (vm.pages[i].content.length > 40) {
-                                vm.pages[i].desc = vm.pages[i].content.substring(0, 39);
+                            if (vm.pages[i].contentHeader.length > 40) {
+                                vm.pages[i].desc = vm.pages[i].contentHeader.substring(0, 39);
                             }
                             else {
-                                vm.pages[i].desc = vm.pages[i].content;
+                                vm.pages[i].desc = vm.pages[i].contentHeader;
                             }
                         }
                     });
@@ -46,8 +46,8 @@ angular.module('mainApp')
 
         }])
 
-    .controller('pageEditController', ['$rootScope', '$window', 'Page', 'Post',
-        function ($rootScope, $window, Page, Post) {
+    .controller('pageEditController', ['$rootScope', '$window', 'Page', 'Post', 'siteService',
+        function ($rootScope, $window, Page, Post, siteService) {
             //also for page creating
             var vm = this;
 
@@ -72,7 +72,8 @@ angular.module('mainApp')
                     .success(function (data) {
 
                         vm.pageData.title = data.title;
-                        vm.pageData.content = data.content;
+                        vm.pageData.contentHeader = data.contentHeader;
+                        vm.pageData.contentFooter = data.contentFooter;
                         vm.pageData.url = data.url;
                         vm.pageData.date = data.date;
 
@@ -81,6 +82,14 @@ angular.module('mainApp')
                                 vm.pageData.posts = posts;
                             });
                     });
+            }
+            else
+            {
+                vm.pageData.title = 'Example page Title';
+                vm.pageData.contentFooter = 'Example page Footer Content';
+                vm.pageData.contentHeader = 'Example page Header Content';
+                vm.pageData.url = siteService.getSiteUrl() + 'example_page_url';
+                vm.pageData.date = new Date();
             }
 
             vm.deletePostFromPage = function (page_id, post_id) {

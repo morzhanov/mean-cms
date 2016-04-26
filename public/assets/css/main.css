@@ -27,6 +27,7 @@ html.js .loader {
 * {
   font-family: Frutiger;
   font-weight: 400 !important; }
+  * .jumbotron,
   * .btn {
     border-radius: 0px !important; }
 
@@ -60,6 +61,13 @@ body textarea:required:valid {
 .btn-primary:focus,
 .btn-primary:active {
   background-color: #672c78; }
+
+.ng-view-template {
+  height: 100%; }
+
+section#public-home,
+section#public-home header {
+  height: 100%; }
 
 /**
  *Dashboard
@@ -197,8 +205,10 @@ header .header-content {
     padding-right: 10px;
     font-size: 24px; }
 
-#login .jumbotron {
-  margin-top: 120px; }
+section#login {
+  height: 100%; }
+  section#login .jumbotron {
+    margin-top: 120px; }
 
 #login, #signup {
   background-color: #222; }
@@ -349,7 +359,7 @@ section#single-page .page-url {
   position: relative;
   margin-right: 0px;
   margin-left: 0px;
-  font-size: 20px;
+  font-size: 14px;
   margin-bottom: 30px; }
   section#single-page .page-title span,
   section#single-page .page-url span {

@@ -4,25 +4,48 @@ angular.module('mainApp')
         '$location',
         'Auth',
         'HeightDetect',
-        'User',
-        '$routeParams',
-        function ($rootScope, $location, Auth, HeightDetect, User, $routeParams, ngParallax) {
+        '$http',
+        function ($rootScope, $location, Auth, HeightDetect, $http, ngParallax) {
 
             var vm = this;
 
+            HeightDetect.heightDetect();
+
+            /**
+             * admin controller section
+             */
+            vm.isAdmin = false;
+
+            vm.invalidatePanelUsername = function () {
+                $http.get('/api/admin')
+                    .success(function () {
+                        vm.isAdmin = true;
+                    })
+                    .error(function () {
+                        vm.isAdmin = false;
+                    });
+            };
+
+            angular.element(document).ready(function () {
+                angular.element('.loader_inner').fadeOut();
+                angular.element('.loader').delay(400).fadeOut("slow");
+
+                if (Auth.isLoggedIn()) {
+                    if ($location.$$path == '/login' || $location.$$path == '/signup') {
+                        $location.path('/');
+                    }
+
+                    vm.invalidatePanelUsername();
+                }
+            });
+
             vm.siteSettings = {};
             vm.siteSettings.title = 'CMS';
+            vm.siteSettings.url = 'localhost:8080/';
 
             console.log(vm.siteSettings.title);
 
             vm.user = {};
-
-            if (Auth.isLoggedIn())
-                if ($location.$$path == '/login' || $location.$$path == '/signup') {
-                    $location.path('/');
-                }
-
-            HeightDetect.heightDetect();
 
             // get info if a person is logged in
             vm.loggedIn = Auth.isLoggedIn();
@@ -31,11 +54,20 @@ angular.module('mainApp')
             $rootScope.$on('$routeChangeStart', function () {
                 vm.loggedIn = Auth.isLoggedIn();
 
-                // get user information on route change
-                Auth.getUser()
-                    .then(function (data) {
-                        vm.user = data;
-                    });
+                HeightDetect.heightDetect();
+
+                if(vm.loggedIn)
+                {
+                    // get user information on route change
+                    Auth.getUser()
+                        .then(function (data) {
+                            vm.user = data;
+                        });
+                }
+                else
+                {
+                    $location.path('/login');
+                }
             });
 
             // function to handle login form

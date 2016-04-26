@@ -42,7 +42,8 @@ module.exports = function (app, express) {
             var page = new Page({
                 title: req.body.title,
                 url: req.body.url,
-                content: req.body.content,
+                contentHeader: req.body.contentHeader,
+                contentFooter: req.body.contentFooter,
                 posts: req.body.posts,
                 menuIndex: req.body.menuIndex,
                 date: new Date(Date.now())
@@ -90,7 +91,8 @@ module.exports = function (app, express) {
                 //update the pages info only if its new
                 if (req.body.title) page.title = req.body.title;
                 if (req.body.url) page.url = req.body.url;
-                if (req.body.content) page.content = req.body.content;
+                if (req.body.contentHeader) page.contentHeader = req.body.contentHeader;
+                if (req.body.contentFooter) page.contentFooter = req.body.contentFooter;
                 if (req.body.posts) page.posts = req.body.posts;
                 if (req.body.menuIndex) page.menuIndex = req.body.menuIndex;
                 page.date = new Date(Date.now());
@@ -159,7 +161,8 @@ module.exports = function (app, express) {
             var page = new Page({
                 title: request.body.title,
                 url: request.body.url,
-                content: request.body.content,
+                contentFooter: request.body.contentFooter,
+                contentHeader: request.body.contentHeader,
                 menuIndex: request.body.menuIndex,
                 date: new Date(Date.now())
             });
