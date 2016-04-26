@@ -10,15 +10,6 @@ angular.module('mainApp')
                 Page.all()
                     .success(function (data) {
                         vm.pages = data;
-
-                        for (var i = 0; i < vm.pages.length; ++i) {
-                            if (vm.pages[i].contentHeader.length > 40) {
-                                vm.pages[i].desc = vm.pages[i].contentHeader.substring(0, 39);
-                            }
-                            else {
-                                vm.pages[i].desc = vm.pages[i].contentHeader;
-                            }
-                        }
                     });
             };
 

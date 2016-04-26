@@ -89,7 +89,7 @@ angular.module('mainApp')
                         // if a user successfully logs in, redirect to users page
                         if (data.success) {
                             $rootScope.$emit('changeUser');
-                            $rootScope.$emit('invalidateAdminPanel');
+                            vm.invalidatePanelUsername();
                             $location.path('/');
                         }
                         else
@@ -119,6 +119,6 @@ angular.module('mainApp')
                 vm.user = {};
                 $location.path('/login');
 
-                $rootScope.$emit('invalidateAdminPanel');
+                vm.isAdmin = false;
             };
         }]);
