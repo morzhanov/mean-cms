@@ -8,7 +8,7 @@ angular.module('app.admin.routes', ['ngRoute'])
 
             .when('/admin-dashboard',
                 {
-                    templateUrl: 'app/views/pages/admin/dashboard.html',
+                    templateUrl: 'app/views/admin/dashboard.html',
                     controller: 'dashboardController',
                     controllerAs: 'dashboard'
                 })
@@ -16,7 +16,7 @@ angular.module('app.admin.routes', ['ngRoute'])
             //show all users
             .when('/users',
                 {
-                    templateUrl: 'app/views/pages/admin/users/all.html',
+                    templateUrl: 'app/views/admin/users/all.html',
                     controller: 'adminUserController',
                     controllerAs: 'adminUser'
                 })

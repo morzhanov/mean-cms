@@ -18,7 +18,7 @@ angular.module('mainApp')
             vm.editPage = function (id) {
                 $window.localStorage.setItem('edit-page-id', id);
 
-                $window.localStorage.setItem('dashboard-content', "app/views/pages/admin/page/page.html");
+                $window.localStorage.setItem('dashboard-content', "app/views/admin/page/page.html");
 
                 $window.localStorage.setItem('single-page-edit-type', "edit");
 
@@ -50,7 +50,7 @@ angular.module('mainApp')
 
             vm.pageData = {};
 
-            vm.allPostsTemplate = 'app/views/pages/admin/page/all_posts.html';
+            vm.allPostsTemplate = 'app/views/admin/page/all_posts.html';
 
             $rootScope.$on('toggleEditPageView', function () {
                 vm.pageData = {};

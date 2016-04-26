@@ -8,7 +8,7 @@ angular.module('app.p.routes', ['ngRoute'])
 
             .when('/forbidden',
                 {
-                    templateUrl: 'app/views/pages/public/forbidden.html'
+                    templateUrl: 'app/views/public/forbidden.html'
                 })
 
             /**
@@ -17,24 +17,24 @@ angular.module('app.p.routes', ['ngRoute'])
             //home page route
             .when('/',
                 {
-                    templateUrl: 'app/views/pages/public/home.html'
+                    templateUrl: 'app/views/public/home.html'
                 })
 
             .when('/donation',
                 {
-                    templateUrl: 'app/views/pages/public/donation.html'
+                    templateUrl: 'app/views/public/donation.html'
                 })
 
             //login page
             .when('/login',
                 {
-                    templateUrl: 'app/views/pages/public/login.html'
+                    templateUrl: 'app/views/public/login.html'
                 })
 
             //login page
             .when('/signup',
                 {
-                    templateUrl: 'app/views/pages/public/signup.html',
+                    templateUrl: 'app/views/public/signup.html',
                     controller: 'userCreateController',
                     controllerAs: 'user'
                 })
@@ -43,14 +43,14 @@ angular.module('app.p.routes', ['ngRoute'])
             //same view as edit page
             .when('/users/create',
                 {
-                    templateUrl: 'app/views/pages/public/signup.html',
+                    templateUrl: 'app/views/public/signup.html',
                     controller: 'userCreateController',
                     controllerAs: 'user'
                 })
 
             // page to edit a user
             .when('/users/:user_id', {
-                templateUrl: 'app/views/pages/admin/users/single.html',
+                templateUrl: 'app/views/admin/users/single.html',
                 controller: 'userEditController',
                 controllerAs: 'user'
             });

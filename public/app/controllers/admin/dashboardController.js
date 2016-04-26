@@ -73,7 +73,7 @@ angular.module('mainApp')
             if ($window.localStorage.getItem('dashboard-content') !== "undefined")
                 vm.contentUrl = $window.localStorage.getItem('dashboard-content');
             else {
-                vm.contentUrl = "app/views/pages/admin/home.html";
+                vm.contentUrl = "app/views/admin/home.html";
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
             }
 
@@ -96,7 +96,7 @@ angular.module('mainApp')
 
                 vm.toggleActiveClass('.btn-home');
 
-                vm.contentUrl = "app/views/pages/admin/home.html";
+                vm.contentUrl = "app/views/admin/home.html";
 
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
 
@@ -106,7 +106,7 @@ angular.module('mainApp')
 
                 vm.toggleActiveClass('.btn-all-pages');
 
-                vm.contentUrl = "app/views/pages/admin/page/pages.html";
+                vm.contentUrl = "app/views/admin/page/pages.html";
 
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
 
@@ -116,7 +116,7 @@ angular.module('mainApp')
 
                 vm.toggleActiveClass('.btn-all-posts');
 
-                vm.contentUrl = "app/views/pages/admin/post/posts.html";
+                vm.contentUrl = "app/views/admin/post/posts.html";
 
                 $window.localStorage.setItem('dashboard-content', vm.contentUrl);
             };
@@ -131,7 +131,7 @@ angular.module('mainApp')
 
                 vm.toggleActiveClass('.btn-create-post');
 
-                vm.contentUrl = "app/views/pages/admin/post/post.html";
+                vm.contentUrl = "app/views/admin/post/post.html";
 
                 $window.localStorage.setItem('single-post-edit-type', "create");
 
@@ -148,7 +148,7 @@ angular.module('mainApp')
 
                 vm.toggleActiveClass('.btn-create-page');
 
-                vm.contentUrl = "app/views/pages/admin/page/page.html";
+                vm.contentUrl = "app/views/admin/page/page.html";
 
                 $window.localStorage.setItem('single-page-edit-type', "create");
 
