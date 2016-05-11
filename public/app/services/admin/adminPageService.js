@@ -15,7 +15,7 @@ angular.module('mainApp')
             return $http.get('/api/pages/' + id);
         };
 
-        // get all page
+        // get all pages
         pageFactory.all = function () {
             return $http.get('/api/pages/');
         };

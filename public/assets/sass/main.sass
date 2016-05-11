@@ -152,7 +152,6 @@ header .header-content
   height: 70px
   border-bottom: 2px solid #aaa
   margin-bottom: 0px
-  padding-top: 10px
   .navbar-to-site
     color: #fff
     height: 50px
@@ -191,6 +190,7 @@ header .header-content
     color: #fff
     background-color: transparent
   .navbar-right
+    padding-top: 7px
     a
       color: #fff
     a:hover, a:active, a:focus
@@ -200,6 +200,25 @@ header .header-content
     color: #fff
   .logout-button
     margin-right: 20px
+
+.navbar-left
+  line-height: 70px
+  a
+    height: 70px
+    line-height: 48px
+    color: #fff
+    font-size: 18px
+    &:hover, &:active
+      color: #ff904e
+      text-decoration: none
+  .link
+    cursor: pointer
+    padding-left: 10px
+    height: 66px
+    padding-right: 10px
+    background-color: transparent
+    &:hover
+      background-color: #562085
 
 #admin-panel-container
   max-height: $admin-panel-height

@@ -15,6 +15,11 @@ angular.module('mainApp')
             return $http.get('/api/pages/' + id);
         };
 
+        // get all pages
+        pageFactory.all = function () {
+            return $http.get('/api/pages/');
+        };
+
         // get a single post
         pageFactory.getSinglePost = function (page_id, post_id) {
 

@@ -17,6 +17,7 @@ angular.module('mainApp',
         this.heightDetect = function () {
             $(".height-detect").css("height", $(window).height());
             $(".height-detect").attr("height", $(window).height());
+            $('#dashboard-container').css('height', $(document).height());
         };
 
         $(document).ready(function () {

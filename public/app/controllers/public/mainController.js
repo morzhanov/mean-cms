@@ -5,7 +5,8 @@ angular.module('mainApp')
         'Auth',
         'HeightDetect',
         '$http',
-        function ($rootScope, $location, Auth, HeightDetect, $http, ngParallax) {
+        'pPage',
+        function ($rootScope, $location, Auth, HeightDetect, $http, pPage, ngParallax) {
 
             var vm = this;
 
@@ -15,6 +16,14 @@ angular.module('mainApp')
              * admin controller section
              */
             vm.isAdmin = false;
+
+            /**
+             * all pages for navbar
+             */
+            pPage.all()
+                .success(function (res) {
+                    vm.pages = res;
+                });
 
             vm.invalidatePanelUsername = function () {
                 $http.get('/api/admin')
@@ -43,6 +52,11 @@ angular.module('mainApp')
             vm.siteSettings.title = 'CMS';
             vm.siteSettings.url = 'localhost:8080/';
 
+            /**
+             * public navbar
+             */
+            vm.menuUrl = "app/views/public/navbar-menu.html";
+
             console.log(vm.siteSettings.title);
 
             vm.user = {};
@@ -56,16 +70,14 @@ angular.module('mainApp')
 
                 HeightDetect.heightDetect();
 
-                if(vm.loggedIn)
-                {
+                if (vm.loggedIn) {
                     // get user information on route change
                     Auth.getUser()
                         .then(function (data) {
                             vm.user = data;
                         });
                 }
-                else
-                {
+                else {
                     $location.path('/login');
                 }
             });

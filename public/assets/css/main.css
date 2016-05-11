@@ -141,8 +141,7 @@ header .header-content {
   border-radius: 0px;
   height: 70px;
   border-bottom: 2px solid #aaa;
-  margin-bottom: 0px;
-  padding-top: 10px; }
+  margin-bottom: 0px; }
   .navbar .navbar-to-site {
     color: #fff;
     height: 50px;
@@ -180,15 +179,36 @@ header .header-content {
     font-size: 18px;
     color: #fff;
     background-color: transparent; }
-  .navbar .navbar-right a {
-    color: #fff; }
-  .navbar .navbar-right a:hover, .navbar .navbar-right a:active, .navbar .navbar-right a:focus {
-    color: #ff904e;
-    background-color: transparent; }
+  .navbar .navbar-right {
+    padding-top: 7px; }
+    .navbar .navbar-right a {
+      color: #fff; }
+    .navbar .navbar-right a:hover, .navbar .navbar-right a:active, .navbar .navbar-right a:focus {
+      color: #ff904e;
+      background-color: transparent; }
   .navbar .user-hello {
     color: #fff; }
   .navbar .logout-button {
     margin-right: 20px; }
+
+.navbar-left {
+  line-height: 70px; }
+  .navbar-left a {
+    height: 70px;
+    line-height: 48px;
+    color: #fff;
+    font-size: 18px; }
+    .navbar-left a:hover, .navbar-left a:active {
+      color: #ff904e;
+      text-decoration: none; }
+  .navbar-left .link {
+    cursor: pointer;
+    padding-left: 10px;
+    height: 66px;
+    padding-right: 10px;
+    background-color: transparent; }
+    .navbar-left .link:hover {
+      background-color: #562085; }
 
 #admin-panel-container {
   max-height: 40px; }
