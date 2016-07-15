@@ -55,7 +55,7 @@ angular.module('mainApp')
             /**
              * public navbar
              */
-            vm.menuUrl = "app/views/public/navbar-menu.html";
+            vm.menuUrl = "app/views/public/nav-menu.html";
 
             console.log(vm.siteSettings.title);
 

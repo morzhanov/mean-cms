@@ -2,7 +2,12 @@
 
 <section id="pages" ng-controller="aPageCtrl as pageCtrl">
     <h2 class="all-pages-title">All Pages</h2>
-    <table class="table table-bordered table-striped" ng-show="pageCtrl.pages">
+    <!-- LOADING MESSAGE -->
+    <div class="jumbotron load-jumbotron text-center" ng-show="pageCtrl.processing">
+        <span class="glyphicon glyphicon-repeat spinner"></span>
+        <p>Loading Pages...</p>
+    </div>
+    <table class="table table-bordered" ng-show="pageCtrl.pages">
         <thead>
         <tr>
             <th class="col-sm-1">_id</th>

@@ -4,14 +4,16 @@ angular.module('mainApp')
  * Controller that retrieve all posts from server,
  * delete single post, display all posts on view
  */
-    .controller('postController', ['$rootScope', '$window', 'Post',
-        function ($rootScope, $window, Post) {
+    .controller('aPostCtrl', ['$rootScope', '$window', 'aPost',
+        function ($rootScope, $window, aPost) {
 
             var vm = this;
 
+            vm.processing = true;
+
             //get all posts
             vm.getAllPosts = function () {
-                Post.all()
+                aPost.all()
                     .success(function (data) {
                         vm.posts = data;
 
@@ -23,6 +25,9 @@ angular.module('mainApp')
                                 vm.posts[i].desc = vm.posts[i].content;
                             }
                         }
+
+                        vm.processing = false;
+
                     });
             };
 
@@ -31,7 +36,7 @@ angular.module('mainApp')
             vm.editPost = function (id) {
                 $window.localStorage.setItem('edit-post-id', id);
 
-                $window.localStorage.setItem('dashboard-content', "app/views/pages/admin/post/single.html");
+                $window.localStorage.setItem('dashboard-content', "app/views/admin/post/single.html");
 
                 $window.localStorage.setItem('single-post-edit-type', "edit");
 
@@ -40,7 +45,7 @@ angular.module('mainApp')
 
             vm.deletePost = function (id) {
 
-                Post.delete(id)
+                aPost.delete(id)
                     .success(function () {
                         alert('post successfully deleted!');
 
@@ -53,8 +58,8 @@ angular.module('mainApp')
     /**
      * Controller for single post creating/editing
      */
-    .controller('aPostEditCtrl', ['$rootScope', '$window', 'Post',
-        function ($rootScope, $window, Post) {
+    .controller('aPostEditCtrl', ['$rootScope', '$window', 'aPost',
+        function ($rootScope, $window, aPost) {
             //also for post creating
             var vm = this;
 
@@ -73,7 +78,7 @@ angular.module('mainApp')
 
             //if it's edit type get post from server and fill fields
             if (vm.type == 'edit') {
-                Post.get(vm.postId)
+                aPost.get(vm.postId)
                     .success(function (data) {
 
                         vm.postData.title = data.title;
@@ -85,12 +90,12 @@ angular.module('mainApp')
             vm.savePost = function () {
 
                 if (vm.type == 'edit')
-                    Post.update(vm.postId, vm.postData)
+                    aPost.update(vm.postId, vm.postData)
                         .success(function () {
                             vm.message = "Post successfully edited!";
                         });
                 else
-                    Post.create(vm.postData)
+                    aPost.create(vm.postData)
                         .success(function () {
                             vm.message = "Post successfully created!";
                         });

@@ -1,7 +1,7 @@
 /**
  * Angular public routes management
  */
-angular.module('app.p.routes', ['ngRoute'])
+angular.module('routes', ['ngRoute'])
 
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider

@@ -67,8 +67,8 @@ module.exports = function (app, express) {
                         // create a token
                         var token = jwt.sign(
                             {
-                                name: dbUser.firstName,
-                                surname: dbUser.secondName,
+                                name: dbUser.name,
+                                surname: dbUser.surname,
                                 email: dbUser.email
                             }, secret, {
                                 expiresInMinutes: 1440       //expires in 24 hours
@@ -79,7 +79,14 @@ module.exports = function (app, express) {
                             {
                                 success: true,
                                 message: 'Enjoy your token!',
-                                token: token
+                                token: token,
+                                userData: {
+                                    id: dbUser._id,
+                                    email: dbUser.email,
+                                    name: dbUser.name,
+                                    surname: dbUser.surname,
+                                    site: dbUser.site
+                                }
                             });
                     }
                 }
@@ -105,8 +112,8 @@ module.exports = function (app, express) {
 
         newUser.token = jwt.sign(
             {
-                name: newUser.firstName,
-                surname: newUser.secondName,
+                name: newUser.name,
+                surname: newUser.surname,
                 email: newUser.email
             }, secret, {
                 expiresInMinutes: 1440       //expires in 24 hours
@@ -123,7 +130,22 @@ module.exports = function (app, express) {
                     return res.send(err);
                 }
             }
-            res.json({message: 'User created!'});
+
+            User.findOne({email: newUser.email}, function (err, user) {
+
+                res.json(
+                    {
+                        message: 'User created!',
+                        userData: {
+                            id: user._id,
+                            email: user.email,
+                            name: user.name,
+                            surname: user.surname,
+                            site: user.site
+                        }
+                    });
+
+            });
         })
 
     });
@@ -184,7 +206,7 @@ module.exports = function (app, express) {
     // GET Current admin user route
     apiRouter.get('/me', function (req, res) {
 
-        User.findById(req.decoded.id, function (err, user) {
+        User.findOne({email: req.decoded.email}, function (err, user) {
             if (err) {
                 res.send(err);
             }
@@ -253,6 +275,9 @@ module.exports = function (app, express) {
             var id = req.params.id;
 
             Page.findById(id, function (err, page) {
+
+                if (!page)
+                    res.send(err);
 
                 //update the pages info only if its new
                 if (req.body.title) page.title = req.body.title;
@@ -480,14 +505,22 @@ module.exports = function (app, express) {
             var user = new User();
 
             //set the user information (comes from request)
-            user.firstName = req.body.firstName;
-            user.secondName = req.body.secondName;
+            user.name = req.body.name;
+            user.surname = req.body.surname;
             user.email = req.body.email;
             user.site = req.body.site;
-            user.role = "user";
-            user.image = req.body.image;
-            user.username = req.body.username;
+            // user.role = "user";
+            // user.image = req.body.image;
             user.password = req.body.password;
+
+            user.token = jwt.sign(
+                {
+                    name: user.name,
+                    surname: user.surname,
+                    email: user.email
+                }, secret, {
+                    expiresInMinutes: 1440       //expires in 24 hours
+                });
 
             //save the user and check for errors
             user.save(function (err) {
@@ -519,6 +552,8 @@ module.exports = function (app, express) {
                     res.send(err);
                 }
 
+                user.password = null;
+
                 res.json(user);
             })
         })
@@ -529,16 +564,32 @@ module.exports = function (app, express) {
             var currentUser;
 
             User.findById(req.params.id, function (err, user) {
+
+                if (!user) {
+                    res.send(err);
+                }
+
                 currentUser = user;
 
                 //update the users info only if its new
-                if (req.body.firstName) user.firstName = req.body.firstName;
-                if (req.body.secondName) user.secondName = req.body.secondName;
+                if (req.body.name) user.name = req.body.name;
+                if (req.body.surname) user.surname = req.body.surname;
                 if (req.body.email) user.email = req.body.email;
                 if (req.body.site) user.site = req.body.site;
-                if (req.body.role) user.role = req.body.role;
-                if (req.body.username) user.username = req.body.username;
+                // if (req.body.role) user.role = req.body.role;
+                // if (req.body.username) user.username = req.body.username;
                 if (req.body.password) user.password = req.body.password;
+
+                var token = jwt.sign(
+                    {
+                        name: user.name,
+                        surname: user.surname,
+                        email: user.email
+                    }, secret, {
+                        expiresInMinutes: 1440       //expires in 24 hours
+                    });
+
+                user.token = token;
 
                 //save the user
                 user.save(function (err) {
@@ -546,7 +597,20 @@ module.exports = function (app, express) {
                         res.send(err);
                     }
 
-                    res.json({message: 'User updated!'});
+                    //return the information including token as JSON
+                    res.json(
+                        {
+                            success: true,
+                            message: 'User updated!',
+                            token: token,
+                            userData: {
+                                id: currentUser._id,
+                                email: currentUser.email,
+                                name: currentUser.name,
+                                surname: currentUser.surname,
+                                site: currentUser.site
+                            }
+                        });
                 });
             })
         })
@@ -563,6 +627,61 @@ module.exports = function (app, express) {
 
                     res.json({message: "Successfully deleted!"});
                 })
+        })
+
+        //Do download user photo from client to DB
+        .post('/upload/image/user', function (req, res) {
+
+            var form = new formidable.IncomingForm();
+
+            var currentUser;
+
+            form.parse(req, function (err, fields, files) {
+                var photoData = fields['photo[data]'];
+                var imageType = fields['photo[type]'];
+
+                User.findById(fields['photo[userId]'], function (err, user) {
+                    currentUser = user;
+                    /// If there's an error
+
+                    var photoPath = "./public/assets/img/users-photos/"
+                        + currentUser.email
+                        + imageType;
+
+                    //photoData = photoData.replace(/^data:image\/png|jpeg|jpg|gif;base64,/, "");
+
+                    var base64Data = photoData.substring(
+                        photoData.indexOf(',') + 1
+                    );
+
+                    fs.writeFile(photoPath, base64Data, 'base64', function (err) {
+                        if (err)
+                            console.log(err);
+                        else {
+
+                            photoPath = "assets/img/users-photos/"
+                                + currentUser.username
+                                + imageType;
+
+                            if (currentUser.photo != photoPath && currentUser.photo != undefined) {
+                                /**
+                                 * delete user photo with old extension
+                                 */
+                                fs.unlink(user.photo);
+                            }
+
+                            currentUser.photo = photoPath;
+
+                            currentUser.save(function (err) {
+                                if (err) {
+                                    res.send(err);
+                                }
+                                res.send(202);
+                            });
+                        }
+                    });
+                });
+            });
         });
 
 

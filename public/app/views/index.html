@@ -47,6 +47,12 @@
     <div class="loader_inner"></div>
 </div>
 
+<ng-include src="main.topNavUrl" ng-if="main.topNavUrl">
+</ng-include>
+
+<ng-include src="main.navMenuUrl" ng-if="main.navMenuUrl">
+</ng-include>
+
 <main class="height-detect">
     <!-- ANGULAR VIEWS -->
     <div ng-view class="ng-view-template">
@@ -87,8 +93,8 @@
 <script src="app/app.js"></script>
 
 <!-- App routes files -->
-<script src="app/routes/a.routes.js"></script>
-<script src="app/routes/p.routes.js"></script>
+<script src="app/routes/a/routes.js"></script>
+<script src="app/routes/routes.js"></script>
 
 <!-- Controllers -->
 <script src="app/controllers/mainCtrl.js"></script>
@@ -100,21 +106,24 @@
 <script src="app/controllers/a/aUserCtrl.js"></script>
 
 
-<script src="app/controllers/p/pPageCtrl.js"></script>
-<script src="app/controllers/p/pPostCtrl.js"></script>
-<script src="app/controllers/p/pUserCtrl.js"></script>
+<script src="app/controllers/p/pageCtrl.js"></script>
+<script src="app/controllers/p/postCtrl.js"></script>
+<script src="app/controllers/p/userCtrl.js"></script>
+<script src="app/controllers/p/authCtrl.js"></script>
+<script src="app/controllers/p/navMenuCtrl.js"></script>
 
 <!-- Services -->
-<script src="app/services/authService.js"></script>
-
 <script src="app/services/a/aPageService.js"></script>
 <script src="app/services/a/aPostService.js"></script>
 <script src="app/services/a/aUserService.js"></script>
-<script src="app/services/a/siteService.js"></script>
+<script src="app/services/a/aSiteSettingsService.js"></script>
+<script src="app/services/a/aAuthService.js"></script>
 
-<script src="app/services/p/pUserService.js"></script>
-<script src="app/services/p/pPageService.js"></script>
-<script src="app/services/p/pPostService.js"></script>
+<script src="app/services/AuthService.js"></script>
+<script src="app/services/UserService.js"></script>
+<script src="app/services/PageService.js"></script>
+<script src="app/services/PostService.js"></script>
+<script src="app/services/SiteSettingsService.js"></script>
 
 </body>
 </html>

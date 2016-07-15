@@ -1,6 +1,5 @@
 <!-- EDIT SPECIFIC USER OR CREATE NEW ONE -->
-
-<section id="single-user" class="height-detect">
+<section id="single-user" class="height-detect" ng-controller="aUserEditCtrl as user">
     <div class="parallax-content" ng-parallax pattern="'assets/img/section-bg.png'" speed="5">
         <div class="page-header">
             <h1 ng-if="user.type == 'create'">Create User</h1>
@@ -9,19 +8,19 @@
         <form class="form-horizontal" ng-submit="user.saveUser()">
             <div class="left-form-content col-sm-8">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">First Name</label>
+                    <label class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
                         <input type="text"
                                class="form-control"
-                               ng-model="user.userData.firstName">
+                               ng-model="user.userData.name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Second Name</label>
+                    <label class="col-sm-2 control-label">Surname</label>
                     <div class="col-sm-10">
                         <input type="text"
                                class="form-control"
-                               ng-model="user.userData.secondName">
+                               ng-model="user.userData.surname">
                     </div>
                 </div>
                 <div class="form-group">
@@ -33,14 +32,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text"
-                               class="form-control"
-                               ng-model="user.userData.username">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-sm-2 control-label">Site</label>
                     <div class="col-sm-10">
                         <input type="text"
@@ -49,14 +40,14 @@
                     </div>
                 </div>
                 <div class="admin-edit">
-                    <div class="form-group" ng-if="admin.isAdmin">
-                        <label class="col-sm-2 control-label">Role</label>
-                        <div class="col-sm-10">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="user.userData.role">
-                        </div>
-                    </div>
+                    <!--<div class="form-group" ng-if="admin.isAdmin">-->
+                        <!--<label class="col-sm-2 control-label">Role</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text"-->
+                                   <!--class="form-control"-->
+                                   <!--ng-model="user.userData.role">-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Password</label>

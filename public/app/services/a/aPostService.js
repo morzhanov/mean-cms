@@ -4,7 +4,7 @@
 
 angular.module('mainApp')
 
-    .factory('Post', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+    .factory('aPost', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
 
         // create a new object
         var postFactory = {};

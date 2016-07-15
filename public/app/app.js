@@ -3,7 +3,8 @@
 angular.module('mainApp',
     [
         'ngAnimate',          //animating
-        'app.admin.routes',         //public routing
+        'a.routes',         
+        'routes',
         'ui.bootstrap',
         'ngParallax',          //parallax effect
         'ngFileUpload'

@@ -4,7 +4,7 @@
 
 angular.module('mainApp')
 
-    .factory('Page', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+    .factory('aPage', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
 
         // create a new object
         var pageFactory = {};

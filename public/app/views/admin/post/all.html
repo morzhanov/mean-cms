@@ -2,7 +2,12 @@
 
 <section id="all-posts" ng-controller="aPostCtrl as postCtrl">
     <h2 class="all-posts-title">All Posts</h2>
-    <table class="table table-bordered table-striped" ng-show="postCtrl.posts">
+    <!-- LOADING MESSAGE -->
+    <div class="jumbotron load-jumbotron text-center" ng-show="postCtrl.processing">
+        <span class="glyphicon glyphicon-repeat spinner"></span>
+        <p>Loading Posts...</p>
+    </div>
+    <table class="table table-bordered" ng-show="postCtrl.posts">
         <thead>
         <tr>
             <th class="col-sm-1">_id</th>

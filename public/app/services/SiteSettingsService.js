@@ -3,7 +3,7 @@
  */
 
 angular.module('mainApp')
-    .factory('siteService', [function () {
+    .factory('SiteSettings', [function () {
         var siteServiceFactory = {};
 
         siteServiceFactory.siteSettings = {};

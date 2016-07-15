@@ -83,8 +83,6 @@ section#public-home header
   color: #ff904e
 
 #dashboard-container
-  .row
-    height: 100%
   a
     color: #fff
     text-decoration: none
@@ -107,9 +105,11 @@ section#public-home header
   background-color: #fff
 
 .panel-group
+
 .panel-heading + .panel-collapse >
 .list-group,
 .panel-group
+
 .panel-heading + .panel-collapse >
 .panel-body
   border-top: 0px !important
@@ -184,7 +184,7 @@ header .header-content
   a.navbar-brand
     cursor: pointer
     color: #fff
-  a.navbar-brand:hover,a.navbar-brand:focus, a.navbar-brand:active,
+  a.navbar-brand:hover, a.navbar-brand:focus, a.navbar-brand:active,
   a.users-button:hover, a.users-button:active, a.users-button:focus
     background-color: transparent
     color: #ff904e
@@ -269,6 +269,10 @@ section#login
       font-size: 20px
 
 section#all-users
+  padding-top: 20px
+  padding-right: 20px
+  padding-left: 10px
+  height: 100%
   background: url("../../assets/img/section-bg.jpg") no-repeat center center
   color: #fff !important
   .users-load
@@ -293,15 +297,12 @@ section#all-users
     font-weight: 100
   a
     color: #a9fffd
-  table, td, th, thead, tr
-    border: none
   tr
     background-color: transparent
   .page-header
     border: none
-    padding-top: 50px
+    padding-top: 0px
     margin-top: 0px
-    margin-bottom: 0px
     margin-bottom: 0px
   h1
     margin-left: 10px
@@ -313,6 +314,7 @@ section#all-users
       margin-right: 10px
 
 section#single-user
+  height: 100%
   color: #fff !important
   background: url("../../assets/img/section-bg.jpg") no-repeat center center
   .page-header
@@ -354,10 +356,18 @@ section#image-section
     height: auto
 
 .dashboard-content
-  padding-right: 45px
+  padding: 0px
   height: 100%
 
 section#pages
+  color: #fff
+  padding-top: 20px
+  padding-left: 10px
+  padding-right: 20px
+  height: 100%
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  h2
+    margin-top: 0px
   .new-page-fab
     cursor: pointer
     position: fixed
@@ -365,12 +375,12 @@ section#pages
     right: 40px
     width: 50px
     height: 50px
-    background-color: #4e285e
+    background-color: #ff9329
     font-size: 30px
     color: #fff
     border-radius: 50%
     &:hover
-      background-color: #6a317b
+      background-color: #c6731f
   .manage-pages
     text-align: center
     a
@@ -382,6 +392,11 @@ section#dashboard-home
     margin-top: 10%
 
 section#single-page
+  padding-right: 20px
+  padding-left: 20px
+  padding-top: 20px
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  color: #fff
   .row
     margin-top: 40px
   h2
@@ -398,12 +413,6 @@ section#single-page
     margin-left: 0px
     font-size: 14px
     margin-bottom: 30px
-    span
-      color: #000 !important
-      &:hover
-      &:focus
-      &active
-        color: #000 !important
     input
       padding-left: 10px
       position: absolute
@@ -415,7 +424,7 @@ section#single-page
   .page-posts-title
     padding-left: 30px
     margin-bottom: 20px
-    color: #4e285e
+    color: #fff
     text-align: justify
     font-size: 24px
     margin-top: 0px
@@ -423,12 +432,12 @@ section#single-page
     span
       cursor: default
       &:hover
-        color: #000
+        color: #cbd5ff
     button
       position: absolute
       right: 20px
   .page-post-item
-    color: #4e285e
+    color: #fff
     font-size: 16px
     span
       cursor: default
@@ -465,12 +474,15 @@ section#single-page
     padding-top: 20px
     padding-left: 0px
     span
-      color: #000
       cursor: default
-      &:hover
-        color: #000
 
 section#all-posts
+  color: #fff
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  height: 100%
+  padding-left: 10px
+  padding-right: 20px
+  padding-top: 20px
   div.new-post-fab
     cursor: pointer
     position: fixed
@@ -478,12 +490,12 @@ section#all-posts
     right: 40px
     width: 50px
     height: 50px
-    background-color: #4e285e
+    background-color: #ff9329
     font-size: 30px
     color: #fff
     border-radius: 50%
     &:hover
-      background-color: #6a317b
+      background-color: #e38327
   .manage-posts
     text-align: center
     a
@@ -493,6 +505,12 @@ section#all-posts
   width: 60%
 
 section#single-post
+  height: 100%
+  padding-right: 20px
+  padding-left: 20px
+  padding-top: 20px
+  background: url("../../assets/img/section-bg.jpg") no-repeat center center
+  color: #fff
   .row
     margin-top: 40px
   .post-title
@@ -502,11 +520,7 @@ section#single-post
     font-size: 20px
     margin-bottom: 30px
     span
-      color: #000 !important
-      &:hover
-      &:focus
-      &active
-        color: #000 !important
+      color: #fff
     input
       position: absolute
       right: 0px
@@ -519,3 +533,15 @@ section#single-post
       margin: auto
       width: 60%
       line-height: 10
+
+.load-jumbotron
+  background-color: #4e285e
+  color: #fff
+  
+input
+  background-color: transparent
+textarea
+  background-color: transparent
+  
+.page-posts-container
+  background-color: #4e285e

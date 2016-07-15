@@ -4,16 +4,20 @@ angular.module('mainApp')
  * Controller that retrieve all pages from server,
  * delete single page, display all pages on view
  */
-    .controller('pageController', ['$rootScope', '$window', 'Page',
-        function ($rootScope, $window, Page) {
+    .controller('aPageCtrl', ['$rootScope', '$window', 'aPage',
+        function ($rootScope, $window, aPage) {
 
             var vm = this;
 
+            vm.processing = true;
+
             //get all pages
             vm.getAllPages = function () {
-                Page.all()
+                aPage.all()
                     .success(function (data) {
                         vm.pages = data;
+
+                        vm.processing = false;
                     });
             };
 
@@ -31,7 +35,7 @@ angular.module('mainApp')
 
             vm.deletePage = function (id) {
 
-                Page.delete(id)
+                aPage.delete(id)
                     .success(function () {
                         alert('page successfully deleted!');
 
@@ -45,8 +49,8 @@ angular.module('mainApp')
      * Controller for single page creating/editing
      * also manage all posts of single page (show all posts, delete post from page)
      */
-    .controller('aPageEditCtrl', ['$rootScope', '$window', 'Page', 'Post', 'siteService',
-        function ($rootScope, $window, Page, Post, siteService) {
+    .controller('aPageEditCtrl', ['$rootScope', '$window', 'aPage', 'aPost', 'siteService',
+        function ($rootScope, $window, aPage, aPost, siteService) {
             //also for page creating
             var vm = this;
 
@@ -67,7 +71,7 @@ angular.module('mainApp')
 
             //if it's edit type get post from server and fill fields
             if (vm.type == 'edit') {
-                Page.get(vm.id)
+                aPage.get(vm.id)
                     .success(function (data) {
 
                         vm.pageData.title = data.title;
@@ -76,7 +80,7 @@ angular.module('mainApp')
                         vm.pageData.url = data.url;
                         vm.pageData.date = data.date;
 
-                        Page.allPosts(vm.id)
+                        aPage.allPosts(vm.id)
                             .success(function (posts) {
                                 vm.pageData.posts = posts;
                             });
@@ -103,10 +107,10 @@ angular.module('mainApp')
                 /**
                  * remove element from servers model
                  */
-                Page.deletePostFromPage(page_id, post_id)
+                aPage.deletePostFromPage(page_id, post_id)
                     .success(function (data) {
 
-                        Page.allPosts(vm.id)
+                        aPage.allPosts(vm.id)
                             .success(function (posts) {
                                 vm.pageData.posts = posts;
                                 vm.message = "Post with id = " + post_id
@@ -118,12 +122,12 @@ angular.module('mainApp')
             vm.savePage = function () {
 
                 if (vm.type == 'edit')
-                    Page.update(vm.id, vm.pageData)
+                    aPage.update(vm.id, vm.pageData)
                         .success(function () {
                             vm.message = "Page successfully edited!";
                         });
                 else
-                    Page.create(vm.pageData)
+                    aPage.create(vm.pageData)
                         .success(function () {
                             vm.message = "Page successfully created!";
                         });
@@ -138,25 +142,28 @@ angular.module('mainApp')
                     angular.element('.btn-add-page-post')
                         .html('-');
 
-                    Post.all().success(function (data) {
-
-                        vm.allPosts = data;
+                    aPost.all().success(function (data) {
 
                         /**
                          * delete from all posts posts, that already
                          * present on current page
                          */
-                        for (var i = 0; i < vm.allPosts.length; ++i) {
-                            for (var j = 0; j < vm.pageData.posts.length; ++j)
-                                if (vm.allPosts[i]._id == vm.pageData.posts[j]._id) {
-                                    vm.allPosts.splice(i, 1);
-                                    --i;
-                                    break;
-                                }
-                        }
+                        if (vm.pageData)
+                            if (vm.pageData.posts)
+                                if (vm.pageData.posts.length > 0)
+                                    for (var i = 0; i < data.length; ++i) {
+                                        for (var j = 0; j < vm.pageData.posts.length; ++j)
+                                            if (data[i]._id == vm.pageData.posts[j]._id) {
+                                                data.splice(i, 1);
+                                                --i;
+                                                break;
+                                            }
+                                    }
 
-                        if (vm.allPosts.length == 0)
+                        if (data.length == 0)
                             vm.allPosts = undefined;
+                        else
+                            vm.allPosts = data;
                     });
                 }
                 else {
@@ -172,13 +179,13 @@ angular.module('mainApp')
                 if (vm.pageData.posts == undefined)
                     vm.pageData.posts = [];
 
-                Post.get(id)
+                aPost.get(id)
                     .success(function (post) {
                         "use strict";
 
                         vm.pageData.posts.push(post);
 
-                        Page.update(vm.id, vm.pageData)
+                        aPage.update(vm.id, vm.pageData)
                             .success(function () {
                                 vm.message = "Post successfully added to page!";
                             });

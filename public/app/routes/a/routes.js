@@ -1,7 +1,7 @@
 /**
  * Angular admin routes management
  */
-angular.module('app.admin.routes', ['ngRoute'])
+angular.module('a.routes', ['ngRoute'])
 
     .config(function ($routeProvider) {
         $routeProvider
