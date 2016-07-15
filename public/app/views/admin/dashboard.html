@@ -1,9 +1,44 @@
-<section id="dashboard-container">
+<!-- ADMIN DASHBOARD VIEW -->
+
+<!--Dashboard navigation -->
+<nav class="navbar user-navbar" ng-controller="aDashboardCtrl as dashboard">
+    <!-- admin dashboard navbar-->
+    <div class="navbar-header">
+        <a ng-click="dashboard.toDashboard()"
+           class="navbar-brand">
+            <span class="fa nav-logo fa-code text-danger"></span>Dashboard
+        </a>
+        <a ng-click="dashboard.toSiteHome()"
+           class="navbar-to-site">Go to
+            <span class="site-title">{{dashboard.siteSettings.title}}</span>
+        </a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="user-hello navbar-text">Hello {{dashboard.userData.name}} !
+        </li>
+        <li>
+            <a ng-href="/account"
+               class="navbar-user-photo-reference">
+                <img class="navbar-user-photo"
+                     ng-src="{{dashboard.userData.photo}}"
+                     alt="User Photo">
+            </a>
+        </li>
+        <li>
+            <a class="logout-button"
+               ng-click="dashboard.doLogout()">Logout
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!--Dashboard content container -->
+<section id="dashboard-container" class="height-detect">
     <div class="row">
-        <div class="col-md-2 dshb-menu">
+        <div class="col-md-2 col-sm-2 col-xs-2 dshb-menu height-detect">
             <uib-accordion close-others="true">
 
-                <uib-accordion-group ng-click="dashboard.home()"
+                <uib-accordion-group ng-click="dashboard.toHome()"
                                      class="dshb-menu-item accordion-group-home"
                                      heading="Home">
                     <div class="dshd-menu-child-item">
@@ -64,7 +99,7 @@
                 </uib-accordion-group>
             </uib-accordion>
         </div>
-        <div class="col-md-10 dashboard-content">
+        <div class="col-md-10 col-sm-10 col-xs-10 dashboard-content height-detect">
             <ng-include src="dashboard.contentUrl">
             </ng-include>
         </div>

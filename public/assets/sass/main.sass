@@ -1,5 +1,5 @@
 @import "bourbon/bourbon"
-@include font-face(Frutiger, "../../assets/fonts/bast/bast")
+@import "fonts"
 
 $header-color: #ffffff
 $admin-panel-height: 40px
@@ -26,13 +26,14 @@ html.js .loader
     position: absolute
 
 *
-  font-family: Frutiger
+  font-family: RobotoRegular, serif
   font-weight: 400 !important
   .jumbotron,
   .btn
     border-radius: 0px !important
 
 body
+  background-color: #4e285e
   font-family: "RobotoRegular", sans-serif
   font-weight: normal
   font-size: 14px
@@ -101,6 +102,9 @@ section#public-home header
   height: 100%
   span
     color: #fff
+
+.dashboard-content
+  background-color: #fff
 
 .panel-group
 .panel-heading + .panel-collapse >

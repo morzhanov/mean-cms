@@ -1,14 +1,14 @@
-//main angular app file
+//Main angular app file
+
 angular.module('mainApp',
     [
         'ngAnimate',          //animating
-        'app.p.routes',         //public routing
         'app.admin.routes',         //public routing
         'ui.bootstrap',
         'ngParallax',          //parallax effect
         'ngFileUpload'
     ])
-
+    
     .service('HeightDetect', function () {
 
         var instance = this;
@@ -26,7 +26,9 @@ angular.module('mainApp',
     })
 
     //application configuration to integrate token into requests
-    .config(function ($httpProvider) {
+    .config(function ($httpProvider, $locationProvider) {
         //attach our auth interceptor to the http requests
         $httpProvider.interceptors.push('AuthInterceptor');
+
+        $locationProvider.html5Mode(true).hashPrefix('!');
     });

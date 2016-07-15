@@ -1,9 +1,8 @@
-//BASE SETUP
-//====================================
-
 /**
- * CALL THE PACKAGES
+ * Main NodeJS server application file
  */
+
+//Import all required packages
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -11,10 +10,7 @@ var config = require('./config');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-
-/**
- * APP CONFIGURATION
- */
+var passport = require('passport');
 
 /**
  * use body-parser so we can grab information from POST requets
@@ -45,17 +41,21 @@ mongoose.connect(config.database);
 //set static files location
 //user for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
+app.use(passport.initialize());
 
 //Router Middlewares
-var apiRoutes = require('./app/routes/api')(app, express);
+var apiRoutes = require('./app/routes/admin')(app, express);
 var pageRoutes = require('./app/routes/pages')(app, express);
 var postRoutes = require('./app/routes/posts')(app, express);
 var userRoutes = require('./app/routes/users')(app, express);
 
-app.use('/api', apiRoutes);
-app.use('/api/pages', pageRoutes);
-app.use('/api/posts', postRoutes);
-app.use('/api/users', userRoutes);
+//Admin routers
+app.use('/api/admin', apiRoutes);
+
+//Public routers
+app.use('/pages', pageRoutes);
+app.use('/posts', postRoutes);
+app.use('/users', userRoutes);
 
 //MAIN CATCHHALL ROUTE
 //SEND USERS TO FRONTEND

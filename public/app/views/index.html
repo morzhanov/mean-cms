@@ -47,45 +47,6 @@
     <div class="loader_inner"></div>
 </div>
 
-<nav class="navbar user-navbar" ng-controller="dashboardController as dashboard" ng-if="main.isAdmin">
-    <!-- admin dashboard navbar-->
-    <div class="navbar-header">
-        <a ng-click="dashboard.toDashboard()"
-           class="navbar-brand">
-            <span class="fa nav-logo fa-code text-danger"></span>Dashboard
-        </a>
-        <a ng-click="dashboard.toSiteHome()"
-           class="navbar-to-site">Go to
-            <span class="site-title">{{main.siteSettings.title}}</span>
-        </a>
-    </div>
-    <ul class="nav navbar-nav navbar-right"
-        ng-controller="userController as user">
-        <li ng-if="!main.loggedIn">
-            <a href="/login">Login</a>
-        </li>
-        <li ng-if="!main.loggedIn">
-            <a href="/signup">SignUp</a><
-            /li>
-        <li ng-if="main.loggedIn"
-            class="user-hello navbar-text">Hello {{user.currentUser.firstName}} !
-        </li>
-        <li ng-if="main.loggedIn">
-            <a ng-href="/account"
-               class="navbar-user-photo-reference">
-                <img class="navbar-user-photo"
-                     ng-src="{{user.currentUser.photo}}"
-                     alt="User Photo">
-            </a>
-        </li>
-        <li ng-if="main.loggedIn">
-            <a class="logout-button"
-               ng-click="main.doLogout()">Logout
-            </a>
-        </li>
-    </ul>
-</nav>
-
 <main class="height-detect">
     <!-- ANGULAR VIEWS -->
     <div ng-view class="ng-view-template">
@@ -119,41 +80,41 @@
 
 <script src="assets/libs/ng-simple-parallax/js/ngParallax.min.js"></script>
 
-<script src="assets/libs/modernizr/modernizr.js"></script>
 <script src="assets/libs/plugins-scroll/plugins-scroll.js"></script>
 <script src="assets/libs/waypoints/waypoints.min.js"></script>
 
-<!-- main Angular app files -->
-<script src="app/app.p.routes.js"></script>
-<script src="app/app.admin.routes.js"></script>
+<!-- main Angular app file -->
 <script src="app/app.js"></script>
 
-<!-- app files-->
-<!-- services -->
-<script src="app/services/public/authService.js"></script>
-<script src="app/services/public/userService.js"></script>
-<script src="app/services/public/pageService.js"></script>
-<script src="app/services/public/postService.js"></script>
-<script src="app/services/public/siteService.js"></script>
+<!-- App routes files -->
+<script src="app/routes/a.routes.js"></script>
+<script src="app/routes/p.routes.js"></script>
 
-<!-- controllers -->
-<script src="app/controllers/public/mainController.js"></script>
-<script src="app/controllers/public/userController.js"></script>
-<script src="app/controllers/public/pageController.js"></script>
-<script src="app/controllers/public/postController.js"></script>
+<!-- Controllers -->
+<script src="app/controllers/mainCtrl.js"></script>
 
-<!-- services -->
-<script src="app/services/admin/adminUserService.js"></script>
-<script src="app/services/admin/adminPageService.js"></script>
-<script src="app/services/admin/adminPostService.js"></script>
-<script src="app/services/admin/adminSiteService.js"></script>
+<script src="app/controllers/a/aAuthCtrl.js"></script>
+<script src="app/controllers/a/aDashboardCtrl.js"></script>
+<script src="app/controllers/a/aPageCtrl.js"></script>
+<script src="app/controllers/a/aPostCtrl.js"></script>
+<script src="app/controllers/a/aUserCtrl.js"></script>
 
-<!-- controllers -->
-<script src="app/controllers/admin/dashboardController.js"></script>
-<script src="app/controllers/admin/adminUserController.js"></script>
 
-<script src="app/controllers/admin/adminPageController.js"></script>
-<script src="app/controllers/admin/adminPostController.js"></script>
+<script src="app/controllers/p/pPageCtrl.js"></script>
+<script src="app/controllers/p/pPostCtrl.js"></script>
+<script src="app/controllers/p/pUserCtrl.js"></script>
+
+<!-- Services -->
+<script src="app/services/authService.js"></script>
+
+<script src="app/services/a/aPageService.js"></script>
+<script src="app/services/a/aPostService.js"></script>
+<script src="app/services/a/aUserService.js"></script>
+<script src="app/services/a/siteService.js"></script>
+
+<script src="app/services/p/pUserService.js"></script>
+<script src="app/services/p/pPageService.js"></script>
+<script src="app/services/p/pPostService.js"></script>
 
 </body>
 </html>

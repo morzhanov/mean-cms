@@ -1,8 +1,8 @@
 @font-face {
-  font-family: Frutiger;
+  font-family: "RobotoRegular";
   font-style: normal;
   font-weight: normal;
-  src: url("../../assets/fonts/bast/bast.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/bast/bast.woff2") format("woff2"), url("../../assets/fonts/bast/bast.woff") format("woff"), url("../../assets/fonts/bast/bast.ttf") format("truetype"), url("../../assets/fonts/bast/bast.svg#Frutiger") format("svg"); }
+  src: url("../fonts/RobotoRegular/RobotoRegular.eot?#iefix") format("embedded-opentype"), url("../fonts/RobotoRegular/RobotoRegular.woff") format("woff"), url("../fonts/RobotoRegular/RobotoRegular.ttf") format("truetype"); }
 html.js .loader {
   background: none repeat scroll 0 0 #ffffff;
   bottom: 0;
@@ -25,13 +25,14 @@ html.js .loader {
     position: absolute; }
 
 * {
-  font-family: Frutiger;
+  font-family: RobotoRegular, serif;
   font-weight: 400 !important; }
   * .jumbotron,
   * .btn {
     border-radius: 0px !important; }
 
 body {
+  background-color: #4e285e;
   font-family: "RobotoRegular", sans-serif;
   font-weight: normal;
   font-size: 14px;
@@ -96,6 +97,9 @@ section#public-home header {
   height: 100%; }
   .dshb-menu span {
     color: #fff; }
+
+.dashboard-content {
+  background-color: #fff; }
 
 .panel-body {
   border-top: 0px !important; }

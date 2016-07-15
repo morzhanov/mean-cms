@@ -7,14 +7,9 @@ var Schema = mongoose.Schema;
 
 //Page model in db
 var Post = new Schema({
-    //title of the post
-    title: String,
-    //content of the post
-    content: String,
-    //The date when this document was last updated.
-    date: Date
+    title: String,            //title of the post
+    content: String,          //content of the post
+    date: Date                //the date when this document was last updated.
 });
 
-var Post = mongoose.model('Post', Post);
-
-module.exports = Post;
+module.exports = mongoose.model('Post', Post);

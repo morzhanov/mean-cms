@@ -7,20 +7,17 @@ var Schema = mongoose.Schema;
 
 //Page model in db
 var Page = new Schema({
-    //title of the page
-    title: String,
-    //The SEO-friendly alias that will be used to identify the page.
-    url: {type: String, index:{unique:true}},
-    //content of the page (array of posts ids)
-    contentHeader: String,
-    contentFooter: String,
-    posts: [String],
-    //defines the menu sequence of the pages in the navigation bar.
-    menuIndex: Number,
-    //The date when this document was last updated.
-    date: Date
+    title: String,               //title of the page
+    url:                         //The SEO-friendly alias that will be used to identify the page.
+    {
+        type: String,
+        index: {unique: true}
+    },
+    contentHeader: String,      //content header of the page
+    contentFooter: String,      //content footer of the page
+    posts: [String],            //(array of posts ids)
+    menuIndex: Number,          //defines the menu sequence of the pages in the navigation bar.
+    date: Date                  //The date when this document was last updated.
 });
 
-var Page = mongoose.model('Page', Page);
-
-module.exports = Page;
+module.exports = mongoose.model('Page', Page);
