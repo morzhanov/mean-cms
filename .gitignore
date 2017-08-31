@@ -36,7 +36,7 @@ node_modules/
 jspm_packages
 
 #bower libs
-public/libs/
+src/public/libs/
 
 # Optional npm cache directory
 .npm

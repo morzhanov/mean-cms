@@ -1,7 +1,7 @@
 {
-  "name": "mean_stack_cms",
-  "version": "1.0.0",
-  "description": "MEAN stack CMS",
+  "name": "mean-cms",
+  "version": "1.1.0",
+  "description": "MEAN CMS",
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -40,5 +40,13 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "3.1.0",
     "gulp-uglify": "3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladMorzhanov/MEAN-Stack-CMS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VladMorzhanov/MEAN-Stack-CMS/issues"
+  },
+  "homepage": "https://github.com/VladMorzhanov/MEAN-Stack-CMS#readme"
 }
