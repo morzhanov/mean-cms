@@ -1,7 +1,7 @@
 {
   "name": "mean_stack_cms",
   "description": "MEAN stack CMS",
-  "main": "server.js",
+  "main": "src/server.js",
   "authors": [
     "VladMDev"
   ],
@@ -21,7 +21,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "public/libs",
+    "src/public/libs",
     "test",
     "tests"
   ],

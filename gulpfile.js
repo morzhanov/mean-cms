@@ -9,16 +9,16 @@ var uglify = require('gulp-uglify');
 var nodemon = require('gulp-nodemon');
 
 gulp.task('css', function () {
-    return gulp.src('public/assets/sass/style.sass')
+    return gulp.src('src/public/assets/sass/style.sass')
         .pipe(sass().on('error', sass.logError))
         .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('public/assets/css'));
+        .pipe(gulp.dest('src/public/assets/css'));
 });
 
 gulp.task('watch', function () {
 
-    gulp.watch('public/assets/css/style.sass', ['css']);
+    gulp.watch('src/public/assets/css/style.sass', ['css']);
 
 });
 
@@ -26,7 +26,7 @@ gulp.task('watch', function () {
 // the nodemon task
 gulp.task('nodemon', function () {
     nodemon({
-        script: 'server.js',
+        script: 'src/server.js',
         ext: 'js sass css html'
     })
         .on('start', ['watch'])
