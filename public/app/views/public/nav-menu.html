@@ -1,0 +1,40 @@
+<nav ng-controller="navMenuCtrl as nav"
+class="navbar nav">
+    <div class="navbar-header">
+    </div>
+    <div class="navbar-left">
+        <div class="link home">
+            <a ng-href="main.siteSettings.url">Home</a>
+        </div>
+    </div>
+    <div class="navbar-left menu-links" ng-repeat="link in nav.pageLinks">
+        <div class="link">
+            <a ng-href="page.url">{{link.title}}</a>
+        </div>
+    </div>
+    <ul class="nav navbar-nav navbar-right"
+        ng-controller="userController as user">
+        <li ng-if="!main.loggedIn">
+            <a href="/login">Login</a>
+        </li>
+        <li ng-if="!main.loggedIn">
+            <a href="/signup">SignUp</a><
+            /li>
+        <li ng-if="main.loggedIn"
+            class="user-hello navbar-text">Hello {{user.currentUser.firstName}} !
+        </li>
+        <li ng-if="main.loggedIn">
+            <a ng-href="/account"
+               class="navbar-user-photo-reference">
+                <img class="navbar-user-photo"
+                     ng-src="{{user.currentUser.photo}}"
+                     alt="User Photo">
+            </a>
+        </li>
+        <li ng-if="main.loggedIn">
+            <a class="logout-button"
+               ng-click="main.doLogout()">Logout
+            </a>
+        </li>
+    </ul>
+</nav>

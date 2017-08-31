@@ -1,0 +1,79 @@
+<!-- ADMIN DASHBOARD VIEW -->
+
+<!--Dashboard navigation -->
+<ng-include src="app/views/admin/topNav.html">
+</ng-include>
+
+<!--Dashboard content container -->
+<section id="dashboard-container" class="height-detect">
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-2 dshb-menu height-detect">
+            <uib-accordion close-others="true">
+
+                <uib-accordion-group ng-click="dashboard.toHome()"
+                                     class="dshb-menu-item accordion-group-home"
+                                     heading="Home">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.toHome()"
+                           class="btn-home">Home</a>
+                    </div>
+                </uib-accordion-group>
+                <uib-accordion-group class="dshb-menu-item posts-collapse"
+                                     ng-click="dashboard.allPosts()"
+                                     heading="Posts"
+                                     is-open="isPostsOpen">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.allPosts()"
+                           class="btn-all-posts">All</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.createPost($event)"
+                           class="btn-create-post">Create New</a>
+                    </div>
+                </uib-accordion-group>
+
+                <uib-accordion-group class="dshb-menu-item posts-collapse"
+                                     ng-click="dashboard.allPages()"
+                                     heading="Pages"
+                                     is-open="isPagesOpen">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.allPages()"
+                           class="btn-all-pages">All</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.createPage($event)"
+                           class="btn-create-page">Create New</a>
+                    </div>
+                </uib-accordion-group>
+
+                <uib-accordion-group class="dshb-menu-item posts-collapse" heading="Appearance"
+                                     is-open="isAppearanceOpen">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="">Theme</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="">Menus</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="">Colors</a>
+                    </div>
+                </uib-accordion-group>
+
+                <uib-accordion-group class="dshb-menu-item posts-collapse"
+                                     heading="Settings"
+                                     is-open="isOpen">
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="dashboard.allUsers()">Users</a>
+                    </div>
+                    <div class="dshd-menu-child-item">
+                        <a ng-click="">Site preferences</a>
+                    </div>
+                </uib-accordion-group>
+            </uib-accordion>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-10 dashboard-content height-detect">
+            <ng-include src="dashboard.contentUrl">
+            </ng-include>
+        </div>
+    </div>
+</section>

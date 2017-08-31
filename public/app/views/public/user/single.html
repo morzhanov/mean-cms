@@ -1,0 +1,112 @@
+<section id="single-user" class="height-detect">
+    <div class="parallax-content" ng-parallax pattern="'assets/img/section-bg.png'" speed="5">
+        <div class="page-header">
+            <h1 ng-if="user.type == 'create'">Create User</h1>
+            <h1 ng-if="user.type == 'edit'">Edit User</h1>
+        </div>
+        <form class="form-horizontal" ng-submit="user.saveUser()">
+            <div class="left-form-content col-sm-8">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.firstName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Second Name</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.secondName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Site</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="user.userData.site">
+                    </div>
+                </div>
+                <div class="admin-edit">
+                    <div class="form-group" ng-if="admin.isAdmin">
+                        <label class="col-sm-2 control-label">Role</label>
+                        <div class="col-sm-10">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="user.userData.role">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password"
+                               class="form-control"
+                               ng-model="user.userData.password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit"
+                                class="btn btn-success btn-lg btn-block"
+                                ng-if="user.type == 'create'">Create User
+                        </button>
+                        <button type="submit"
+                                class="btn btn-success btn-lg btn-block"
+                                ng-if="user.type == 'edit'">Update User
+                        </button>
+                    </div>
+                </div>
+                <div class="row show-hide-message" ng-show="user.message">
+                    <div class="col-sm-offset-2 col-sm-10 ">
+                        <div class="alert alert-info">
+                            {{ user.message }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-form-content col-sm-4">
+                <div class="form-group">
+                    <div>
+                        <div class="thumbnail" id="user-photo"><img
+                                ng-src="{{user.userData.photo}}"
+                                alt="user photo"></div>
+                    </div>
+                    <input class="filestyle fd-photo"
+                           filestyle
+                           name='image'
+                           ng-model="photo"
+                           ng-model-instant
+                           onchange="angular.element(this).scope().LoadFilePath(this)"
+                           type="file"
+                           data-input="false"
+                           data-classIcon="icon-plus"
+                           data-buttonText="Change photo"
+                           style="margin: auto;
+                           width: 200px;
+                           margin-top: 10px;">
+                    </input>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

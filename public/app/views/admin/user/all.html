@@ -1,0 +1,46 @@
+<!-- GET ALL USERS OF CMS -->
+
+<section id="all-users" class="height-detect" ng-controller="aUserCtrl as user">
+    <div class="page-header">
+        <h1>
+            Users
+            <a ng-click="dashboard.createNewUser()" class="btn btn-default btn-new-user">
+                <span class="glyphicon glyphicon-plus"></span>
+                New User
+            </a>
+        </h1>
+    </div>
+    <!-- LOADING MESSAGE -->
+    <div class="jumbotron load-jumbotron text-center" ng-show="user.processing">
+        <span class="glyphicon glyphicon-repeat spinner"></span>
+        <p>Loading Users...</p>
+    </div>
+    <table class="table table-bordered" ng-show="user.users">
+        <thead>
+        <tr>
+            <th class="col-sm-1">_id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Site</th>
+            <!--<th>Role</th>-->
+            <th class="col-sm-2">Manage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- LOOP OVER THE USERS -->
+        <tr ng-repeat="person in user.users">
+            <td class="col-sm-1">{{ person._id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.surname }}</td>
+            <td>{{ person.email }}</td>
+            <td><a target="_blank" ng-href="{{person.site}}">{{ person.siteAlias }}</a></td>
+            <!--<td>{{ person.role }}</td>-->
+            <td class="col-sm-2">
+                <a  ng-click="dashboard.editUser(person._id)" class="btn btn-danger">Edit</a>
+                <a  ng-click="user.deleteUser(person._id)" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
