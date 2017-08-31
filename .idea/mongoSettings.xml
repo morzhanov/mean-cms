@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="MongoConfiguration">
-    <option name="shellPath" value="mongo jello.modulusmongo.net:27017/ymi3gimI -u vladmdev -p 2133352" />
-  </component>
-</project>
