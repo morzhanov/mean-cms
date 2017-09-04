@@ -1,71 +1,85 @@
-/**
- * Main NodeJS server application file
- */
+const http = require('http')
+const app = require('../index')
+const async = require('async')
+const debug = require('debug')('main-server:server')
+const signals = ['SIGINT', 'SIGTERM']
+const {printIP} = require('../services/app-service')
+const {PORT} = require('../constants')
+const db = app.get('db')
 
-//Import all required packages
-var express = require('express');
-var app = express();
-var path = require('path');
-var config = require('../config');
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var passport = require('passport');
+// create https server
+const server = http.createServer(app)
 
-/**
- * use body-parser so we can grab information from POST requets
- */
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+// listen server
+server.listen(PORT)
 
-/**
- * configure our app to handle CORS requests
- */
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, \ Authorization');
-    next();
-});
+// set listeners and error handlers
+server.on('error', onError)
+server.on('listening', onListening)
 
-/**
- * log all requests to console
- */
-app.use(morgan('dev'));
+signals.forEach(function (signal) {
+  process.once(signal, () => {
+    debug(signal, ' happened!')
+    async.waterfall([
+      closeServer,
+      closeDbConnection
+    ], closeApp)
+  })
+})
 
 /**
- * connect to mongoose
+ * Closes app and depends on err exit it with 0 or 1 status
+ * @param  {Error} err - passed error
  */
-mongoose.connect(config.database);
-
-//set static files location
-//user for requests that our frontend will make
-app.use(express.static(__dirname + '/public'));
-app.use(passport.initialize());
-
-//Router Middlewares
-var apiRoutes = require('./app/routes/admin')(app, express);
-var pageRoutes = require('./app/routes/pages')(app, express);
-var postRoutes = require('./app/routes/posts')(app, express);
-var userRoutes = require('./app/routes/users')(app, express);
-
-//Admin routers
-app.use('/api/admin', apiRoutes);
-
-//Public routers
-app.use('/pages', pageRoutes);
-app.use('/posts', postRoutes);
-app.use('/users', userRoutes);
-
-//MAIN CATCHHALL ROUTE
-//SEND USERS TO FRONTEND
-//has to be registered after API ROUTES
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
-});
+function closeApp (err) {
+  debug('Now application will be closed!', err || '')
+  err ? process.exit(1) : process.exit(0)
+}
 
 /**
- * START THE SERVER
+ * Closes application server
+ * @param  {Function} next - next passed callback
  */
-app.listen(config.port);
-console.log('Magic happens on port ' + config.port);
+function closeServer (next) {
+  debug('Now server will be closed!')
+  server.close(next)
+}
+
+/**
+ * Closes db connection
+ * @param  {Function} next - next passed callback
+ */
+function closeDbConnection (next) {
+  debug('Now db will be closed!')
+  db.close(next)
+}
+
+/**
+ * Logging server info on listening
+ */
+function onListening () {
+  const addr = server.address()
+  debug(`Listening on port ${addr.port}`)
+  printIP()
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ * @param  {Error} err - passed error
+ */
+function onError (err) {
+  if (err.syscall !== 'listen') {
+    throw err
+  }
+
+  switch (err.code) {
+    case 'EACCES':
+      debug(`Port ${PORT} requires elevated privileges`)
+      return process.exit(1)
+    case 'EADDRINUSE':
+      debug(`Port ${PORT} is already in use`)
+      return process.exit(1)
+    default:
+      throw err
+  }
+}
