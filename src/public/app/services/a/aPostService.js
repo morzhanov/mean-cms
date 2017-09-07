@@ -3,39 +3,35 @@
  */
 
 angular.module('mainApp')
+  .factory('aPost', ['$http', 'Auth', '$location', '$q', function ($http) {
+    // create a new object
+    const postFactory = {}
 
-    .factory('aPost', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+    // get a single post
+    postFactory.get = function (id) {
+      return $http.get('/api/admin/posts/' + id)
+    }
 
-        // create a new object
-        var postFactory = {};
+    // get all posts
+    postFactory.all = function () {
+      return $http.get('/api/admin/posts/')
+    }
 
-        // get a single post
-        postFactory.get = function (id) {
+    // create a post
+    postFactory.create = function (userData) {
+      return $http.post('/api/admin/posts/', userData)
+    }
 
-            return $http.get('/api/admin/posts/' + id);
-        };
+    // update a post
+    postFactory.update = function (id, userData) {
+      return $http.put('/api/admin/posts/' + id, userData)
+    }
 
-        // get all posts
-        postFactory.all = function () {
-            return $http.get('/api/admin/posts/');
-        };
+    // delete a post
+    postFactory.delete = function (id) {
+      return $http.delete('/api/admin/posts/' + id)
+    }
 
-        // create a post
-        postFactory.create = function (userData) {
-            return $http.post('/api/admin/posts/', userData);
-        };
-
-        // update a post
-        postFactory.update = function (id, userData) {
-            return $http.put('/api/admin/posts/' + id, userData);
-        };
-
-        // delete a post
-        postFactory.delete = function (id) {
-            return $http.delete('/api/admin/posts/' + id);
-        };
-
-        // return our entire postFactory object
-        return postFactory;
-
-    }]);
+    // return our entire postFactory object
+    return postFactory
+  }])

@@ -4,34 +4,31 @@
 
 angular.module('mainApp')
 
-    .factory('pPage', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+  .factory('pPage', ['$http', 'Auth', '$location', '$q',
+    function ($http) {
+      //  create a new object
+      let pageFactory = {}
 
-        // create a new object
-        var pageFactory = {};
+      //  get a single page
+      pageFactory.get = function (id) {
+        return $http.get('/api/pages/' + id)
+      }
 
-        // get a single page
-        pageFactory.get = function (id) {
+      //  get all pages
+      pageFactory.all = function () {
+        return $http.get('/api/pages/')
+      }
 
-            return $http.get('/api/pages/' + id);
-        };
+      //  get a single post
+      pageFactory.getSinglePost = function (pageId, postId) {
+        return $http.get('/api/pages/' + pageId + '/posts/' + postId)
+      }
 
-        // get all pages
-        pageFactory.all = function () {
-            return $http.get('/api/pages/');
-        };
+      //  get all posts
+      pageFactory.allPosts = function (pageId) {
+        return $http.get('/api/pages/' + pageId + '/posts/')
+      }
 
-        // get a single post
-        pageFactory.getSinglePost = function (page_id, post_id) {
-
-            return $http.get('/api/pages/' + page_id + "/posts/" + post_id);
-        };
-
-        // get all posts
-        pageFactory.allPosts = function (page_id) {
-            return $http.get('/api/pages/' + page_id + "/posts/");
-        };
-
-        // return our entire pageFactory object
-        return pageFactory;
-
-    }]);
+      //  return our entire pageFactory object
+      return pageFactory
+    }])

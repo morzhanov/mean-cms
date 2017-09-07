@@ -3,61 +3,52 @@ angular.module('mainApp')
 /**
  * Main Controller of this application
  */
-    .controller('mainController', ['$rootScope',
-        '$location',
-        'HeightDetect',
-        function ($rootScope, $location, HeightDetect) {
+  .controller('mainController', ['$rootScope',
+    '$location',
+    'HeightDetect',
+    function ($rootScope, $location, HeightDetect) {
+      const vm = this
 
-            var vm = this;
+      if (localStorage.getItem('is-nav-menu')) {
+        vm.navMenuUrl = 'app/views/public/nav-menu.html'
+      } else {
+        vm.navMenuUrl = null
+      }
 
-            if (localStorage.getItem('is-nav-menu'))
-                vm.navMenuUrl = 'app/views/public/nav-menu.html';
-            else
-                vm.navMenuUrl = null;
+      $rootScope.$on('show-nav-menu', function () {
+        vm.navMenuUrl = 'app/views/public/nav-menu.html'
+      })
 
-            $rootScope.$on('show-nav-menu', function (event, data) {
+      $rootScope.$on('hide-nav-menu', function () {
+        vm.navMenuUrl = null
+      })
 
-                vm.navMenuUrl = 'app/views/public/nav-menu.html';
+      vm.topNavUrl = null
 
-            });
+      if (localStorage.getItem('top-nav')) {
+        vm.topNavUrl = localStorage.getItem('top-nav')
+      }
 
-            $rootScope.$on('hide-nav-menu', function (event, data) {
+      HeightDetect.heightDetect()
 
-                vm.navMenuUrl = null;
+      initLoaderView()
 
-            });
+      vm.isA = function () {
+        return false
+      }
+    }])
 
-            vm.topNavUrl = null;
+  .controller('navMenuCtrl', ['$rootScope',
+    '$location',
+    'HeightDetect',
+    function ($rootScope, $location, HeightDetect) {
 
-            if (localStorage.getItem('top-nav'))
-                vm.topNavUrl = localStorage.getItem('top-nav');
+    }])
 
-            HeightDetect.heightDetect();
-
-            initLoaderView();
-
-            vm.isA = function () {
-
-                return false;
-
-            };
-
-        }])
-
-    .controller('navMenuCtrl', ['$rootScope',
-        '$location',
-        'HeightDetect',
-        function ($rootScope, $location, HeightDetect) {
-
-
-        }]);
-
-//method that manage site loader view visibility
-function initLoaderView() {
-
-    angular.element(document).ready(function () {
-        angular.element('.loader_inner').fadeOut();
-        angular.element('.loader').delay(400).fadeOut("slow");
-    });
-
+// method that manage site loader view visibility
+function initLoaderView () {
+  angular.element(document).ready(function () {
+    angular.element('.loader_inner').fadeOut()
+    angular.element('.loader').delay(400).fadeOut('slow')
+  })
 }

@@ -1,1 +1,0 @@
-npm i bower gulp gulp-clean-css gulp-sass gulp-rename gulp-uglify gulp-concat gulp-nodemon --save --dev

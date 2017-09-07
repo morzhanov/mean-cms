@@ -3,46 +3,42 @@
  */
 
 angular.module('mainApp')
+  .factory('aUser', ['$http', 'Auth', '$location', '$q', function ($http) {
+    // create a new object
+    const userFactory = {}
 
-    .factory('aUser', ['$http', 'Auth', '$location', '$q', function ($http, Auth, $location, $q) {
+    userFactory.currentUser = {}
 
-        // create a new object
-        var userFactory = {};
+    // get a single user
+    userFactory.get = function (id) {
+      return $http.get('/api/admin/users/' + id)
+    }
 
-        userFactory.currentUser = {};
+    // get all users
+    userFactory.all = function () {
+      return $http.get('/api/admin/users/')
+    }
 
-        // get a single user
-        userFactory.get = function (id) {
+    // create a user
+    userFactory.create = function (userData) {
+      return $http.post('/api/admin/users/', userData)
+    }
 
-            return $http.get('/api/admin/users/' + id);
-        };
+    // update a user
+    userFactory.update = function (id, userData) {
+      return $http.put('/api/admin/users/' + id, userData)
+    }
 
-        // get all users
-        userFactory.all = function () {
-            return $http.get('/api/admin/users/');
-        };
+    // delete a user
+    userFactory.delete = function (id) {
+      return $http.delete('/api/admin/users/' + id)
+    }
 
-        // create a user
-        userFactory.create = function (userData) {
-            return $http.post('/api/admin/users/', userData);
-        };
+    // get current user
+    userFactory.current = function () {
+      return $http.get('/api/admin/me')
+    }
 
-        // update a user
-        userFactory.update = function (id, userData) {
-            return $http.put('/api/admin/users/' + id, userData);
-        };
-
-        // delete a user
-        userFactory.delete = function (id) {
-            return $http.delete('/api/admin/users/' + id);
-        };
-
-        //get current user
-        userFactory.current = function () {
-            return $http.get('/api/admin/me');
-        };
-
-        // return our entire userFactory object
-        return userFactory;
-
-    }]);
+    // return our entire userFactory object
+    return userFactory
+  }])
