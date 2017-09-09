@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-
-    <title>MEAN CMS</title>
-    <meta name="description" content="">
-
-    <!-- set the base path for angular routing -->
-    <base href="/">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="app.min.css" rel="stylesheet">
-</head>
-
-<body ng-app="app" ng-controller="MainCtrl as main">
-
-<div class="hidden"></div>
-
-<div class="loader">
-    <div class="loader_inner"></div>
-</div>
-
-<ng-include src="main.topNavUrl" ng-if="main.topNavUrl">
-</ng-include>
-
-<ng-include src="main.navMenuUrl" ng-if="main.navMenuUrl">
-</ng-include>
-
-<main class="height-detect">
-    <!-- ANGULAR VIEWS -->
-    <div ng-view class="ng-view-template">
-
-    </div>
-</main>
-<script type="text/javascript" src="vendor.js"></script>
-<script type="text/javascript" src="bundle.js"></script>
-</body>
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: /home/vladmdev/git/mean-cms/src/public/src/index.html:71
+  var angular=window.angular,ngModule;
+                    ^
+  ReferenceError: window is not defined
+  
+  - index.html:71 Object.<anonymous>
+    /home/vladmdev/git/mean-cms/src/public/src/index.html:71:19
+  
+  - index.html:21 __webpack_require__
+    /home/vladmdev/git/mean-cms/src/public/src/index.html:21:30
+  
+  - index.html:64 angular
+    /home/vladmdev/git/mean-cms/src/public/src/index.html:64:18
+  
+  - index.html:67 
+    /home/vladmdev/git/mean-cms/src/public/src/index.html:67:10
+  
+  - index.js:231 HtmlWebpackPlugin.evaluateCompilationResult
+    [mean-cms]/[html-webpack-plugin]/index.js:231:26
+  
+  - index.js:117 
+    [mean-cms]/[html-webpack-plugin]/index.js:117:21
+  
+  - util.js:16 tryCatcher
+    [mean-cms]/[bluebird]/js/release/util.js:16:23
+  
+  - promise.js:512 Promise._settlePromiseFromHandler
+    [mean-cms]/[bluebird]/js/release/promise.js:512:31
+  
+  - promise.js:569 Promise._settlePromise
+    [mean-cms]/[bluebird]/js/release/promise.js:569:18
+  
+</pre>

@@ -11,6 +11,8 @@ AdDashboardCtrl.$inject = [
 function AdDashboardCtrl ($rootScope, Auth, $location, aUser, siteService) {
   const vm = this
 
+  vm.templateUrl = require('../../views/admin/topNav.html')
+
   vm.contentUrl = 'app/views/admin/home.html'
 
   if ($location.path().substr(0, 6) === '/admin') {

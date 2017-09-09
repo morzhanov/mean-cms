@@ -42,6 +42,10 @@ const config = {
         }
       },
       {
+        test: /\.html$/,
+        loader: 'ng-cache-loader?prefix=[dir]/[dir]'
+      },
+      {
         test: /\.css$/,
         use: [
           {

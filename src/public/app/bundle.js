@@ -28,9 +28,9 @@ webpackJsonp([0], [
 
     __webpack_require__(3)
     __webpack_require__(4)
-    __webpack_require__(15)
-    __webpack_require__(27)
-    __webpack_require__(29)
+    __webpack_require__(16)
+    __webpack_require__(28)
+    __webpack_require__(30)
 
     /***/
   }),
@@ -53,9 +53,9 @@ webpackJsonp([0], [
     __webpack_require__(9)
     __webpack_require__(10)
     __webpack_require__(11)
-    __webpack_require__(12)
     __webpack_require__(13)
     __webpack_require__(14)
+    __webpack_require__(15)
 
     /***/
   }),
@@ -99,9 +99,9 @@ webpackJsonp([0], [
             $location.path('/admin/dashboard')
           } else {
             vm.error = data.message
-          }
-        })
       }
+        });
+      };
 
       // sign up user
       vm.performSignUp = function () {
@@ -418,9 +418,9 @@ webpackJsonp([0], [
             $location.path('/admin/dashboard')
           } else {
             vm.error = data.message
-          }
-        })
       }
+        });
+      };
 
       // sign up user
       vm.performSignUp = function () {
@@ -447,6 +447,8 @@ webpackJsonp([0], [
 
     function AdDashboardCtrl ($rootScope, Auth, $location, aUser, siteService) {
       var vm = this
+
+      vm.templateUrl = __webpack_require__(12)
 
       vm.contentUrl = 'app/views/admin/home.html'
 
@@ -607,9 +609,9 @@ webpackJsonp([0], [
             } else {
               vm.users[i].siteAlias = vm.users[i].site
             }
-          }
-        })
       }
+        });
+      };
 
       vm.createNewUser = function () {
         vm.contentUrl = 'app/views/admin/user/single.html'
@@ -635,6 +637,31 @@ webpackJsonp([0], [
     /***/
   }),
   /* 12 */
+  /***/ (function (module, exports) {
+
+    var angular = window.angular, ngModule
+    try {
+      ngModule = angular.module(['ng'])
+    }
+    catch (e) {
+      ngModule = angular.module('ng', [])
+    }
+    var v1 = '<nav class="navbar user-navbar" ng-controller="AdDashboardCtrl as dashboard">\n<div class="navbar-header">\n<a ng-click="dashboard.toDashboard()" class="navbar-brand">\n<span class="fa nav-logo fa-code text-danger"></span>Dashboard\n</a>\n<a ng-click="dashboard.toSiteHome()" class="navbar-to-site">Go to\n<span class="site-title">{{dashboard.siteSettings.title}}</span>\n</a>\n</div>\n<ul class="nav navbar-nav navbar-right">\n<li class="user-hello navbar-text">Hello {{dashboard.userData.name}} !\n</li>\n<li>\n<a ng-href="/account" class="navbar-user-photo-reference">\n<img class="navbar-user-photo" ng-src="{{dashboard.userData.photo}}" alt="User Photo">\n</a>\n</li>\n<li>\n<a class="logout-button" ng-click="dashboard.doLogout()">Log Out\n</a>\n</li>\n</ul>\n</nav>\n'
+    var id1 = 'views/admin/topNav.html'
+    var inj = angular.element(window.document).injector()
+    if (inj) {
+      inj.get('$templateCache').put(id1, v1)
+    }
+    else {
+      ngModule.run(['$templateCache', function (c) {
+        c.put(id1, v1)
+      }])
+    }
+    module.exports = v1
+
+    /***/
+  }),
+  /* 13 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -811,7 +838,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 13 */
+  /* 14 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -907,7 +934,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 14 */
+  /* 15 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1080,12 +1107,11 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 15 */
+  /* 16 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
 
-    __webpack_require__(16)
     __webpack_require__(17)
     __webpack_require__(18)
     __webpack_require__(19)
@@ -1096,10 +1122,11 @@ webpackJsonp([0], [
     __webpack_require__(24)
     __webpack_require__(25)
     __webpack_require__(26)
+    __webpack_require__(27)
 
     /***/
   }),
-  /* 16 */
+  /* 17 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1207,7 +1234,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 17 */
+  /* 18 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1246,7 +1273,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 18 */
+  /* 19 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1275,7 +1302,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 19 */
+  /* 20 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1326,7 +1353,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 20 */
+  /* 21 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1361,7 +1388,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 21 */
+  /* 22 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1386,7 +1413,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 22 */
+  /* 23 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1492,7 +1519,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 23 */
+  /* 24 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1559,7 +1586,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 24 */
+  /* 25 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1603,7 +1630,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 25 */
+  /* 26 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1654,7 +1681,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 26 */
+  /* 27 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1689,16 +1716,16 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 27 */
+  /* 28 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
 
-    __webpack_require__(28)
+    __webpack_require__(29)
 
     /***/
   }),
-  /* 28 */
+  /* 29 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1729,17 +1756,17 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 29 */
+  /* 30 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
 
-    __webpack_require__(30)
     __webpack_require__(31)
+    __webpack_require__(32)
 
     /***/
   }),
-  /* 30 */
+  /* 31 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1773,7 +1800,7 @@ webpackJsonp([0], [
 
     /***/
   }),
-  /* 31 */
+  /* 32 */
   /***/ (function (module, exports, __webpack_require__) {
 
     'use strict'
@@ -1832,4 +1859,4 @@ webpackJsonp([0], [
 
     /***/
   })
-], [1])
+], [1]);
