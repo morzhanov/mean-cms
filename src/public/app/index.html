@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>MEAN CMS</title>
+    <meta name="description" content="">
+
+    <!-- set the base path for angular routing -->
+    <base href="/">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="app.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="app" ng-controller="MainCtrl as main">
+
+<div class="hidden"></div>
+
+<div class="loader">
+    <div class="loader_inner"></div>
+</div>
+
+<ng-include src="main.topNavUrl" ng-if="main.topNavUrl">
+</ng-include>
+
+<ng-include src="main.navMenuUrl" ng-if="main.navMenuUrl">
+</ng-include>
+
+<main class="height-detect">
+    <!-- ANGULAR VIEWS -->
+    <div ng-view class="ng-view-template">
+
+    </div>
+</main>
+<script type="text/javascript" src="vendor.js"></script>
+<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>

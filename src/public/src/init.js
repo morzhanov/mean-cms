@@ -1,0 +1,5 @@
+require('./assets/sass/main.scss')
+require('./controllers')
+require('./services')
+require('./directives')
+require('./routes')

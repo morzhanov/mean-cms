@@ -20,13 +20,11 @@ if (app.get('env') === 'production') {
   app.use(helmet())
 }
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/public/app/views/index.html'))
-})
-
 app.use(cors())
 app.use(json())
 app.use(urlencoded({extended: false}))
 app.use(API_URI, api)
+
+app.use(express.static(path.join(__dirname, 'public/app')))
 
 module.exports = app

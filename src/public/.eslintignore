@@ -1,1 +1,3 @@
 libs/**
+bundle.**
+vendor.bundle.**
