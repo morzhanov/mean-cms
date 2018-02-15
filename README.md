@@ -21,7 +21,7 @@ In this app you can:
 4. Create and customize posts.
 
 ## Main Technologies
-* AngukarJS
+* AngularJS
 * Bootstrap
 * Node.js + Express.js
 * Passport.js
