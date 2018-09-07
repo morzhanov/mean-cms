@@ -32,7 +32,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-filestyle": "^1.2.1",
     "cors": "^2.8.1",
-    "debug": "~2.2.0",
+    "debug": "^3.1.0",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "formidable": "^1.1.1",
